@@ -44,10 +44,10 @@ class LoginController extends Controller
        //  gawe perms
        public function authenticated(request $request, $user)
        {
-           if ($user->hasRole('admin')) {
-               return redirect()->route('admin.index');
-           }
+        if ($user->hasRole(['admin', 'uperadmin'])) {
+            return redirect()->route('panel.index');
+        }
        
-           return redirect()->route('user.index');
+           return redirect()->route('home');
        }
 }

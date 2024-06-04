@@ -21,18 +21,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// gawe admin
-Route::get('panel', function() {
-    return view('admin.index');
-})->middleware('role:admin')->name('admin.index');
 
-// gawe user
-Route::get('user-page', function() {
-    return view('user.index');
-})->middleware(MultiRoleMiddleware::class . ':user,admin')->name('user.index');
+// gawe superadmin dan admin
+Route::get('panel', function() {
+    return view('panel.index');
+})->middleware(MultiRoleMiddleware::class . ':superadmin,admin')->name('panel.index');
+
+// gawe superadmin only
+Route::get('panel/permission', function() {
+    return view('panel.perms.index');
+})->middleware('role:superadmin')->name('perms.index');
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('default');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
