@@ -21,21 +21,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
 // gawe admin
 Route::get('panel', function() {
-    return view('admin.home');
-})->middleware('role:admin')->name('admin.page');
+    return view('admin.index');
+})->middleware('role:admin')->name('admin.index');
 
 // gawe user
 Route::get('user-page', function() {
-    return view('user.page');
-})->middleware(MultiRoleMiddleware::class . ':user,admin')->name('user.page');
+    return view('user.index');
+})->middleware(MultiRoleMiddleware::class . ':user,admin')->name('user.index');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('default');
 
 
 

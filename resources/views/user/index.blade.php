@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }} sebagai admin
+                    {{ __('You are logged in!') }} sebagai user
                 </div>
             </div>
         </div>
