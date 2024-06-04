@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\MultiRoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,15 +22,20 @@ Route::get('/', function () {
 });
 
 
-Route::get('admin-page', function() {
-    return 'Halaman untuk Admin';
-})->middleware('role:admin')->name('admin.home');
 
+// gawe admin
+Route::get('panel', function() {
+    return view('admin.home');
+})->middleware('role:admin')->name('admin.page');
+
+// gawe user
 Route::get('user-page', function() {
-    return 'Halaman untuk User';
-})->middleware('role:user')->name('user.home');
-
+    return view('user.page');
+})->middleware(MultiRoleMiddleware::class . ':user,admin')->name('user.page');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
