@@ -7,7 +7,16 @@ $(function() {
             { data: "id", name: "id", visible: false },
             { data: "kode_produk", name: "kode_produk" },
             { data: "nama_produk", name: "nama_produk" },
-            { data: "harga", name: "harga" },
+            { data: "nama_kategori", name: "nama_kategori" },
+            {
+                data: "harga",
+                name: "harga",
+                render: function(data, type, row) {
+                    var harga = data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                    return "Rp " + harga;
+                },
+            },
+            { data: "stock", name: "stock" },
             { data: "actions", name: "actions", orderable: false, searchable: false },
         ],
         

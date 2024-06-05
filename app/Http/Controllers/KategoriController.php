@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 class KategoriController extends Controller
 {
     public function index()
-    {
-        {
+    { {
             $ingfo_sakkarepmu = "List Kategori";
             $kategori = Kategori::all();
             return view('panel.kategori.index', [
@@ -21,7 +20,12 @@ class KategoriController extends Controller
 
     public function create()
     {
-        return view('panel.kategori.create');
+        $ingfo_sakkarepmu = 'Tambah Kategori';
+        $produk = Kategori::all();
+        return view('panel.kategori.create', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'produks' => $produk
+        ]);
     }
 
     public function store(Request $request)
@@ -40,7 +44,7 @@ class KategoriController extends Controller
     {
         $ingfo_sakkarepmu = 'liat barang';
         $kategori = Kategori::find($id);
-        return view('satuan.show', [
+        return view('kategori.show', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'kategoris' => $kategori
         ]);
@@ -50,23 +54,31 @@ class KategoriController extends Controller
     {
         $ingfo_sakkarepmu = 'Edit Kategori';
         $kategori = Kategori::find($id);
-        return view('satuan.edit', [
+        return view('kategori.edit', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
-            'kategoris' => $kategori
+            'kategori' => $kategori
         ]);
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'kode_kategori' => 'required|max:20|unique:kategori,kode_kategori,' . $id,
-            'nama_kategori' => 'required|max:50',
-            'deskripsi' => 'nullable|string',
-        ]);
+    { {
+            $messages = [
+                'required' => 'Attribute harus diisi',
+            ];
+            $validator = Validator::make($request->all(), [
+                'kode_kategori' => 'required|regex:/[A-Z]+/',
+                'nama_kategori' => 'required'
+            ], $messages);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            $kategori = Kategori::find($id);
+            $kategori->kode_kategori = $request->kode_kategori;
+            $kategori->nama_kategori = $request->nama_kategori;
+            $kategori->save();
+            return redirect()->route('panel.kategori.index')->with('success', 'Category updated successfully.');
+        }
 
-        $kategori = Kategori::findOrFail($id);
-        $kategori->update($request->all());
-        return redirect()->route('panel.kategori.index')->with('success', 'Category updated successfully.');
     }
 
     public function destroy($id)

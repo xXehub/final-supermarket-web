@@ -29,10 +29,10 @@
                     <h4 class="mb-3"></h4>
                 </div>
                 <div class="col-lg-3 col-xl-2">
-                    {{-- <div class="d-grid gap-2">
-                        <a href="{{ route('barang.create') }}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Tambah
+                    <div class="d-grid gap-2">
+                        <a href="{{ route('produk.create') }}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Tambah
                             Barang</a>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
             <hr>
@@ -51,7 +51,9 @@
                                     <th>ID</th>
                                     <th>Kode Barang</th>
                                     <th>Name</th>
+                                    <th>Kategori</th>
                                     <th>Harga Barang</th>
+                                    <th>Stock</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -85,11 +87,10 @@
     {{-- jquery all --}}
     @vite('resources/assets/libs/jquery/dist/jquery.min.js')
     <!-- Bootstrap tether Core JavaScript -->
-    {{-- @vite('resources/assets/libs/popper.js/dist/umd/popper.min.js') --}}
+    @vite('resources/assets/libs/popper.js/dist/umd/popper.min.js')
     @vite('resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')
     {{-- plugin datatable --}}
     @vite('resources/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')
     @vite('resources/assets/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js')
     @vite('resources/dist/js/pages/datatable/datatable-basic.init.js')
-    
 @endsection

@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use App\Models\Kategori;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use RealRashid\SweetAlert\Facades\Alert;
+
 
 use DataTables;
 
@@ -35,11 +36,12 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        $ingfo_sakkarepmu = 'Create Employee';
-
-        // ELOQUENT
+        $ingfo_sakkarepmu = 'Tambah Produk';
         $kategori = Kategori::all();
-        return view('panel.produk.create', compact('ingfo_sakkarepmu', 'kategori'));
+        return view('panel.produk.create', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'kategoris' => $kategori
+        ]);
     }
 
     /**
@@ -76,8 +78,8 @@ class ProdukController extends Controller
             $produk->stock = $request->stock;
             $produk->save();
 
-            Alert::success('Added Successfully', 'Employee Data Added Successfully.');
-            return redirect()->route('panel.produk.produk.index')->with('success', 'Produk berhasil ditambahkan.');
+            return redirect()->route('produk.index')->with('simpan', 'Barang berhasil ditambahkan.');
+            // return redirect()->route('panel.produk.produk.index')->with('success', 'Produk berhasil ditambahkan.');
         }
     }
 
@@ -105,14 +107,9 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        $ingfo_sakkarepmu = 'Edit Produk';
         $produk = Produk::find($id);
-        $kategori = Kategori::all();
-        return view('panel.produk.produk.edit', [
-            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
-            'produk' => $produk,
-            'kategoris' => $kategori
-        ]);
+        $kategoris = Kategori::all(); // retrieve all categories
+        return view('panel.produk.edit', compact('produk', 'kategoris'));
     }
 
     /**
@@ -144,7 +141,9 @@ class ProdukController extends Controller
             $produk->kategori_id = $request->kategori_id;
             $produk->stock = $request->stock;
             $produk->save();
-            return redirect()->route('panel.produk.produk.index');
+
+            // sweet alert
+            return redirect()->route('produk.index')->with('simpan', 'Barang berhasil dihapus.');
         }
     }
 
@@ -159,16 +158,12 @@ class ProdukController extends Controller
             // ELOQUENT
             $produk = Produk::find($id);
             // $encryptedFilename = $produk->encrypted_filename;
-
-            // Delete Employee
             $produk->delete();
 
             // Delete File
             // Storage::disk('public')->delete('files/' . $encryptedFilename);
 
-            Alert::success('Deleted Successfully', 'Employee Data Deleted Successfully.');
-
-            return redirect()->route('employees.index');
+            return redirect()->route('produk.index')->with('hapus', 'Barang berhasil dihapus.');
         }
     }
 
@@ -176,18 +171,17 @@ class ProdukController extends Controller
     public function getData(Request $request)
     {
         $produks = Produk::with('kategori');
-    
         if ($request->ajax()) {
             return datatables()->of($produks)
                 ->addIndexColumn()
                 ->addColumn('nama_kategori', function ($produk) {
                     return $produk->kategori->nama_kategori;
                 })
-                ->addColumn('kode_kategori', function ($produk) { 
+                ->addColumn('kode_kategori', function ($produk) {
                     return $produk->kategori->kode_kategori;
                 })
                 ->addColumn('actions', function ($produk) {
-                    return view('panel.produk.actions', compact('produk'))->render();
+                    return view('panel.produk.actions', compact('produk'));
                 })
                 ->toJson();
         }

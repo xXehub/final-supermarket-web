@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('kode_produk', 20)->unique();
             $table->string('nama_produk', 100);
             $table->foreignId('kategori_id')->constrained('kategori');
-            $table->decimal('harga', 10, 2);
+            $table->integer('harga');
             $table->integer('stock');
             $table->text('deskripsi')->nullable();
             $table->timestamps();
