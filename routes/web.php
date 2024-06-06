@@ -3,6 +3,7 @@
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Middleware\MultiRoleMiddleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,37 +17,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-// default
-
+// Default route
 Route::get('/', function () {
     return view('welcome');
 });
 
+// gawe superadmindan admin
+Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(function () {
+    Route::get('panel', function () {
+        return view('panel.index');
+    })->name('panel.index');
+    Route::resource('/panel/produk', ProdukController::class);
+});
 
-// gawe superadmin dan admin
-Route::get('panel', function() {
-    return view('panel.index');
-})->middleware(MultiRoleMiddleware::class . ':superadmin,admin')->name('panel.index');
-
-// gawe superadmin only
-
-Route::get('panel/permission', function() {
-    return view('panel.perms.index');
-})->middleware('role:superadmin')->name('perms.index');
+// gawe superadmin only co
+Route::middleware(['role:superadmin'])->group(function () {
+    Route::get('panel/permission', function () {
+        return view('panel.perms.index');
+    })->name('perms.index');
+});
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-// resource
+// resources route public mas
 Route::resource('kategori', KategoriController::class);
-Route::resource('produk', ProdukController::class);
-
-// get data
-// Route::get('getProduk', [ProdukController::class, 'getData'])->name('produk.getData');
+// get data public mas
 Route::get('data/produk', [ProdukController::class, 'getData'])->name('produk.data');
-
-
-
-

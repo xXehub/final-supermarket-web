@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $ingfo_sakkarepmu = "Dashboard";
+        return view('home', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+        ]);
     }
 }
