@@ -24,7 +24,8 @@ class KategoriController extends Controller
         $produk = Kategori::all();
         return view('panel.kategori.create', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
-            'produks' => $produk
+            'produks' => $produk,
+            
         ]);
     }
 

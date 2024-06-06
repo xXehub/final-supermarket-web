@@ -1,13 +1,24 @@
 {{-- multi group --}}
 <form id="delete-form-{{ $produk->id }}" action="{{ route('produk.destroy', ['produk' => $produk->id]) }}"
     method="POST">
-    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="btn-group me-2" role="group" aria-label="First group">
-            <a type="button" href="{{ route('produk.show', ['produk' => $produk->id]) }}" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
-            <a type="button" href="{{ route('produk.edit', ['produk' => $produk->id]) }}" class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i></a>
-            @csrf
-            @method('delete')
-            <button type="button" class="btn btn-secondary" onclick="confirmDelete({{ $produk->id }})"><i class="fa-solid fa-trash"></i></button>
+    <div class="btn-list flex-nowrap">
+        @csrf
+        @method('delete')
+        <a class="btn" onclick="confirmDelete({{ $produk->id }})">
+            Hapus
+        </a>
+        <div class="dropdown">
+            <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
+                Action
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item" href="{{ route('produk.show', ['produk' => $produk->id]) }}">
+                    Detail
+                </a>
+                <a class="dropdown-item" href="{{ route('produk.edit', ['produk' => $produk->id]) }}">
+                    Edit
+                </a>
+            </div>
         </div>
     </div>
 </form>

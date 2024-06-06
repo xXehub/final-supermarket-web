@@ -187,7 +187,7 @@
               <div class="collapse navbar-collapse" id="sidebar-menu">
                   <ul class="navbar-nav pt-lg-3">
                       <li class="nav-item">
-                          <a class="nav-link" href="{{ route('panel.index') }}">
+                          <a class="nav-link" href="{{ route('panel.dashboard') }}">
                               <span
                                   class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -242,7 +242,7 @@
           const menuUrl = item.querySelector('a').href;
           // Bandingkan URL yang sedang diakses dengan URL menu
           if (currentUrl === menuUrl) {
-            // Jika URL yang sedang diakses sama dengan URL menu, tambahkan kelas 'active' pada elemen <li>
+            // Jika URL yang sedang diakses sama dengan U.RL menu, tambahkan kelas 'active' pada elemen <li>
             item.classList.add('active');
           }
         });

@@ -45,7 +45,7 @@ class LoginController extends Controller
        public function authenticated(request $request, $user)
        {
         if ($user->hasRole(['admin', 'uperadmin'])) {
-            return redirect()->route('panel.index');
+            return redirect()->route('panel.dashboard');
         }
        
            return redirect()->route('home');

@@ -25,8 +25,8 @@ Route::get('/', function () {
 // gawe superadmindan admin
 Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(function () {
     Route::get('panel', function () {
-        return view('panel.index');
-    })->name('panel.index');
+        return view('panel.dashboard');
+    })->name('panel.dashboard');
     Route::resource('/panel/produk', ProdukController::class);
 });
 
