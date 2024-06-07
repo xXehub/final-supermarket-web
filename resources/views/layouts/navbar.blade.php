@@ -261,6 +261,10 @@
                                             href="{{ route('produk.index') }}">
                                             Produk
                                         </a>
+                                        <a class="dropdown-item {{ Route::is('kategori.index') ? 'active' : '' }}"
+                                            href="{{ route('kategori.index') }}">
+                                            Kategori
+                                        </a>
                                         <a class="dropdown-item" href="./blank.html">
                                             Supplier
                                         </a>
@@ -300,7 +304,7 @@
                         {{-- permission superadmin aja yg bisa akses --}}
                         <li class="nav-item {{ Route::is('panel.perms') ? 'active' : '' }}">
                             <a class="nav-link @role('admin') disabled @endrole"
-                            href="@role('superadmin') {{ route('perms.index') }} @else # @endrole">
+                                href="@role('superadmin') {{ route('perms.index') }} @else # @endrole">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <i class="fa-solid fa-id-card"></i>
                                 </span>

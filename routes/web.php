@@ -28,10 +28,14 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
         return view('panel.dashboard');
     })->name('panel.dashboard');
     Route::resource('/panel/produk', ProdukController::class);
+    Route::get('/produk/create', [ProdukController::class, 'create'])->name('panel.produk.create');
+
+    // kategori
     Route::resource('/panel/kategori', KategoriController::class);
+    // Route::get('panel/kategori/create', [KategoriController::class, 'create'])->name('panel.kategori.create');
     // Route::get('panel/kategori', [KategoriController::class, 'index']);
     // web.php (Routes file)
-    Route::get('/produk/create', [ProdukController::class, 'create'])->name('panel.produk.create');
+
 
 
 });
@@ -50,3 +54,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::resource('kategori', KategoriController::class);
 // get data public mas
 Route::get('data/produk', [ProdukController::class, 'getData'])->name('produk.data');
+Route::get('data/kategori', [KategoriController::class, 'getData'])->name('kategori.data');

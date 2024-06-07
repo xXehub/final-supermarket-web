@@ -85,6 +85,28 @@ class KategoriController extends Controller
     public function destroy($id)
     {
         Kategori::find($id)->delete();
-        return redirect()->route('panel.kategori.index')->with('success', 'Category deleted successfully.');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus!');
     }
+
+    // gawe getData 
+    public function getData(Request $request)
+    {
+        $kategoris = Kategori::with('produk');
+    
+        if ($request->ajax()) {
+            return datatables()->of($kategoris)
+                ->addIndexColumn()
+                ->addColumn('kode_kategori', function ($kategori) {
+                    return $kategori->kode_kategori;
+                })
+                ->addColumn('nama_kategori', function ($kategori) {
+                    return $kategori->nama_kategori;
+                })
+                ->addColumn('actions', function ($kategori) {
+                    return view('panel.kategori.actions', compact('kategori'));
+                })
+                ->toJson();
+        }
+    }
+    
 }
