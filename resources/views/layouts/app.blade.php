@@ -33,9 +33,16 @@
 </head>
 
 <body>
-    @include('layouts.navbar')
+    @if (!isset($ndeliknoNavbar) || !$ndeliknoNavbar)
+        @include('layouts.navbar')
+    @endif
     @yield('content')
+    
+
+    @if (!isset($ndeliknoFooter) || !$ndeliknoFooter)
     @include('layouts.footer')
+@endif
+
     @vite('resources/js/app.js')
 
 
@@ -50,7 +57,7 @@
     @vite('resources/dist/js/demo.min.js?1684106062')
 
     {{-- script --}}
-  
+
 </body>
 
 </html>

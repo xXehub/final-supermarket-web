@@ -14,6 +14,8 @@ class MultiRoleMiddleware
             return $next($request);
         }
 
-        return abort(403, 'GAK PUNYA AKSES YA MAS :P.');
+        return response()->view('errors.noperms', [], 403);
+
+        // return abort(403, 'GAK PUNYA AKSES YA MAS :P.');
     }
 }
