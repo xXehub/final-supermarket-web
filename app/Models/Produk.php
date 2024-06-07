@@ -14,4 +14,15 @@ class Produk extends Model
     {
         return $this->belongsTo(Kategori::class);
     }
+
+    // validator
+    protected $fillable = [
+        'kode_produk',
+        'nama_produk',
+        'kategori_id',
+        'harga',
+        'stock',
+        'deskripsi',
+    ];
+
 }

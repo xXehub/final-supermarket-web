@@ -69,7 +69,7 @@
                                                     <td data-label="Name">
                                                         <div class="d-flex py-1 align-items-center">
                                                             <span class="avatar me-2"
-                                                                style="background-image: url(./static/avatars/010m.jpg)"></span>
+                                                                style="background-image: url(/static/avatars/010m.jpg)"></span>
                                                             <div class="flex-fill">
                                                                 <div class="font-weight-medium">El Pardede</div>
                                                                 <div class="text-muted"><a href="#"
@@ -110,7 +110,7 @@
                                                     <td data-label="Name">
                                                         <div class="d-flex py-1 align-items-center">
                                                             <span class="avatar me-2"
-                                                                style="background-image: url(./static/avatars/005f.jpg)"></span>
+                                                                style="background-image: url(/static/avatars/005f.jpg)"></span>
                                                             <div class="flex-fill">
                                                                 <div class="font-weight-medium">Dyann Escala</div>
                                                                 <div class="text-muted"><a href="#"
@@ -151,7 +151,7 @@
                                                     <td data-label="Name">
                                                         <div class="d-flex py-1 align-items-center">
                                                             <span class="avatar me-2"
-                                                                style="background-image: url(./static/avatars/006f.jpg)"></span>
+                                                                style="background-image: url(/static/avatars/006f.jpg)"></span>
                                                             <div class="flex-fill">
                                                                 <div class="font-weight-medium">Avivah Mugleston</div>
                                                                 <div class="text-muted"><a href="#"
@@ -233,7 +233,7 @@
                                                     <td data-label="Name">
                                                         <div class="d-flex py-1 align-items-center">
                                                             <span class="avatar me-2"
-                                                                style="background-image: url(./static/avatars/008f.jpg)"></span>
+                                                                style="background-image: url(/static/avatars/008f.jpg)"></span>
                                                             <div class="flex-fill">
                                                                 <div class="font-weight-medium">Tessie Curzon</div>
                                                                 <div class="text-muted"><a href="#"

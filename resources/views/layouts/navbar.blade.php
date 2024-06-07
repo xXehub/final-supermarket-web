@@ -18,9 +18,10 @@
             </button>
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                 <a href=".">
-                    <img src="{{ asset('/resources/assets/gudangrempah.png') }}" width="110" height="32"
+                    <img src="{{ asset('/static/gudangrempah/gricon.png') }}" width="110" height="32"
                         alt="Gudang Rempah" class="navbar-brand-image">
                 </a>
+                Gudang Rempah
             </h1>
             <div class="navbar-nav flex-row order-md-last">
                 <div class="nav-item d-none d-md-flex me-3">
@@ -197,7 +198,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                         aria-label="Open user menu">
-                        <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                        <span class="avatar avatar-sm" style="background-image: url(/static/avatars/000m.jpg)"></span>
                         <div class="d-none d-xl-block ps-2">
                             <div>{{ Auth::user()->name }}</div>
                             <div class="mt-1 small text-muted">{{ Auth::user()->roles->pluck('name')->implode(', ') }}

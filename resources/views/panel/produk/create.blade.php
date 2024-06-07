@@ -7,15 +7,13 @@
                     <h5 class="modal-title">Tambah Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                {{-- gawe input nama produk --}}
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                {{-- gawe nama produk --}}
                                 <label class="form-label">Nama Produk</label>
                                 <input type="text" class="form-control @error('nama_produk') is-invalid @enderror"
-                                    type="text" name="nama_produk" id="nama_produk" value="{{ old('nama_produk') }}"
+                                    name="nama_produk" id="nama_produk" value="{{ old('nama_produk') }}"
                                     placeholder="Masukan Nama barang">
                                 @error('nama_produk')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -24,23 +22,18 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                {{-- gawe kode produk --}}
                                 <label class="form-label">Kode Produk</label>
                                 <input type="text" class="form-control @error('kode_produk') is-invalid @enderror"
-                                    type="text" name="kode_produk" id="kode_produk"
-                                    value="BRG-{{ old('kode_produk') }}" readonly disabled>
+                                    name="kode_produk" id="kode_produk" value="BRG-{{ old('kode_produk') }}" readonly>
                             </div>
                         </div>
-
-                        {{-- harga, kategori, stock --}}
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                {{-- gawe harga produk --}}
                                 <label class="form-label">Harga</label>
-                                <input type="text" class="form-control @error('harga_barang') is-invalid @enderror"
-                                    type="text" name="harga_barang" id="harga_barang"
-                                    value="{{ old('harga_barang') }}" placeholder="Masukan Harga barang">
-                                @error('harga_barang')
+                                <input type="text" class="form-control @error('harga') is-invalid @enderror"
+                                    name="harga" id="harga" value="{{ old('harga') }}"
+                                    placeholder="Masukan Harga barang">
+                                @error('harga')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -64,7 +57,6 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="mb-3">
-                                {{-- gawe kode produk --}}
                                 <label class="form-label">Stock</label>
                                 <input class="form-control @error('stock') is-invalid @enderror" type="number"
                                     name="stock" id="stock" value="{{ old('stock') }}" placeholder="1">
@@ -73,7 +65,6 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- gawe status --}}
                         <label class="form-label">Status</label>
                         <div class="form-selectgroup-boxes row mb-3">
                             <div class="col-lg-6">
@@ -93,7 +84,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-selectgroup-item">
-                                    <input type="radio" name="report-type" value="1"
+                                    <input type="radio" name="report-type" value="0"
                                         class="form-selectgroup-input">
                                     <span class="form-selectgroup-label d-flex align-items-center p-3">
                                         <span class="me-3">
@@ -117,7 +108,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="modal-footer">
                     <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                         Cancel
@@ -129,8 +119,7 @@
                                     Reset
                                 </a>
                             </span>
-                            <a type="submit" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-                                data-bs-target="#modal-tambahData" onclick="simpanForm()">
+                            <button type="submit" class="btn btn-primary d-none d-sm-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -140,9 +129,9 @@
                                     <path d="M5 12l14 0" />
                                 </svg>
                                 Simpan
-                            </a>
-                            <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
-                                data-bs-target="#modal-tambahData" aria-label="Tambah Produk">
+                            </button>
+                            <button type="submit" class="btn btn-primary d-sm-none btn-icon"
+                                aria-label="Tambah Produk">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -151,17 +140,14 @@
                                     <path d="M12 5l0 14" />
                                     <path d="M5 12l14 0" />
                                 </svg>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </form>
-
-
 
 {{-- library sweetalert --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -170,7 +156,7 @@
 
 {{-- gawe simpan barang --}}
 {{-- Notifikasi setelah penghapusan --}}
-<script>
+<script>    
     // gawe reset form
     function simpanForm() {
         console.log("Simpan Form Successs ");
@@ -202,7 +188,7 @@
         console.log("Form Reset Successs ");
         document.getElementById("nama_produk").value = '';
         document.getElementById("kategori_id").value = '';
-        document.getElementById("harga_barang").value = '';
+        document.getElementById("harga").value = '';
         document.getElementById("deskripsi").value = '';
 
         // sweet alert notif reset

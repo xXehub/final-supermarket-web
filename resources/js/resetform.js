@@ -3,7 +3,7 @@ function resetForm() {
     console.log("Form Reset Successs ");
     document.getElementById("nama_produk").value = '';
     document.getElementById("kategori_id").value = '';
-    document.getElementById("harga_barang").value = '';
+    document.getElementById("harga").value = '';
     document.getElementById("deskripsi").value = '';
 
     // sweet alert notif reset

@@ -64,13 +64,15 @@ class ProdukController extends Controller
                 'required' => 'Attribute harus diisi',
                 'email' => 'Isi :attribute dengan format yang benar',
                 'numeric' => 'Isi :attribute dengan angka'
+                // 'min:0' => 'Tidak boleh kurang dari 0'
             ];
             $validator = Validator::make($request->all(), [
                 'kode_produk' => 'required',
                 'nama_produk' => 'required',
-                'harga' => 'required|numeric',
+                'harga' => 'required|numeric|integer|min:0',
                 'kategori_id' => 'required',
-                'stock' => 'required'
+                'stock' => 'required|integer|min:0',
+                'deskripsi' => 'required'
             ], $messages);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
@@ -82,9 +84,10 @@ class ProdukController extends Controller
             $produk->harga = $request->harga;
             $produk->kategori_id = $request->kategori_id;
             $produk->stock = $request->stock;
+            $produk->deskripsi = $request->deskripsi;
             $produk->save();
 
-            return redirect()->route('produk.index')->with('simpan', 'Barang berhasil ditambahkan.');
+            return redirect()->route('produk.index')->with('success', 'Barang berhasil ditambahkan.');
             // return redirect()->route('panel.produk.produk.index')->with('success', 'Produk berhasil ditambahkan.');
         }
     }
@@ -97,12 +100,12 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        $ingfo_sakkarepmu = 'Employee Detail';
+        $ingfo_sakkarepmu = 'Detail Produk';
 
         // ELOQUENT
         $produk = Produk::find($id);
 
-        return view('produk.show', compact('ingfo_sakkarepmu', 'produk'));
+        return view('panel.produk.show', compact('ingfo_sakkarepmu', 'produk'));
     }
 
     /**
