@@ -49,7 +49,12 @@
                             <div class="mb-3">
                                 <label class="form-label">Kategori</label>
                                 <select name="kategori_id" id="kategori_id" class="form-select">
-
+                                    {{-- @foreach ($kategoris as $kategori_sakkarepmu)
+                                        <option value="{{ $kategori_sakkarepmu->id }}"
+                                            {{ old('kategori_id') == $kategori_sakkarepmu->id ? 'selected' : '' }}>
+                                            {{ $kategori_sakkarepmu->kode_kategori . ' ' . $kategori_sakkarepmu->nama_kategori }}
+                                        </option>
+                                    @endforeach --}}
                                 </select>
                                 @error('kategori_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
