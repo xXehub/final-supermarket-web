@@ -79,13 +79,13 @@
                                 <table class="table" id="produkTable">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Kode Barang</th>
-                                            <th>Name</th>
-                                            <th>Kategori</th>
-                                            <th>Harga Barang</th>
-                                            <th>Stock</th>
-                                            <th>Actions</th>
+                                            <th style="width: 10%;">ID</th>
+                                            <th style="width: 20%;">Kode Produk</th>
+                                            <th style="width: 25%;">Nama Produk</th>
+                                            <th style="width: 15%;">Kategori</th>
+                                            <th style="width: 10%;">Harga</th>
+                                            <th style="width: 10%;">Quantity</th>
+                                            <th style="width: 10%;">Actions</th>
                                         </tr>
                                     </thead>
                                 </table>

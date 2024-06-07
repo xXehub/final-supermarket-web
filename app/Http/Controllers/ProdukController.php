@@ -38,6 +38,7 @@ class ProdukController extends Controller
     {
         $ingfo_sakkarepmu = 'Tambah Produk';
         $kategori = Kategori::all();
+        
         return view('panel.produk.create', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'kategoris' => $kategori
@@ -185,6 +186,7 @@ class ProdukController extends Controller
                 })
                 ->toJson();
         }
+
     }
 
 }

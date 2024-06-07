@@ -28,6 +28,12 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
         return view('panel.dashboard');
     })->name('panel.dashboard');
     Route::resource('/panel/produk', ProdukController::class);
+    Route::resource('/panel/kategori', KategoriController::class);
+    // Route::get('panel/kategori', [KategoriController::class, 'index']);
+    // web.php (Routes file)
+    Route::get('/produk/create', [ProdukController::class, 'create'])->name('panel.produk.create');
+
+
 });
 
 // gawe superadmin only co
@@ -41,6 +47,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // resources route public mas
-Route::resource('kategori', KategoriController::class);
+// Route::resource('kategori', KategoriController::class);
 // get data public mas
 Route::get('data/produk', [ProdukController::class, 'getData'])->name('produk.data');
