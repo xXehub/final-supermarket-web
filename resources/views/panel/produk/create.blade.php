@@ -7,7 +7,7 @@
                     <h5 class="modal-title">Tambah Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
+                {{-- gawe input nama produk --}}
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-6">
@@ -37,10 +37,10 @@
                             <div class="mb-3">
                                 {{-- gawe harga produk --}}
                                 <label class="form-label">Harga</label>
-                                <input type="text" class="form-control @error('nama_produk') is-invalid @enderror"
-                                    type="text" name="nama_produk" id="nama_produk" value="{{ old('nama_produk') }}"
-                                    placeholder="Masukan Nama barang">
-                                @error('nama_produk')
+                                <input type="text" class="form-control @error('harga_barang') is-invalid @enderror"
+                                    type="text" name="harga_barang" id="harga_barang"
+                                    value="{{ old('harga_barang') }}" placeholder="Masukan Harga barang">
+                                @error('harga_barang')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -49,12 +49,13 @@
                             <div class="mb-3">
                                 <label class="form-label">Kategori</label>
                                 <select name="kategori_id" id="kategori_id" class="form-select">
-                                    {{-- @foreach ($kategoris as $kategori_sakkarepmu)
+                                    <option value="" disabled selected>Pilih Kategori</option>
+                                    @foreach ($kategoris as $kategori_sakkarepmu)
                                         <option value="{{ $kategori_sakkarepmu->id }}"
                                             {{ old('kategori_id') == $kategori_sakkarepmu->id ? 'selected' : '' }}>
-                                            {{ $kategori_sakkarepmu->kode_kategori . ' ' . $kategori_sakkarepmu->nama_kategori }}
+                                            {{ $kategori_sakkarepmu->kode_kategori . ' - ' . $kategori_sakkarepmu->nama_kategori }}
                                         </option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                                 @error('kategori_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -72,7 +73,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- gawe status --}}
                         <label class="form-label">Status</label>
                         <div class="form-selectgroup-boxes row mb-3">
                             <div class="col-lg-6">
@@ -160,28 +161,6 @@
     </div>
 </form>
 
-<script>
-    // Generate random string for kode_produk with XXX-XXX-XXX template
-    function generateRandomCode() {
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        var result = '';
-        for (var i = 0; i < 3; i++) {
-            for (var j = 0; j < 3; j++) {
-                result += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            if (i < 2) {
-                result += '-'; // Add hyphen after each group of characters except the last one
-            }
-        }
-        return result;
-    }
-
-    // Call the function to generate random string and update the kode_produk input
-    document.addEventListener('DOMContentLoaded', function() {
-        var kode_produk_input = document.getElementById('kode_produk');
-        kode_produk_input.value = generateRandomCode();
-    });
-</script>
 
 
 {{-- library sweetalert --}}
@@ -217,14 +196,13 @@
 
 {{-- end simpan barang --}}
 
-{{-- gawe resetform --}}
 <script>
     // gawe reset form
     function resetForm() {
         console.log("Form Reset Successs ");
         document.getElementById("nama_produk").value = '';
-        document.getElementById("kategori").selectedIndex = 0;
-        document.getElementById("harga").value = '';
+        document.getElementById("kategori_id").value = '';
+        document.getElementById("harga_barang").value = '';
         document.getElementById("deskripsi").value = '';
 
         // sweet alert notif reset

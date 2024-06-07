@@ -24,9 +24,14 @@ class ProdukController extends Controller
     {
         // gawe list produk
         $ingfo_sakkarepmu = "Data List Produk";
+        $kategori = Kategori::All();
         // confirmDelete();
 
-        return view('panel.produk.index', compact('ingfo_sakkarepmu'));
+        return view('panel.produk.index', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'kategoris' => $kategori
+        ]);
+        // return view('panel.produk.index', compact('ingfo_sakkarepmu'));
     }
 
     /**
@@ -38,7 +43,7 @@ class ProdukController extends Controller
     {
         $ingfo_sakkarepmu = 'Tambah Produk';
         $kategori = Kategori::all();
-        
+
         return view('panel.produk.create', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'kategoris' => $kategori

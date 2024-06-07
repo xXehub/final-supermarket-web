@@ -237,7 +237,7 @@
                                     <i class="fa-solid fa-database"></i>
                                 </span>
                                 <span class="nav-link-title">
-                                    Home
+                                    Dashboard
                                 </span>
                             </a>
                         </li>
