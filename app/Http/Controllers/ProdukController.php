@@ -61,30 +61,55 @@ class ProdukController extends Controller
         // gawe message dan validasi
         {
             $messages = [
-                'required' => 'Attribute harus diisi',
-                'email' => 'Isi :attribute dengan format yang benar',
-                'numeric' => 'Isi :attribute dengan angka'
-                // 'min:0' => 'Tidak boleh kurang dari 0'
+                // validator message mas
+                'kode_produk.required' => 'Kode produk wajib diisi',
+                'kode_produk.unique' => 'Kode produk sudah ada',
+                'kode_produk.max' => 'Kode produk maksimal 20 karakter',
+                'nama_produk.required' => 'Nama produk wajib diisi',
+                'nama_produk.max' => 'Nama produk maksimal 100 karakter',
+                'kategori_id.required' => 'Kategori wajib dipilih',
+                'kategori_id.exists' => 'Kategori tidak valid',
+                'harga.required' => 'Harga wajib diisi',
+                'harga.integer' => 'Harga harus berupa angka',
+                'harga.min' => 'Harga minimal 0',
+                'stock.required' => 'Stok wajib diisi',
+                'stock.integer' => 'Stok harus berupa angka',
+                'stock.min' => 'Stok minimal 0',
+                'deskripsi.string' => 'Deskripsi harus berupa teks',
+                'gambar_produk.image' => 'Gambar produk harus berupa gambar',
+                'gambar_produk.mimes' => 'Gambar produk harus berupa file dengan format jpeg, png, atau jpg',
+                'gambar_produk.max' => 'Gambar produk maksimal 2MB',
             ];
             $validator = Validator::make($request->all(), [
-                'kode_produk' => 'required',
-                'nama_produk' => 'required',
-                'harga' => 'required|numeric|integer|min:0',
-                'kategori_id' => 'required',
+                'kode_produk' => 'required|unique:produk|max:20',
+                'nama_produk' => 'required|max:100',
+                'kategori_id' => 'required|exists:kategori,id',
+                'harga' => 'required|integer|min:0',
                 'stock' => 'required|integer|min:0',
-                'deskripsi' => 'required'
+                'deskripsi' => 'nullable|string',
+                'gambar_produk' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             ], $messages);
+
+            // lanek validasine gagal 
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
+            // gawe upload gambar produk
+            $gambar_produk = null;
+            if ($request->hasFile('gambar_produk')) {
+                $file = $request->file('gambar_produk');
+                $gambar_produk = time() . '_' . $file->getClientOriginalName();
+                $file->storeAs('public/produk', $gambar_produk);
+            }
             $produk = new Produk();
             $produk->kode_produk = $request->kode_produk;
             $produk->nama_produk = $request->nama_produk;
-            $produk->harga = $request->harga;
             $produk->kategori_id = $request->kategori_id;
+            $produk->harga = $request->harga;
             $produk->stock = $request->stock;
             $produk->deskripsi = $request->deskripsi;
+            $produk->gambar_produk = $gambar_produk;
             $produk->save();
 
             return redirect()->route('produk.index')->with('success', 'Barang berhasil ditambahkan.');

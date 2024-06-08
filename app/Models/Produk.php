@@ -23,6 +23,7 @@ class Produk extends Model
         'harga',
         'stock',
         'deskripsi',
+        'gambar_produk',
     ];
 
 }

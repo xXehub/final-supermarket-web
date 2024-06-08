@@ -80,8 +80,9 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 10%;">ID</th>
-                                            <th style="width: 20%;">Kode Produk</th>
-                                            <th style="width: 25%;">Nama Produk</th>
+                                            <th style="width: 45%;">Produk</th>
+                                            <th style="width: 45%;">HIDE INI</th>
+                                            <th style="width: 45%;">HIDE INI</th>
                                             <th style="width: 15%;">Kategori</th>
                                             <th style="width: 10%;">Harga</th>
                                             <th style="width: 10%;">Quantity</th>

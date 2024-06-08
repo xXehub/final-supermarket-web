@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
             'name' => 'Sihub el hubski da vinci',
             'email' => 'superadmin_sakkarepmu@admin.com',
             'password' => bcrypt('superadmin'),
+            'gambar_profile' => 'gricon.png',
         ]);
 
         $superadmin->assignRole($superadminRole);
@@ -33,6 +34,7 @@ class UserSeeder extends Seeder
             'name' => 'Deru el pedro samudro',
             'email' => 'admin_sakkarepmu@admin.com',
             'password' => bcrypt('admin'),
+            'gambar_profile' => 'gricon.png',
         ]);
 
         $admin->assignRole($adminRole);
@@ -41,6 +43,7 @@ class UserSeeder extends Seeder
             'name' => 'Owi chan',
             'email' => 'user_sakkarepmu@user.com',
             'password' => bcrypt('user'),
+            'gambar_profile' => 'gricon.png',
         ]);
 
         $user->assignRole($userRole);

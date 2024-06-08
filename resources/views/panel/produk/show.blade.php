@@ -24,7 +24,8 @@
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-body p-4 py-5 text-center">
-                                            <span class="avatar avatar-xl mb-4 rounded">W</span>
+                                            <span class="avatar avatar-xl mb-4 rounded" style="background-image: url('{{ $produk->gambar_produk ? asset('storage/produk/' . $produk->gambar_produk) : '' }}')"></span>
+
                                             <h3 class="mb-0">{{ $produk->nama_produk }}</h3>
                                             <p class="text-muted">{{ $produk->created_at }}</p>
                                             <p class="mb-3">

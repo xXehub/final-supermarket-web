@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->integer('harga');
             $table->integer('stock');
             $table->text('deskripsi')->nullable();
+            $table->string('gambar_produk')->nullable(); // update gambar produk ommmmm wkwk
             $table->timestamps();
         });
     }

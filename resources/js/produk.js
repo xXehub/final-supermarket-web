@@ -5,9 +5,17 @@ $(function() {
         ajax: "/data/produk",
         columns: [
             { data: "id", name: "id", visible: false },
-            { data: "kode_produk", name: "kode_produk" },
+            // gambar produk
             { 
-                data: "nama_produk", 
+                data: null,
+                render: function(data, type, row) {
+                    // Menggabungkan gambar_produk dan kode_produk dalam satu kolom
+                    return '<td data-label="Name"><div class="d-flex py-1 align-items-center"><span class="avatar me-2" style="background-image: url(/storage/produk/' + data.gambar_produk + ')"></span><div class="flex-fill"><div class="font-weight-medium">' + data.nama_produk + '</div><div class="text-muted"><a href="#" class="text-reset">' + data.kode_produk + '</a></div></div></div></td>';
+                }
+            },
+            { data: "kode_produk", name: "kode_produk" , visible: false},
+            { 
+                data: "nama_produk" , visible: false, 
                 name: "nama_produk",
                 render: function(data, type, row) {
                     // nama produk biar dadi kapital
