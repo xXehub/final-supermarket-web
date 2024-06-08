@@ -2,6 +2,7 @@
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Middleware\MultiRoleMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,9 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
 
     // Rute resource untuk kategori
     Route::resource('/panel/kategori', KategoriController::class);
+
+    // Rute resource untuk supplier mas
+    Route::resource('/panel/supplier', SupplierController::class);
 });
 
 // Middleware untuk superadmin saja
@@ -39,3 +43,4 @@ Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profi
 // Rute untuk mendapatkan data produk dan kategori
 Route::get('data/produk', [ProdukController::class, 'getData'])->name('produk.data');
 Route::get('data/kategori', [KategoriController::class, 'getData'])->name('kategori.data');
+Route::get('data/supplier', [SupplierController::class, 'getData'])->name('supplier.data');
