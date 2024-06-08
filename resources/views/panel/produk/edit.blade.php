@@ -46,7 +46,7 @@
                                     {{-- <option value="" disabled selected>Pilih Kategori</option> --}}
                                     @foreach ($kategoris as $kategori)
                                         <option value="{{ $kategori->id }}"
-                                            {{ $produk->kategori_id == $kategori->id ? 'selected' : '' }}>
+                                            {{ $produk->kategori_id == $kategori->id ? 'elected' : '' }}>
                                             {{ $kategori->nama_kategori }}</option>
                                     @endforeach
                                 </select>

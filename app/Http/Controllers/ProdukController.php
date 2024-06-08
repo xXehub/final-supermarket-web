@@ -127,12 +127,15 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        $ingfo_sakkarepmu = 'Detail Produk';
+        $ingfo_sakkarepmu = "Data List Produk";
+        $kategori = Kategori::all();
+        $produk = Produk::first();
 
-        // ELOQUENT
-        $produk = Produk::find($id);
-
-        return view('panel.produk.show', compact('ingfo_sakkarepmu', 'produk'));
+        return view('panel.produk.show', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'kategoris' => $kategori,
+            'produk' => $produk // Pastikan produk dikirim ke view
+        ]);
     }
 
     /**
