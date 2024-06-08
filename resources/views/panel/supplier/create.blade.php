@@ -97,6 +97,7 @@
                             </button>
                         </div>
                     </div>
+<<<<<<< HEAD
                 </div>
             </div>
         </div>
@@ -240,3 +241,6 @@
 
     {{-- test --}}
 @endif
+=======
+                </div>
+>>>>>>> c6ad0c3763116adfaab91fd9a7e4293d28550ba3
