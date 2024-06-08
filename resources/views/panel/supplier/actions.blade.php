@@ -65,8 +65,4 @@
             title: '{{ $message }}'
         });
     </script>
-<<<<<<< HEAD
 @endif
-=======
-@endif
->>>>>>> c6ad0c3763116adfaab91fd9a7e4293d28550ba3

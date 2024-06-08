@@ -65,7 +65,7 @@ class SupplierController extends Controller
 
             // eloquent instant method create
             Supplier::create($request->all());
-            return redirect()->route('supplier.index')->with('success', 'Category created successfully.');      // return redirect()->route('panel.produk.produk.index')->with('success', 'Produk berhasil ditambahkan.');
+            return redirect()->route('supplier.index')->with('success', 'Supplier berhasil ditambahkan.');      // return redirect()->route('panel.produk.produk.index')->with('success', 'Produk berhasil ditambahkan.');
         }
     } 
     
