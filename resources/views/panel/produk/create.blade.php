@@ -106,8 +106,25 @@
                                     {{ old('deskripsi') }} rows="3"></textarea>
                             </div>
                         </div>
+                        {{-- gawe upload gambar --}}
+
+
+                        <div class="col-lg-12">
+                            <div>
+                                <br />
+                                <label class="form-label" for="gambar_produk" class="form-label">Gambar
+                                    Produk</label>
+                                <input type="file" class="form-control" id="gambar_produk" name="gambar_produk">
+                                <!-- Tambah pesan kesalahan jika diperlukan -->
+                                @error('gambar_produk')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
                 <div class="modal-footer">
                     <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                         Cancel
@@ -156,7 +173,7 @@
 
 {{-- gawe simpan barang --}}
 {{-- Notifikasi setelah penghapusan --}}
-<script>    
+<script>
     // gawe reset form
     function simpanForm() {
         console.log("Simpan Form Successs ");
