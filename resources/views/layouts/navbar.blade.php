@@ -26,7 +26,7 @@
             <div class="navbar-nav flex-row order-md-last">
                 <div class="nav-item d-none d-md-flex me-3">
                     <div class="btn-list">
-                        <a href="https://github.com/tabler/tabler" class="btn" target="_blank" rel="noreferrer">
+                        <a href="https://github.com/xXehub/final-supermarket-web" class="btn" target="_blank" rel="noreferrer">
                             <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -37,7 +37,7 @@
                             </svg>
                             Project Kami
                         </a>
-                        <a href="https://github.com/sponsors/codecalm" class="btn" target="_blank" rel="noreferrer">
+                        <a href="https://github.com/xXehub/final-supermarket-web" class="btn" target="_blank" rel="noreferrer">
                             <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"

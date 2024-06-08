@@ -20,7 +20,6 @@
 
         <!-- Memuat plugin DataTables -->
         <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-
     </head>
     <div class="page">
         <div class="page-wrapper">
@@ -79,7 +78,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-vcenter table-mobile-md card-table" id="produkTable">
                                         <thead>
-                                            <br/>
+                                            <br />
                                             <tr>
                                                 <th style="width: 10%;">ID</th>
                                                 <th style="width: 45%;">Produk</th>

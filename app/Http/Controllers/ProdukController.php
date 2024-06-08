@@ -129,7 +129,7 @@ class ProdukController extends Controller
     {
         $ingfo_sakkarepmu = "Data List Produk";
         $kategori = Kategori::all();
-        $produk = Produk::first();
+        $produk = Produk::find($id);
 
         return view('panel.produk.show', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
@@ -148,7 +148,8 @@ class ProdukController extends Controller
     {
         $ingfo_sakkarepmu = 'Edit Data Kategori';
         $kategoris = Kategori::find($id);
-        return view('panel.kategori.edit', compact('ingfo_sakkarepmu', 'kategoris'));
+        $produk = Produk::find($id);
+        return view('panel.produk.edit', compact('ingfo_sakkarepmu', 'kategoris', 'produk'));
     }
 
     /**
@@ -160,21 +161,7 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $messages = [
-            'kode_produk.required' => 'Kode produk wajib diisi',
-            'kode_produk.regex' => 'Kode produk harus berupa huruf besar',
-            'nama_produk.required' => 'Nama produk wajib diisi',
-            'harga.required' => 'Harga wajib diisi',
-            'harga.numeric' => 'Harga harus berupa angka',
-            'kategori_id.required' => 'Kategori wajib dipilih',
-            'kategori_id.exists' => 'Kategori tidak valid',
-            'stock.required' => 'Stok wajib diisi',
-            'stock.integer' => 'Stok harus berupa angka',
-            'gambar_produk.image' => 'Gambar produk harus berupa gambar',
-            'gambar_produk.mimes' => 'Gambar produk harus berupa file dengan format jpeg, png, atau jpg',
-            'gambar_produk.max' => 'Gambar produk maksimal 2MB',
-        ];
-
+        // Validasi input
         $validator = Validator::make($request->all(), [
             'kode_produk' => 'required|regex:/[A-Z]+/',
             'nama_produk' => 'required',
@@ -182,24 +169,27 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategori,id',
             'stock' => 'required|integer',
             'gambar_produk' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
-        ], $messages);
+        ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Temukan produk berdasarkan ID
         $produk = Produk::find($id);
 
         if (!$produk) {
             return redirect()->route('produk.index')->with('error', 'Produk tidak ditemukan.');
         }
 
+        // Update atribut produk
         $produk->kode_produk = $request->kode_produk;
         $produk->nama_produk = $request->nama_produk;
         $produk->harga = $request->harga;
         $produk->kategori_id = $request->kategori_id;
         $produk->stock = $request->stock;
 
+        // Cek apakah ada file gambar yang diunggah
         if ($request->hasFile('gambar_produk')) {
             // Hapus gambar lama jika ada
             if ($produk->gambar_produk && Storage::exists('public/produk/' . $produk->gambar_produk)) {
@@ -213,10 +203,12 @@ class ProdukController extends Controller
             $produk->gambar_produk = $gambar_produk;
         }
 
+        // Simpan perubahan
         $produk->save();
 
-        return redirect()->route('produk.index')->with('success', 'Barang berhasil diupdate.');
+        return redirect()->route('produk.index')->with('success', 'Data produk berhasil diperbarui.');
     }
+
 
 
 

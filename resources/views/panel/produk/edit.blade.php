@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Data</h5>
+                    <h5 class="modal-title">{{ $ingfo_sakkarepmu }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -26,7 +26,8 @@
                                 <label class="form-label">Kode Produk</label>
                                 <input type="text" class="form-control @error('kode_produk') is-invalid @enderror"
                                     type="text" name="kode_produk" id="kode_produk"
-                                    value="{{ $errors->any() ? old('kode_produk') : $produk->kode_produk }}" maxlength="11" required>
+                                    value="{{ $errors->any() ? old('kode_produk') : $produk->kode_produk }}"
+                                    maxlength="11" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -164,7 +165,7 @@
     </div>
 </form>
 <script>
-    document.getElementById('kode_produk').addEventListener('input', function (e) {
+    document.getElementById('kode_produk').addEventListener('input', function(e) {
         var value = e.target.value.replace(/[^A-Za-z0-9]/g, ''); // Remove non-alphanumeric characters
         if (value.length > 9) {
             value = value.slice(0, 9); // Limit to 9 characters

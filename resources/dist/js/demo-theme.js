@@ -4,7 +4,7 @@
 * @link https://tabler.io
 * Copyright 2018-2023 The Tabler Authors
 * Copyright 2018-2023 codecalm.net Paweł Kuna
-* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+* Licensed under MIT (https://github.com/xXehub/final-supermarket-web/blob/master/LICENSE)
 */
 (function (factory) {
 	typeof define === 'function' && define.amd ? define(factory) :
