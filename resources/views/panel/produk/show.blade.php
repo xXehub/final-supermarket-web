@@ -52,7 +52,8 @@
                                                 <div class="card-header">
                                                     <h3 class="card-title">Detail Produk</h3>
                                                     <div class="card-actions">
-                                                        <a href="{{ route('produk.edit', ['produk' => $produk->id]) }}">
+                                                        <a href="{{ route('produk.edit', ['produk' => $produk->id]) }}"data-bs-toggle="modal"
+                                                            data-bs-target="#modal-editData">
                                                             Edit
                                                             Produk<!-- Download SVG icon from http://tabler-icons.io/i/edit -->
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1"

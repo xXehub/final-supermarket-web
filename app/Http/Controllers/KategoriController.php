@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class KategoriController extends Controller
 {
     public function index()
     { {
             $ingfo_sakkarepmu = "List Kategori";
-            $kategori = Kategori::all();
+            $kategori = Kategori::first();
             return view('panel.kategori.index', [
                 'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
-                'kategoris' => $kategori
+                'kategori' => $kategori
             ]);
         }
     }
@@ -25,7 +26,7 @@ class KategoriController extends Controller
         return view('panel.kategori.create', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'produks' => $produk,
-            
+
         ]);
     }
 
@@ -38,16 +39,16 @@ class KategoriController extends Controller
         ]);
 
         Kategori::create($request->all());
-        return redirect()->route('panel.kategori.index')->with('success', 'Category created successfully.');
+        return redirect()->route('kategori.index')->with('success', 'Category created successfully.');
     }
 
     public function show($id)
     {
         $ingfo_sakkarepmu = 'liat barang';
         $kategori = Kategori::find($id);
-        return view('kategori.show', [
+        return view('panel.kategori.show', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
-            'kategoris' => $kategori
+            'kategori' => $kategori
         ]);
     }
 
@@ -55,20 +56,20 @@ class KategoriController extends Controller
     {
         $ingfo_sakkarepmu = 'Edit Kategori';
         $kategori = Kategori::find($id);
-        return view('kategori.edit', [
-            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
-            'kategori' => $kategori
-        ]);
+        return view('panel.kategori.edit', compact('ingfo_sakkarepmu', 'kategori'));
     }
 
     public function update(Request $request, $id)
     { {
             $messages = [
                 'required' => 'Attribute harus diisi',
+                'nama_kategori' => 'Tidak boleh dikosongkan',
+                'deskripsi' => 'Tidak boleh dikosongkan'
             ];
             $validator = Validator::make($request->all(), [
                 'kode_kategori' => 'required|regex:/[A-Z]+/',
-                'nama_kategori' => 'required'
+                'nama_kategori' => 'required',
+                'deskripsi' => 'required'
             ], $messages);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
@@ -76,8 +77,9 @@ class KategoriController extends Controller
             $kategori = Kategori::find($id);
             $kategori->kode_kategori = $request->kode_kategori;
             $kategori->nama_kategori = $request->nama_kategori;
+            $kategori->deskripsi = $request->deskripsi;
             $kategori->save();
-            return redirect()->route('panel.kategori.index')->with('success', 'Category updated successfully.');
+            return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diupdate.');
         }
 
     }
@@ -92,7 +94,7 @@ class KategoriController extends Controller
     public function getData(Request $request)
     {
         $kategoris = Kategori::with('produk');
-    
+
         if ($request->ajax()) {
             return datatables()->of($kategoris)
                 ->addIndexColumn()
@@ -108,5 +110,5 @@ class KategoriController extends Controller
                 ->toJson();
         }
     }
-    
+
 }

@@ -249,7 +249,7 @@
                             </a>
                         </li>
                         {{-- penyimpanan --}}
-                        <li class="nav-item dropdown {{ Route::is('produk.index') ? 'active' : '' }}">
+                        <li class="nav-item dropdown {{ Route::is('produk.index', 'kategori.index') ? 'active' : '' }}">
                             <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                                 data-bs-auto-close="outside" role="button" aria-expanded="false">
                                 <span

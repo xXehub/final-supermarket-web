@@ -24,8 +24,9 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label class="form-label">Kode Produk</label>
-                                <input type="text" class="form-control" id="kode_produk" name="kode_produk"
-                                    value="{{ $produk->kode_produk }}" required>
+                                <input type="text" class="form-control @error('kode_produk') is-invalid @enderror"
+                                    type="text" name="kode_produk" id="kode_produk"
+                                    value="{{ $errors->any() ? old('kode_produk') : $produk->kode_produk }}" maxlength="11" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -45,7 +46,7 @@
                                     {{-- <option value="" disabled selected>Pilih Kategori</option> --}}
                                     @foreach ($kategoris as $kategori)
                                         <option value="{{ $kategori->id }}"
-                                            {{ $produk->kategori_id == $kategori->id ? 'elected' : '' }}>
+                                            {{ $produk->kategori_id == $kategori->id ? 'selected' : '' }}>
                                             {{ $kategori->nama_kategori }}</option>
                                     @endforeach
                                 </select>
@@ -57,8 +58,8 @@
                         <div class="col-lg-3">
                             <div class="mb-3">
                                 <label class="form-label">Stock</label>
-                                <input class="form-control" id="stock"  type="number" name="stock" value="{{ $produk->stock }}"
-                                    placeholder="1" required>
+                                <input class="form-control" id="stock" type="number" name="stock"
+                                    value="{{ $produk->stock }}" placeholder="1" required>
                                 @error('stock')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -76,7 +77,8 @@
                                         </span>
                                         <span class="form-selectgroup-label-content">
                                             <span class="form-selectgroup-title strong mb-1">Terverifikasi</span>
-                                            <span class="d-block text-muted">Produk telah diverifikasi oleh admin</span>
+                                            <span class="d-block text-muted">Produk telah diverifikasi oleh
+                                                admin</span>
                                         </span>
                                     </span>
                                 </label>
@@ -90,8 +92,10 @@
                                             <span class="form-selectgroup-check"></span>
                                         </span>
                                         <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Tidak Terverifikasi</span>
-                                            <span class="d-block text-muted">Produk belum diverifikasi oleh admin</span>
+                                            <span class="form-selectgroup-title strong mb-1">Tidak
+                                                Terverifikasi</span>
+                                            <span class="d-block text-muted">Produk belum diverifikasi oleh
+                                                admin</span>
                                         </span>
                                     </span>
                                 </label>
@@ -160,29 +164,19 @@
     </div>
 </form>
 <script>
-    // Membuat fungsi untuk memeriksa panjang karakter dan format kode_produk saat memasukkan data
-    document.addEventListener('DOMContentLoaded', function() {
-        var kode_produk_input = document.getElementById('kode_produk');
-        kode_produk_input.addEventListener('input', function() {
-            // Menghapus karakter yang tidak valid
-            this.value = this.value.replace(/[^\w-]/g, '');
-            // Memastikan format XXX-XXX-XXX
-            if (this.value.length > 3 && this.value.indexOf('-') === -1) {
-                this.value = this.value.slice(0, 3) + '-' + this.value.slice(3, 6) + '-' + this.value.slice(6, 9);
-            } else if (this.value.length > 3 && this.value.indexOf('-') !== -1) {
-                var parts = this.value.split('-');
-                for (var i = 0; i < parts.length; i++) {
-                    if (parts[i].length > 3) {
-                        parts[i] = parts[i].slice(0, 3);
-                    }
-                }
-                this.value = parts.join('-');
+    document.getElementById('kode_produk').addEventListener('input', function (e) {
+        var value = e.target.value.replace(/[^A-Za-z0-9]/g, ''); // Remove non-alphanumeric characters
+        if (value.length > 9) {
+            value = value.slice(0, 9); // Limit to 9 characters
+        }
+        var formattedValue = '';
+        for (var i = 0; i < value.length; i++) {
+            if (i > 0 && i % 3 === 0) {
+                formattedValue += '-';
             }
-            // Memastikan panjang maksimum adalah 11 karakter
-            if (this.value.length > 11) {
-                this.value = this.value.slice(0, 11);
-            }
-        });
+            formattedValue += value[i];
+        }
+        e.target.value = formattedValue;
     });
 </script>
 
@@ -205,11 +199,7 @@
         });
         Toast.fire({
             icon: "success",
-            title: 'Berhasil Update Barang'
+            title: 'Berhasil Update Produk'
         });
     };
 </script>
-
-
-
-

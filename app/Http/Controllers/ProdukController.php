@@ -143,10 +143,9 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        $produk = Produk::findOrFail($id);
-        $kategoris = Kategori::all(); // retrieve all categories
-        return view('panel.produk.edit', compact('produk', 'kategoris'));
-
+        $ingfo_sakkarepmu = 'Edit Data Kategori';
+        $kategoris = Kategori::find($id);
+        return view('panel.kategori.edit', compact('ingfo_sakkarepmu', 'kategoris'));
     }
 
     /**

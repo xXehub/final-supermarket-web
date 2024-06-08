@@ -75,78 +75,80 @@
                 <div class="container-xl">
                     <div class="card">
                         <div class="card-body">
-                            <div id="table-default" class="table-responsive">
-                                <table class="table" id="produkTable">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 10%;">ID</th>
-                                            <th style="width: 45%;">Produk</th>
-                                            <th style="width: 45%;">Hidden</th>
-                                            <th style="width: 45%;">Hidden</th>
-                                            <th style="width: 15%;">Kategori</th>
-                                            <th style="width: 10%;">Harga</th>
-                                            <th style="width: 10%;">Quantity</th>
-                                            <th style="width: 10%;">Actions</th>
-                                        </tr>
-                                    </thead>
-                                </table>
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter table-mobile-md card-table" id="produkTable">
+                                        <thead>
+                                            <br/>
+                                            <tr>
+                                                <th style="width: 10%;">ID</th>
+                                                <th style="width: 45%;">Produk</th>
+                                                <th style="width: 45%;">Hidden</th>
+                                                <th style="width: 45%;">Hidden</th>
+                                                <th style="width: 15%;">Kategori</th>
+                                                <th style="width: 10%;">Harga</th>
+                                                <th style="width: 10%;">Quantity</th>
+                                                <th style="width: 10%;">Actions</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-
         </div>
-    </div>
 
-    {{-- gawe nyeluk modal create e om :d --}}
-    @include('panel.produk.create')
-    @include('panel.produk.edit')
-    <script>
-        jQuery(document).ready(function($) {
-            // Periksa apakah sedang dalam mode edit dan terdapat kesalahan validasi pada form edit
-            @if (Route::is('produk.edit') && $errors->any())
-                $('#modal-editData').modal('show');
-                // Periksa apakah sedang dalam mode tambah dan terdapat kesalahan validasi pada form tambah
-            @elseif (Route::is('produk.create') && $errors->any())
-                $('#modal-tambahData').modal('show');
-            @endif
-        });
-    </script>
-    {{-- gawe notif sukses --}}
-    @if ($message = Session::get('hapus'))
+        {{-- gawe nyeluk modal create e om :d --}}
+        @include('panel.produk.create')
+        @include('panel.produk.edit')
         <script>
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Toast.fire({
-                icon: "success",
-                title: '{{ $message }}'
+            jQuery(document).ready(function($) {
+                // Periksa apakah sedang dalam mode edit dan terdapat kesalahan validasi pada form edit
+                @if (Route::is('produk.edit') && $errors->any())
+                    $('#modal-editData').modal('show');
+                    // Periksa apakah sedang dalam mode tambah dan terdapat kesalahan validasi pada form tambah
+                @elseif (Route::is('produk.create') && $errors->any())
+                    $('#modal-tambahData').modal('show');
+                @endif
             });
         </script>
-    @endif
+        {{-- gawe notif sukses --}}
+        @if ($message = Session::get('hapus'))
+            <script>
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: '{{ $message }}'
+                });
+            </script>
+        @endif
 
-    @vite('resources/dist/libs/list.js/dist/list.min.js?1684106062')
-    {{-- tabel --}}
-    @vite('resources/dist/js/tabler.min.js?1684106062')
-    @vite('resources/dist/js/demo.min.js?1684106062')
+        @vite('resources/dist/libs/list.js/dist/list.min.js?1684106062')
+        {{-- tabel --}}
+        @vite('resources/dist/js/tabler.min.js?1684106062')
+        @vite('resources/dist/js/demo.min.js?1684106062')
 
 
-    {{-- jquery all --}}
-    {{-- @vite('resources/assets/libs/jquery/dist/jquery.min.js') --}}
-    <!-- Bootstrap tether Core JavaScript -->
-    {{-- @vite('resources/assets/libs/popper.js/dist/umd/popper.min.js') --}}
-    {{-- @vite('resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') --}}
-    {{-- plugin datatable --}}
-    @vite('resources/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')
-    {{-- @vite('resources/assets/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js') --}}
-    {{-- @vite('resources/dist/js/pages/datatable/datatable-basic.init.js') --}}
-@endsection
+        {{-- jquery all --}}
+        {{-- @vite('resources/assets/libs/jquery/dist/jquery.min.js') --}}
+        <!-- Bootstrap tether Core JavaScript -->
+        {{-- @vite('resources/assets/libs/popper.js/dist/umd/popper.min.js') --}}
+        {{-- @vite('resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') --}}
+        {{-- plugin datatable --}}
+        @vite('resources/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')
+        {{-- @vite('resources/assets/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js') --}}
+        {{-- @vite('resources/dist/js/pages/datatable/datatable-basic.init.js') --}}
+    @endsection
