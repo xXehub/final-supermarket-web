@@ -76,6 +76,7 @@ class ProdukController extends Controller
                 'stock.integer' => 'Stok harus berupa angka',
                 'stock.min' => 'Stok minimal 0',
                 'deskripsi.string' => 'Deskripsi harus berupa teks',
+                'gambar_produk.required' => 'Gambar produk wajib diunggah',
                 'gambar_produk.image' => 'Gambar produk harus berupa gambar',
                 'gambar_produk.mimes' => 'Gambar produk harus berupa file dengan format jpeg, png, atau jpg',
                 'gambar_produk.max' => 'Gambar produk maksimal 2MB',
@@ -87,7 +88,7 @@ class ProdukController extends Controller
                 'harga' => 'required|integer|min:0',
                 'stock' => 'required|integer|min:0',
                 'deskripsi' => 'nullable|string',
-                'gambar_produk' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                'gambar_produk' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ], $messages);
 
             // lanek validasine gagal 

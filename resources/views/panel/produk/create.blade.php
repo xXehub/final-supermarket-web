@@ -1,6 +1,7 @@
 <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="modal modal-blur fade" id="modal-tambahData" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal modal-blur fade" id="modal-tambahData" tabindex="-1" role="dialog" aria-hidden="true"
+        data-bs-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -107,12 +108,11 @@
                             </div>
                         </div>
                         {{-- gawe upload gambar --}}
-
-
                         <div class="col-lg-12">
                             <div>
                                 <br />
-                                <label class="form-label" for="gambar_produk" class="form-label">Gambar
+                                <label class="form-label" for="gambar_produk" class="form-label"
+                                    value="{{ old('gambar_produk') }}">Gambar
                                     Produk</label>
                                 <input type="file" class="form-control" id="gambar_produk" name="gambar_produk">
                                 <!-- Tambah pesan kesalahan jika diperlukan -->
@@ -123,8 +123,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="modal-footer">
                     <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                         Cancel
@@ -166,6 +164,16 @@
     </div>
 </form>
 
+{{-- gawe reopen modal lek enek validasi error --}}
+@if ($errors->any())
+    <script>
+        jQuery(document).ready(function($) {
+            // Gunakan $ di sini
+            $('#modal-tambahData').modal('show');
+        });
+    </script>
+@endif
+
 {{-- library sweetalert --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{-- gawe nyeluk js pek --}}
@@ -196,7 +204,6 @@
         });
     };
 </script>
-
 {{-- end simpan barang --}}
 
 <script>
@@ -265,4 +272,24 @@
             title: '{{ $message }}'
         });
     </script>
+    <script>
+        // Ambil elemen modal
+        var modal = document.getElementById('modal-tambahData');
+
+        // Tangkap event submit form
+        var form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            // Lakukan validasi formulir di sini
+            if (!form.checkValidity()) {
+                // Jika validasi gagal, hentikan aksi default
+                event.preventDefault();
+                // Tampilkan modal
+                var modal = new bootstrap.Modal(document.getElementById('modal-tambahData'));
+                modal.show();
+            }
+        });
+    </script>
+
+
+    {{-- test --}}
 @endif

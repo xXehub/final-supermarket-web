@@ -7,11 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
-    protected $table = 'kategori'; 
+    protected $table = 'kategori';
     use HasFactory;
 
     public function produk()
     {
-        return $this->belongsTo(Produk::class); 
+        return $this->belongsTo(Produk::class);
     }
+
+    // validator
+    protected $fillable = [
+        'kode_kategori',
+        'nama_kategori',
+        'deskripsi'
+    ];
 }
