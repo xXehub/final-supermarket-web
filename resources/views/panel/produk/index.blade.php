@@ -95,13 +95,24 @@
                     </div>
                 </div>
             </div>
-       
+
         </div>
     </div>
 
     {{-- gawe nyeluk modal create e om :d --}}
     @include('panel.produk.create')
-
+    @include('panel.produk.edit')
+    <script>
+        jQuery(document).ready(function($) {
+            // Periksa apakah sedang dalam mode edit dan terdapat kesalahan validasi pada form edit
+            @if (Route::is('produk.edit') && $errors->any())
+                $('#modal-editData').modal('show');
+                // Periksa apakah sedang dalam mode tambah dan terdapat kesalahan validasi pada form tambah
+            @elseif (Route::is('produk.create') && $errors->any())
+                $('#modal-tambahData').modal('show');
+            @endif
+        });
+    </script>
     {{-- gawe notif sukses --}}
     @if ($message = Session::get('hapus'))
         <script>

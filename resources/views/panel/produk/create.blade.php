@@ -1,5 +1,7 @@
-<form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data" id="formTambahData">
     @csrf
+
+
     <div class="modal modal-blur fade" id="modal-tambahData" tabindex="-1" role="dialog" aria-hidden="true"
         data-bs-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
@@ -25,7 +27,8 @@
                             <div class="mb-3">
                                 <label class="form-label">Kode Produk</label>
                                 <input type="text" class="form-control @error('kode_produk') is-invalid @enderror"
-                                    name="kode_produk" id="kode_produk" value="BRG-{{ old('kode_produk') }}" readonly>
+                                    name="kode_produk" id="kode_produk" value="BRG-{{ old('kode_produk') }}" readonly
+                                    disabled>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -43,7 +46,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Kategori</label>
                                 <select name="kategori_id" id="kategori_id" class="form-select">
-                                    <option value="" disabled selected>Pilih Kategori</option>
+                                    {{-- <option value="" disabled selected>Pilih Kategori</option> --}}
                                     @foreach ($kategoris as $kategori_sakkarepmu)
                                         <option value="{{ $kategori_sakkarepmu->id }}"
                                             {{ old('kategori_id') == $kategori_sakkarepmu->id ? 'selected' : '' }}>
@@ -163,16 +166,24 @@
         </div>
     </div>
 </form>
-
-{{-- gawe reopen modal lek enek validasi error --}}
-@if ($errors->any())
-    <script>
-        jQuery(document).ready(function($) {
-            // Gunakan $ di sini
+<script>
+    jQuery(document).ready(function($) {
+        @if ($errors->any())
             $('#modal-tambahData').modal('show');
-        });
-    </script>
-@endif
+        @endif
+    });
+</script>
+<script>
+    // Ambil form
+    var form = document.getElementById("formTambahData");
+
+    // Tambahkan event listener untuk menangkap saat form disubmit
+    form.addEventListener("submit", function() {
+        // Hapus atribut readonly dari input kode_produk sebelum mengirimkan formulir
+        document.getElementById("kode_produk").removeAttribute("disabled");
+    });
+</script>
+{{-- gawe reopen modal lek enek validasi error --}}
 
 {{-- library sweetalert --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

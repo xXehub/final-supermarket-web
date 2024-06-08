@@ -22,14 +22,14 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        // gawe list produk
         $ingfo_sakkarepmu = "Data List Produk";
-        $kategori = Kategori::All();
-        // confirmDelete();
+        $kategori = Kategori::all();
+        $produk = Produk::first();
 
         return view('panel.produk.index', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
-            'kategoris' => $kategori
+            'kategoris' => $kategori,
+            'produk' => $produk // Pastikan produk dikirim ke view
         ]);
         // return view('panel.produk.index', compact('ingfo_sakkarepmu'));
     }
@@ -46,7 +46,8 @@ class ProdukController extends Controller
 
         return view('panel.produk.create', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
-            'kategoris' => $kategori
+            'kategoris' => $kategori,
+            'produk' => null // Tidak ada produk yang dikirimkan pada create
         ]);
     }
 
@@ -142,9 +143,10 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        $produk = Produk::find($id);
+        $produk = Produk::findOrFail($id);
         $kategoris = Kategori::all(); // retrieve all categories
         return view('panel.produk.edit', compact('produk', 'kategoris'));
+
     }
 
     /**
@@ -155,32 +157,66 @@ class ProdukController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { {
-            $messages = [
-                'required' => 'Attribute harus diisi',
-            ];
-            $validator = Validator::make($request->all(), [
-                'kode_produk' => 'required|regex:/[A-Z]+/',
-                'nama_produk' => 'required',
-                'harga' => 'required|numeric',
-                'kategori_id' => 'required',
-                'stock' => 'required'
-            ], $messages);
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
-            $produk = Produk::find($id);
-            $produk->kode_produk = $request->kode_produk;
-            $produk->nama_produk = $request->nama_produk;
-            $produk->harga = $request->harga;
-            $produk->kategori_id = $request->kategori_id;
-            $produk->stock = $request->stock;
-            $produk->save();
+    {
+        $messages = [
+            'kode_produk.required' => 'Kode produk wajib diisi',
+            'kode_produk.regex' => 'Kode produk harus berupa huruf besar',
+            'nama_produk.required' => 'Nama produk wajib diisi',
+            'harga.required' => 'Harga wajib diisi',
+            'harga.numeric' => 'Harga harus berupa angka',
+            'kategori_id.required' => 'Kategori wajib dipilih',
+            'kategori_id.exists' => 'Kategori tidak valid',
+            'stock.required' => 'Stok wajib diisi',
+            'stock.integer' => 'Stok harus berupa angka',
+            'gambar_produk.image' => 'Gambar produk harus berupa gambar',
+            'gambar_produk.mimes' => 'Gambar produk harus berupa file dengan format jpeg, png, atau jpg',
+            'gambar_produk.max' => 'Gambar produk maksimal 2MB',
+        ];
 
-            // sweet alert
-            return redirect()->route('produk.index')->with('simpan', 'Barang berhasil dihapus.');
+        $validator = Validator::make($request->all(), [
+            'kode_produk' => 'required|regex:/[A-Z]+/',
+            'nama_produk' => 'required',
+            'harga' => 'required|numeric',
+            'kategori_id' => 'required|exists:kategori,id',
+            'stock' => 'required|integer',
+            'gambar_produk' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
+        ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
+
+        $produk = Produk::find($id);
+
+        if (!$produk) {
+            return redirect()->route('produk.index')->with('error', 'Produk tidak ditemukan.');
+        }
+
+        $produk->kode_produk = $request->kode_produk;
+        $produk->nama_produk = $request->nama_produk;
+        $produk->harga = $request->harga;
+        $produk->kategori_id = $request->kategori_id;
+        $produk->stock = $request->stock;
+
+        if ($request->hasFile('gambar_produk')) {
+            // Hapus gambar lama jika ada
+            if ($produk->gambar_produk && Storage::exists('public/produk/' . $produk->gambar_produk)) {
+                Storage::delete('public/produk/' . $produk->gambar_produk);
+            }
+
+            // Simpan gambar baru
+            $file = $request->file('gambar_produk');
+            $gambar_produk = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/produk', $gambar_produk);
+            $produk->gambar_produk = $gambar_produk;
+        }
+
+        $produk->save();
+
+        return redirect()->route('produk.index')->with('success', 'Barang berhasil diupdate.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

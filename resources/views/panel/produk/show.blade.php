@@ -99,4 +99,7 @@
 
                 </div>
             </div>
+
+            {{-- nyeluk modal edit mas --}}
+            @include('panel.produk.edit')
         @endsection
