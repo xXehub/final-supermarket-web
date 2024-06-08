@@ -1,12 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+    @php
+        $ndeliknoNavbar = true;
+    @endphp
+
+    @php
+        $ndeliknoFooter = true;
+    @endphp
     <div class="container">
         <div class="page page-center">
             <div class="container container-tight py-4">
                 <div class="text-center mb-4">
-                    <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36"
-                            alt=""></a>
+                    <a href="." class="navbar-brand navbar-brand-autodark"><img
+                            src="{{ asset('/static/gudangrempah/gricon.png') }}" height="36" alt="Gudang Rempah">Gudang
+                        Rempah</a>
                 </div>
                 <div class="card card-md">
                     <div class="card-body">
@@ -104,11 +112,9 @@
             </div>
         </div>
     </div>
-
-
     {{-- show password --}}
     <script>
-        document.getElementById('togglePassword').addEventListener('click', function (e) {
+        document.getElementById('togglePassword').addEventListener('click', function(e) {
             e.preventDefault();
             const passwordField = document.getElementById('password');
             const passwordFieldType = passwordField.getAttribute('type');
