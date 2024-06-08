@@ -1,7 +1,5 @@
 <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data" id="formTambahData">
     @csrf
-
-
     <div class="modal modal-blur fade" id="modal-tambahData" tabindex="-1" role="dialog" aria-hidden="true"
         data-bs-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">

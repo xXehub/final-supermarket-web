@@ -17,10 +17,8 @@
         @vite('resources/assets/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css')
         <!-- Memuat jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
         <!-- Memuat plugin DataTables -->
         <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-
     </head>
     <div class="page">
         <div class="page-wrapper">
@@ -42,7 +40,7 @@
                                     </a>
                                 </span>
                                 <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-                                    data-bs-target="#modal-tambahsupplier">
+                                    data-bs-target="#modal-tambahSupplier">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -69,7 +67,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Page body -->
             <div class="page-body">
                 <div class="container-xl">
@@ -101,7 +98,7 @@
 
     {{-- gawe nyeluk modal create e om :d --}}
     @include('panel.supplier.create')
-    @include('panel.supplier.edit')
+    {{-- @include('panel.supplier.edit') --}}
 
     {{-- gawe notif sukses --}}
     @if ($message = Session::get('hapus'))

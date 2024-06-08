@@ -26,28 +26,49 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('suppliers.create');
+        $ingfo_sakkarepmu = 'Tambah Data Supplier';
+        $supplier = Supplier::all();
+
+        return view('panel.supplier.create', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'suppliers' => $supplier,
+            'produk' => null // Tidak ada produk yang dikirimkan pada create
+        ]);
+        // return view('suppliers.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+   
     {
-        $request->validate([
-            'kode_supplier' => 'required|unique:supplier|max:20',
-            'nama_supplier' => 'required|max:100',
-            'alamat' => 'required|max:255',
-            'no_hp' => 'required|numeric',
-            'deskripsi' => 'nullable',
-        ]);
+        // gawe message dan validasi
+        {
+            $messages = [
+                // validator message mas
+                'required' => 'Tidak boleh kosong',
+                'no_hp.min:0' => 'Tidak boleh kurang dari 0',
+            ];
+            $validator = Validator::make($request->all(), [
+                'kode_supplier' => 'required|unique:supplier|max:20',
+                'nama_supplier' => 'required|max:100',
+                'alamat' => 'required|max:255',
+                'no_hp' => 'required|digits_between:1,20|min:0',
+                'deskripsi' => 'nullable|string',
+            ], $messages);
 
-        Supplier::create($request->all());
+            // lanek validasine gagal 
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
 
-        return redirect()->route('panel.supplier.index')
-            ->with('success', 'Supplier created successfully.');
-    }
-
+            // eloquent instant method create
+            Supplier::create($request->all());
+            return redirect()->route('supplier.index')->with('success', 'Category created successfully.');      // return redirect()->route('panel.produk.produk.index')->with('success', 'Produk berhasil ditambahkan.');
+        }
+    } 
+    
     /**
      * Display the specified resource.
      */
@@ -82,7 +103,7 @@ class SupplierController extends Controller
         $supplier = Supplier::findOrFail($id);
         $supplier->update($request->all());
 
-        return redirect()->route('panel.supplier.index')
+        return redirect()->route('supplier.index')
             ->with('success', 'Supplier updated successfully.');
     }
 
@@ -94,7 +115,7 @@ class SupplierController extends Controller
         $supplier = Supplier::findOrFail($id);
         $supplier->delete();
 
-        return redirect()->route('panel.supplier.index')
+        return redirect()->route('supplier.index')
             ->with('success', 'Supplier deleted successfully.');
     }
 
