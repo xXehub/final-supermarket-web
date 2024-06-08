@@ -37,11 +37,11 @@
         @include('layouts.navbar')
     @endif
     @yield('content')
-    
+
 
     @if (!isset($ndeliknoFooter) || !$ndeliknoFooter)
-    @include('layouts.footer')
-@endif
+        @include('layouts.footer')
+    @endif
 
     @vite('resources/js/app.js')
 
