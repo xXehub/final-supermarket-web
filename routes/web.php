@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\API\KategoriController;
 use App\Http\Controllers\API\ProdukController;
 use App\Http\Controllers\API\ProfileController;
@@ -14,9 +15,7 @@ Route::get('/', function () {
 
 // Middleware untuk superadmin dan admin
 Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(function () {
-    Route::get('panel', function () {
-        return view('panel.dashboard');
-    })->name('panel.dashboard');
+    Route::get('panel', [\App\Http\Controllers\Panel\DashboardController::class, 'index'])->name('panel.dashboard');
 
     // Rute resource untuk produk
     Route::resource('/panel/produk', ProdukController::class);

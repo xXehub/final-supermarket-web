@@ -28,11 +28,13 @@ class ProdukController extends Controller
         $kategori = Kategori::all();
         $produk = Produk::first();
         $suppliers = Supplier::all(); // Ubah ini menjadi all() agar mengambil semua data supplier
+        $totalProduk = Produk::count();
 
         return view('panel.produk.index', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'kategoris' => $kategori,
-            'suppliers' => $suppliers, // Ubah variabelnya menjadi 'suppliers'
+            'suppliers' => $suppliers,
+            'totalProduk' => $totalProduk, // Ubah variabelnya menjadi 'suppliers'
             'produk' => $produk // Pastikan produk dikirim ke view
         ]);
     }
@@ -47,6 +49,7 @@ class ProdukController extends Controller
         $ingfo_sakkarepmu = 'Tambah Produk';
         $kategori = Kategori::all();
         $supplier = Supplier::all();
+
 
         return view('panel.produk.create', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
