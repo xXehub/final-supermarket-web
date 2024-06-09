@@ -57,6 +57,24 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="col-lg-3">
+                            <div class="mb-3">
+                                <label class="form-label">Supplier</label>
+                                <select name="supplier_id" id="supplier_id" class="form-select">
+                                    {{-- <option value="" disabled selected>Pilih Kategori</option> --}}
+                                    @foreach ($suppliers as $supplier_sakkarepmu)
+                                        <option value="{{ $supplier_sakkarepmu->id }}"
+                                            {{ old('supplier_id') == $supplier_sakkarepmu->id ? 'selected' : '' }}>
+                                            {{ $supplier_sakkarepmu->kode_supplier . ' - ' . $supplier_sakkarepmu->nama_supplier }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('supplier_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-lg-3">
                             <div class="mb-3">
                                 <label class="form-label">Stock</label>

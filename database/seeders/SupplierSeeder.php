@@ -16,26 +16,26 @@ class SupplierSeeder extends Seeder
         $suppliers = [
             [
                 'kode_supplier' => 'SUP-001',
-                'nama_supplier' => 'Marlboro Rokok Filter Ice Burst Special Edition 20',
-                'alamat' => 'Jl. Rokok Sejahtera No. 1',
-                'no_hp' => '085731816771',
-                'deskripsi' => 'Supplier rokok Marlboro'
+                'nama_supplier' => 'PT Djarum',
+                'alamat' => 'Jl. Djarum No. 1',
+                'no_hp' => '081234567890',
+                'deskripsi' => 'Supplier rokok Djarum'
             ],
             [
                 'kode_supplier' => 'SUP-002',
-                'nama_supplier' => 'Dunhill Rokok Fine Cut Blue 20',
-                'alamat' => 'Jl. Rokok Asri No. 2',
-                'no_hp' => '0815532217669',
-                'deskripsi' => 'Supplier rokok Dunhill'
+                'nama_supplier' => 'PT Gudang Garam',
+                'alamat' => 'Jl. Gudang Garam No. 2',
+                'no_hp' => '081234567891',
+                'deskripsi' => 'Supplier rokok Gudang Garam'
             ],
             [
                 'kode_supplier' => 'SUP-003',
-                'nama_supplier' => 'Gudang Garam Rokok Signature Mild 16',
-                'alamat' => 'Jl. Rokok Damai No. 3',
-                'no_hp' => '088989900911',
-                'deskripsi' => 'Supplier rokok Gudang Garam'
+                'nama_supplier' => 'PT Sampoerna',
+                'alamat' => 'Jl. Sampoerna No. 3',
+                'no_hp' => '081234567892',
+                'deskripsi' => 'Supplier rokok Sampoerna'
             ]
-        ];
+        ];        
 
         foreach ($suppliers as $supplier) {
             Supplier::create($supplier);

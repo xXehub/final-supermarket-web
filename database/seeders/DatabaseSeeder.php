@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RoleSeeder::class,
             KategoriSeeder::class,
-            ProdukTableSeeder::class,
             SupplierSeeder::class,
+            ProdukTableSeeder::class,
             // add seeder disini ngab 
         ]);
     }

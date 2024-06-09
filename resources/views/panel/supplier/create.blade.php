@@ -25,7 +25,8 @@
                             <div class="mb-3">
                                 <label class="form-label">Kode Supplier</label>
                                 <input type="text" class="form-control @error('kode_supplier') is-invalid @enderror"
-                                    name="kode_supplier" id="kode_supplier" value="{{ old('kode_supplier') }}" readonly disabled>
+                                    name="kode_supplier" id="kode_supplier" value="{{ old('kode_supplier') }}" readonly
+                                    disabled>
                             </div>
                         </div>
                         {{-- alamat --}}
@@ -41,6 +42,19 @@
                             </div>
                         </div>
                         {{-- no hp --}}
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label class="form-label">Telephone</label>
+                                <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
+                                    name="no_hp" id="no_hp" value="{{ old('no_hp') }}"
+                                    placeholder="Masukan Nomor Telephone">
+                                @error('no_hp')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- supplier --}}
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label class="form-label">Telephone</label>

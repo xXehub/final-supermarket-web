@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Kategori;
+use App\Models\Supplier;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -26,13 +27,14 @@ class ProdukController extends Controller
         $ingfo_sakkarepmu = "Data List Produk";
         $kategori = Kategori::all();
         $produk = Produk::first();
+        $suppliers = Supplier::all(); // Ubah ini menjadi all() agar mengambil semua data supplier
 
         return view('panel.produk.index', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'kategoris' => $kategori,
+            'suppliers' => $suppliers, // Ubah variabelnya menjadi 'suppliers'
             'produk' => $produk // Pastikan produk dikirim ke view
         ]);
-        // return view('panel.produk.index', compact('ingfo_sakkarepmu'));
     }
 
     /**
@@ -44,10 +46,12 @@ class ProdukController extends Controller
     {
         $ingfo_sakkarepmu = 'Tambah Produk';
         $kategori = Kategori::all();
+        $supplier = Supplier::all();
 
         return view('panel.produk.create', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'kategoris' => $kategori,
+            'suppliers' => $supplier,
             'produk' => null // Tidak ada produk yang dikirimkan pada create
         ]);
     }
@@ -71,6 +75,8 @@ class ProdukController extends Controller
                 'nama_produk.max' => 'Nama produk maksimal 100 karakter',
                 'kategori_id.required' => 'Kategori wajib dipilih',
                 'kategori_id.exists' => 'Kategori tidak valid',
+                'supplier_id.required' => 'Kategori wajib dipilih',
+                'supplier_id.exists' => 'Kategori tidak valid',
                 'harga.required' => 'Harga wajib diisi',
                 'harga.integer' => 'Harga harus berupa angka',
                 'harga.min' => 'Harga minimal 0',
@@ -87,6 +93,7 @@ class ProdukController extends Controller
                 'kode_produk' => 'required|unique:produk|max:20',
                 'nama_produk' => 'required|max:100',
                 'kategori_id' => 'required|exists:kategori,id',
+                'supplier_id' => 'required|exists:supplier,id',
                 'harga' => 'required|integer|min:0',
                 'stock' => 'required|integer|min:0',
                 'deskripsi' => 'nullable|string',
@@ -109,6 +116,7 @@ class ProdukController extends Controller
             $produk->kode_produk = $request->kode_produk;
             $produk->nama_produk = $request->nama_produk;
             $produk->kategori_id = $request->kategori_id;
+            $produk->supplier_id = $request->supplier_id;
             $produk->harga = $request->harga;
             $produk->stock = $request->stock;
             $produk->deskripsi = $request->deskripsi;
@@ -236,10 +244,13 @@ class ProdukController extends Controller
     // get data
     public function getData(Request $request)
     {
-        $produks = Produk::with('kategori');
+        $produks = Produk::with('kategori', 'supplier');
         if ($request->ajax()) {
             return datatables()->of($produks)
                 ->addIndexColumn()
+                ->addColumn('nama_supplier', function ($produk) {
+                    return $produk->supplier->nama_supplier;
+                })
                 ->addColumn('nama_kategori', function ($produk) {
                     return $produk->kategori->nama_kategori;
                 })

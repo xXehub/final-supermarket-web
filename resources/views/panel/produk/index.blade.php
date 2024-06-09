@@ -85,6 +85,7 @@
                                                 <th style="width: 45%;">Hidden</th>
                                                 <th style="width: 45%;">Hidden</th>
                                                 <th style="width: 15%;">Kategori</th>
+                                                <th style="width: 15%;">Supplier</th>
                                                 <th style="width: 10%;">Harga</th>
                                                 <th style="width: 10%;">Quantity</th>
                                                 <th style="width: 10%;">Actions</th>

@@ -27,6 +27,7 @@ $(function() {
                 }
             },
             { data: "nama_kategori", name: "nama_kategori" },
+            { data: "nama_supplier", name: "nama_supplier" },
             {
                 data: "harga",
                 name: "harga",

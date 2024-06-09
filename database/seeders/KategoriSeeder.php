@@ -15,9 +15,9 @@ class KategoriSeeder extends Seeder
     public function run()
     {
         $categories = [
-            ['kode_kategori' => 'MIN', 'nama_kategori' => 'Minuman', 'deskripsi' => 'Minuman ombenan sakkarepmu'],
-            ['kode_kategori' => 'MAK', 'nama_kategori' => 'Makanan', 'deskripsi' => 'Yo panganan sakkarepmu'],
-            ['kode_kategori' => 'BUA', 'nama_kategori' => 'Buah', 'deskripsi' => 'Buahmu Sakkarepmu'],
+            ['kode_kategori' => 'FIL', 'nama_kategori' => 'Rokok Filter', 'deskripsi' => 'Jenis rokok dengan filter'],
+            ['kode_kategori' => 'KRE', 'nama_kategori' => 'Rokok Kretek', 'deskripsi' => 'Jenis rokok kretek tradisional'],
+            ['kode_kategori' => 'LIG', 'nama_kategori' => 'Rokok Light', 'deskripsi' => 'Jenis rokok dengan kadar nikotin yang rendah'],
         ];
 
         foreach ($categories as $category) {

@@ -77,9 +77,9 @@
                                                         <dt class="col-5">Nama:</dt>
                                                         <dd class="col-7">{{ $produk->nama_produk }}</dd>
                                                         <dt class="col-5">Supplier:</dt>
-                                                        <dd class="col-7">Dummy Data</dd>
+                                                        <dd class="col-7">{{ $produk->supplier->nama_supplier }}</dd>
                                                         <dt class="col-5">Kategori:</dt>
-                                                        <dd class="col-7">{{ $produk->kategori_id }}</dd>
+                                                        <dd class="col-7">{{ $produk->kategori->nama_kategori }}</dd>
                                                         <dt class="col-5">Stock:</dt>
                                                         <dd class="col-7">
                                                             <span class="flag flag-country-pl"></span> {{ $produk->stock }}

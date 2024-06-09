@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('kode_produk', 20)->unique();
             $table->string('nama_produk', 100);
             $table->foreignId('kategori_id')->constrained('kategori')->onDelete('cascade'); // Cascade delete
+            $table->foreignId('supplier_id')->constrained('supplier');
             $table->integer('harga');
             $table->integer('stock');
             $table->text('deskripsi')->nullable();

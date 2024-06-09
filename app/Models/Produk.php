@@ -15,11 +15,17 @@ class Produk extends Model
         return $this->belongsTo(Kategori::class);
     }
 
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+
     // validator
     protected $fillable = [
         'kode_produk',
         'nama_produk',
         'kategori_id',
+        'supplier_id',
         'harga',
         'stock',
         'deskripsi',
