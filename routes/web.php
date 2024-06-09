@@ -1,8 +1,8 @@
 <?php
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\API\KategoriController;
+use App\Http\Controllers\API\ProdukController;
+use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\API\SupplierController;
 use App\Http\Middleware\MultiRoleMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
