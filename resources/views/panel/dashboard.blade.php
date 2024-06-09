@@ -296,7 +296,7 @@
                                                     {{ $totalProduk }} Produk
                                                 </div>
                                                 <div class="text-muted">
-                                                    12 waiting payments
+                                                    {{$barangBaruToday}} Produk Baru Hari ini
                                                 </div>
                                             </div>
                                         </div>
@@ -310,22 +310,24 @@
                                             <div class="col-auto">
                                                 <span
                                                     class="bg-facebook text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-facebook -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="icon icon-tabler icons-tabler-outline icon-tabler-users">
                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path
-                                                            d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+                                                        <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                                        <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
                                                     </svg>
                                                 </span>
                                             </div>
                                             <div class="col">
                                                 <div class="font-weight-medium">
-                                                    132 Likes
+                                                    {{$totalUser}} User
                                                 </div>
                                                 <div class="text-muted">
-                                                    21 today
+                                                    {{$userBaruToday}} Baru Hari ini
                                                 </div>
                                             </div>
                                         </div>

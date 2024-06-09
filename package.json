@@ -13,6 +13,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "chart.js": "^4.4.3",
         "datatables.net": "^2.0.8",
         "datatables.net-bs5": "^2.0.8",
         "datatables.net-buttons": "^3.0.2",

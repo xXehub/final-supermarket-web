@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
             KategoriSeeder::class,
             SupplierSeeder::class,
             ProdukTableSeeder::class,
+            WhishlistSeeder::class,
+            PemesananSeeder::class,
+            DetailPemesananSeeder::class,
+            PembayaranSeeder::class,
             // add seeder disini ngab 
         ]);
     }

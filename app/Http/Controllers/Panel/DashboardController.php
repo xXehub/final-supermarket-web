@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
+use App\Models\User;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -14,11 +16,23 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        // gawe produk info
         $totalProduk = Produk::count();
+        $barangBaruToday = Produk::whereDate('created_at', Carbon::today())->count();
+
+        // gawe user info
+        $totalUser = User::count();
+        $userBaruToday = User::whereDate('created_at', Carbon::today())->count();
+
         $ingfo_sakkarepmu = "Dashboard";
         return view('panel.dashboard', [
             'totalProduk' => $totalProduk,
+            'barangBaruToday' => $barangBaruToday,
+            'totalUser' => $totalUser,
+            'userBaruToday' => $userBaruToday,
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
         ]);
     }
+
+    
 }
