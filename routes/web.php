@@ -4,6 +4,10 @@ use App\Http\Controllers\API\KategoriController;
 use App\Http\Controllers\API\ProdukController;
 use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\SupplierController;
+use App\Http\Controllers\DetailPemesananController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\WhishlistController;
 use App\Http\Middleware\MultiRoleMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +30,9 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
 
     // Rute resource untuk supplier mas
     Route::resource('/panel/supplier', SupplierController::class);
+
+    // Rute resource untuk supplier mas
+    Route::resource('/panel/pemesanan', PemesananController::class);
 });
 
 // Middleware untuk superadmin saja
@@ -43,3 +50,7 @@ Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profi
 Route::get('data/produk', [ProdukController::class, 'getData'])->name('produk.data');
 Route::get('data/kategori', [KategoriController::class, 'getData'])->name('kategori.data');
 Route::get('data/supplier', [SupplierController::class, 'getData'])->name('supplier.data');
+Route::get('data/pemesanan', [PemesananController::class, 'getData'])->name('pemesanan.data');
+Route::get('data/detail-pemesanan', [DetailPemesananController::class, 'getData'])->name('detail_pemesanan.data');
+Route::get('data/wishlist', [WhishlistController::class, 'getData'])->name('wishlist.data');
+Route::get('data/pembayaran', [PembayaranController::class, 'getData'])->name('pembayaran.data');
