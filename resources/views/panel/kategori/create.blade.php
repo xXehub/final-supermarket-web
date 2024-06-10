@@ -115,7 +115,7 @@
 <script>
     jQuery(document).ready(function($) {
         @if ($errors->any())
-            $('#modal-tambahData').modal('show');
+            $('#modal-tambahKategori').modal('show');
         @endif
     });
 </script>

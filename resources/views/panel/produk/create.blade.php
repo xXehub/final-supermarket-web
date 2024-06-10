@@ -209,7 +209,6 @@
 {{-- gawe simpan barang --}}
 {{-- Notifikasi setelah penghapusan --}}
 <script>
-    // gawe reset form
     function simpanForm() {
         console.log("Simpan Form Successs ");
 
@@ -260,6 +259,7 @@
         });
     };
 </script>
+
 {{-- gawe notif gagal --}}
 @if ($message = Session::get('gagal'))
     <script>

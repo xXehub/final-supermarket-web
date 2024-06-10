@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pemesanan extends Model
 {
-    
+
     protected $table = 'pemesanan';
     use HasFactory;
 
@@ -16,5 +16,10 @@ class Pemesanan extends Model
     {
         return $this->belongsTo(User::class);
     }
-    protected $fillable = ['user_id', 'tanggal', 'status'];
+
+    public function detailPemesanan()
+    {
+        return $this->hasMany(DetailPemesanan::class);
+    }
+    protected $fillable = ['kode_pesanan', 'user_id', 'tanggal', 'status'];
 }

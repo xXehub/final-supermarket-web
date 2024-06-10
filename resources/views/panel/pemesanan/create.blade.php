@@ -1,5 +1,3 @@
-
-
 <form action="{{ route('pemesanan.store') }}" method="POST" enctype="multipart/form-data" id="formTambahData">
     @csrf
     <div class="modal modal-blur fade" id="modal-tambahPesanan" tabindex="-1" role="dialog" aria-hidden="true"
@@ -7,7 +5,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Data</h5>
+                    <h5 class="modal-title">Tambah Data Pesanan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -15,12 +13,26 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label class="form-label">Nama Pemesan</label>
-                                <input type="text" class="form-control @error('nama_user') is-invalid @enderror"
-                                    name="nama_user" id="nama_user" value="{{ old('nama_user') }}"
-                                    placeholder="Masukan Nama barang">
-                                @error('nama_user')
+                                <select class="form-select @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
+                                    <option value="" disabled selected>Pilih User</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                                            {{ $user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('user_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                            </div>
+                        </div>
+                        {{-- gawe kode pemesanan --}}
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label class="form-label">Kode Produk</label>
+                                <input type="text" class="form-control @error('kode_pesanan') is-invalid @enderror"
+                                    name="kode_pesanan" id="kode_pesanan" value="{{ old('kode_pesanan') }}" readonly
+                                    disabled>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -29,6 +41,24 @@
                                 <input type="date" class="form-control @error('tanggal') is-invalid @enderror"
                                     name="tanggal" id="tanggal" value="{{ old('tanggal') }}" required>
                                 @error('tanggal')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- gawe nama produk / pilih produk --}}
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label class="form-label">Nama Produk</label>
+                                <select name="produk_id" id="produk_id" class="form-select select2">
+                                    <option value="" disabled selected>Pilih Produk</option>
+                                    @foreach ($produks as $produk)
+                                        <option value="{{ $produk->id }}"
+                                            {{ old('produk_id') == $produk->id ? 'selected' : '' }}>
+                                            {{ $produk->kode_pesanan . ' - ' . $produk->nama_produk }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('produk_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -52,109 +82,22 @@
                                 @enderror
                             </div>
                         </div>
-                        {{-- gawe nama produk / pilih produk --}}
-                        <div class="col-lg-3">
+                        <div class="col-lg-6">
                             <div class="mb-3">
-                                <label class="form-label">Nama Produk</label>
-                                <select name="produk_id" id="produk_id" class="form-select select2">
-                                    <option value="" disabled selected>Pilih Produk</option>
-                                    @foreach ($produks as $produk)
-                                        <option value="{{ $produk->id }}"
-                                            {{ old('produk_id') == $produk->id ? 'selected' : '' }}>
-                                            {{ $produk->kode_produk . ' - ' . $produk->nama_produk }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('produk_id')
+                                <label class="form-label">Jumlah Pesanan</label>
+                                <input class="form-control @error('jumlah') is-invalid @enderror" type="number"
+                                    name="jumlah" id="jumlah" value="{{ old('jumlah') }}" placeholder="1">
+                                @error('jumlah')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
-
-                        <div class="col-lg-3">
+                        {{-- <div class="col-lg-3">
                             <div class="mb-3">
-                                <label class="form-label">Supplier</label>
-                                <select name="supplier_id" id="supplier_id" class="form-select">
-                                    {{-- <option value="" disabled selected>Pilih Kategori</option> --}}
-                                    {{-- @foreach ($suppliers as $supplier_sakkarepmu)
-                                        <option value="{{ $supplier_sakkarepmu->id }}"
-                                            {{ old('supplier_id') == $supplier_sakkarepmu->id ? 'selected' : '' }}>
-                                            {{ $supplier_sakkarepmu->kode_supplier . ' - ' . $supplier_sakkarepmu->nama_supplier }}
-                                        </option>
-                                    @endforeach --}}
-                                </select>
-                                @error('supplier_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <label class="form-label">Subtotal</label>
+                                <input class="form-control" type="text" name="subtotal" id="subtotal" value="{{ old('subtotal') }}" readonly>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="mb-3">
-                                <label class="form-label">Stock</label>
-                                <input class="form-control @error('stock') is-invalid @enderror" type="number"
-                                    name="stock" id="stock" value="{{ old('stock') }}" placeholder="1">
-                                @error('stock')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <label class="form-label">Status</label>
-                        <div class="form-selectgroup-boxes row mb-3">
-                            <div class="col-lg-6">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" name="report-type" value="1"
-                                        class="form-selectgroup-input" checked>
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Terverifikasi</span>
-                                            <span class="d-block text-muted">Produk telah diverifikasi oleh admin</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" name="report-type" value="0"
-                                        class="form-selectgroup-input">
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Tidak Terverifikasi</span>
-                                            <span class="d-block text-muted">Produk belum diverifikasi oleh
-                                                admin</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div>
-                                <label class="form-label">Keterangan</label>
-                                <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" rows="3"
-                                    name="deskripsi" placeholder="Produk ini adalah produk terlarang yang nantinya akan di ekspor ke berbagai negara "
-                                    {{ old('deskripsi') }} rows="3"></textarea>
-                            </div>
-                        </div>
-                        {{-- gawe upload gambar --}}
-                        <div class="col-lg-12">
-                            <div>
-                                <br />
-                                <label class="form-label" for="gambar_produk" class="form-label"
-                                    value="{{ old('gambar_produk') }}">Gambar
-                                    Produk</label>
-                                <input type="file" class="form-control" id="gambar_produk" name="gambar_produk">
-                                <!-- Tambah pesan kesalahan jika diperlukan -->
-                                @error('gambar_produk')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -197,8 +140,23 @@
         </div>
     </div>
 </form>
+<script>
+    jQuery(document).ready(function($) {
+        @if ($errors->any())
+            $('#modal-tambahPesanan').modal('show');
+        @endif
+    });
+</script>
+<script>
+    // Ambil form
+    var form = document.getElementById("formTambahData");
 
-
+    // Tambahkan event listener untuk menangkap saat form disubmit
+    form.addEventListener("submit", function() {
+        // Hapus atribut readonly dari input kode_produk sebelum mengirimkan formulir
+        document.getElementById("kode_pesanan").removeAttribute("disabled");
+    });
+</script>
 <script>
     $(document).ready(function() {
         $('.select2').select2({
@@ -221,8 +179,8 @@
 
     // Tambahkan event listener untuk menangkap saat form disubmit
     form.addEventListener("submit", function() {
-        // Hapus atribut readonly dari input kode_produk sebelum mengirimkan formulir
-        document.getElementById("kode_produk").removeAttribute("disabled");
+        // Hapus atribut readonly dari input kode_pesanan sebelum mengirimkan formulir
+        document.getElementById("kode_pesanan").removeAttribute("disabled");
     });
 </script>
 {{-- gawe reopen modal lek enek validasi error --}}
@@ -342,7 +300,4 @@
             }
         });
     </script>
-
-
-    {{-- test --}}
 @endif

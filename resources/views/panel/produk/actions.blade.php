@@ -1,4 +1,3 @@
-{{-- multi group --}}
 <form id="delete-form-{{ $produk->id }}" action="{{ route('produk.destroy', ['produk' => $produk->id]) }}"
     method="POST">
     <div class="btn-list flex-nowrap">
