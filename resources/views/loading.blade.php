@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="loading">
-        <p>Loading...</p>
+        <p>Memuat halaman...</p>
         <!-- Tambahkan animasi atau gambar loading di sini -->
     </div>
 </body>
