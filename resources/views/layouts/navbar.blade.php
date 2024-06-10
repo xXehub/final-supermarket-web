@@ -252,7 +252,7 @@
                         </li>
                         {{-- penyimpanan --}}
                         <li
-                            class="nav-item dropdown {{ Route::is('produk.index', 'kategori.index', 'supplier.index') ? 'active' : '' }}">
+                            class="nav-item dropdown {{ Route::is('produk.index', 'kategori.index', 'supplier.index', 'produk.show', 'kategori.show', 'supplier.show') ? 'active' : '' }}">
                             <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                                 data-bs-auto-close="outside" role="button" aria-expanded="false">
                                 <span
@@ -266,16 +266,16 @@
                             <div class="dropdown-menu">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
-                                        <a class="dropdown-item {{ Route::is('produk.index') ? 'active' : '' }}"
+                                        <a class="dropdown-item {{ Route::is('produk.index' , 'produk.show') ? 'active' : '' }}"
                                             href="{{ route('produk.index') }}">
                                             Produk
                                         </a>
-                                        <a class="dropdown-item {{ Route::is('kategori.index') ? 'active' : '' }}"
+                                        <a class="dropdown-item {{ Route::is('kategori.index' , 'kategori.show') ? 'active' : '' }}"
                                             href="{{ route('kategori.index') }}">
                                             Kategori
                                         </a>
-                                        <a class="dropdown-item {{ Route::is('supplier.index') ? 'active' : '' }}"
-                                            href="{{ Route('supplier.index')}}">
+                                        <a class="dropdown-item {{ Route::is('supplier.index' , 'supplier.show') ? 'active' : '' }}"
+                                            href="{{ Route('supplier.index') }}">
                                             Supplier
                                         </a>
                                     </div>
@@ -299,12 +299,12 @@
                             <div class="dropdown-menu">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
-                                        <a class="dropdown-item {{ Route::is('pemesanan.index') ? 'active' : '' }}"
+                                        <a class="dropdown-item {{ Route::is('pemesanan.index', 'pemesanan.show') ? 'active' : '' }}"
                                             href="{{ route('pemesanan.index') }}">
                                             Pesanan
                                         </a>
-                                        <a class="dropdown-item {{ Route::is('pembayaran.index') ? 'active' : '' }}"
-                                        href="{{ route('pembayaran.index') }}">
+                                        <a class="dropdown-item {{ Route::is('pembayaran.index', 'pembayaran.show') ? 'active' : '' }}"
+                                            href="{{ route('pembayaran.index') }}">
                                             Pembayaran
                                         </a>
                                     </div>

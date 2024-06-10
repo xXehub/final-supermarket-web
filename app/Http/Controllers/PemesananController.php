@@ -139,7 +139,7 @@ class PemesananController extends Controller
                     return $pemesanan->user->name;
                 })
                 ->addColumn('gambar_profile', function ($pemesanan) {
-                    return $pemesanan->user->gambar_profile; // Gunakan first() di sini
+                    return $pemesanan->user->gambar_profile; 
                 })
                 ->addColumn('actions', function ($pemesanan) {
                     return view('panel.pemesanan.actions', compact('pemesanan'));

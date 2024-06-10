@@ -28,7 +28,6 @@
 
     <!-- plugin datatable coo -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-
     <style>
         @import url('https://rsms.me/inter/inter.css');
 

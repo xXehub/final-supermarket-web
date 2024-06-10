@@ -3,15 +3,15 @@
         <div class="row text-center align-items-center flex-row-reverse">
             <div class="col-lg-auto ms-lg-auto">
                 <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item"><a href="https://instagram.com/siiihub" target="_blank" class="link-secondary"
-                            rel="noopener">Angela</a></li>
-                    <li class="list-inline-item"><a href="https://instagram.com/siiihub" class="link-secondary">Amanda</a>
+                    <li class="list-inline-item"><a href="https://instagram.com/siiihub" target="_blank"
+                            class="link-secondary" rel="noopener">Angela</a></li>
+                    <li class="list-inline-item"><a href="https://instagram.com/siiihub"
+                            class="link-secondary">Amanda</a>
                     </li>
                     <li class="list-inline-item"><a href="https://instagram.com/siiihub" target="_blank"
                             class="link-secondary" rel="noopener">Deru </a></li>
                     <li class="list-inline-item">
-                        <a href="https://instagram.com/siiihub" target="_blank" class="link-secondary"
-                            rel="noopener">
+                        <a href="https://instagram.com/siiihub" target="_blank" class="link-secondary" rel="noopener">
                             Sihub
                         </a>
                     </li>
