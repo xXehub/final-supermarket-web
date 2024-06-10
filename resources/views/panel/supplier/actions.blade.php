@@ -16,7 +16,7 @@
                     Detail
                 </a>
                 <a class="dropdown-item" href="{{ route('supplier.edit', ['supplier' => $supplier->id]) }}" data-bs-toggle="modal"
-                    data-bs-target="#modal-editData">
+                    data-bs-target="#modal-editSupplier">
                     Edit
                 </a>
             </div>

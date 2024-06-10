@@ -9,7 +9,7 @@
                     <div class="row g-2 align-items-center">
                         <div class="col">
                             <h2 class="page-title">
-                                Supplier Test
+                                Supplier List
                             </h2>
                         </div>
                         <!-- Page title actions -->
@@ -79,7 +79,7 @@
 
     {{-- gawe nyeluk modal create e om :d --}}
     @include('panel.supplier.create')
-    {{-- @include('panel.supplier.edit') --}}
+    @include('panel.supplier.edit')
 
     {{-- gawe notif sukses --}}
     @if ($message = Session::get('hapus'))

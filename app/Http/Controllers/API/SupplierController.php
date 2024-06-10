@@ -18,8 +18,20 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::all();
-        return view('panel.supplier.index', compact('suppliers'));
+
+        $ingfo_sakkarepmu = "Data List Produk";
+        $kategori = Kategori::all();
+        $produk = Produk::first();
+        $supplier = Supplier::first();
+
+        return view('panel.supplier.index', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'kategoris' => $kategori,
+            'supplier' => $supplier,
+            'produk' => $produk // Pastikan produk dikirim ke view
+
+        ]);
+
     }
 
     /**
