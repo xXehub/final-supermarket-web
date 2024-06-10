@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="page">
         <div class="page-wrapper">
@@ -59,10 +58,11 @@
                                         <br />
                                         <tr>
                                             <th style="width: 10%;">ID</th>
-                                            <th style="width: 20%;">Kode</th>
-                                            <th style="width: 30%;">Username</th>
-                                            <th style="width: 10%;">Tanggal Pesan</th>
-                                            <th style="width: 10%;">Status</th>
+                                            <th style="width: 35%;">Kode</th>
+                                            <th>Kode</th>
+                                            <th>Username</th>
+                                            <th style="width: 15%;">Tanggal Pesan</th>
+                                            <th style="width: 15%;">Status</th>
                                             <th style="width: 15%;">Action</th>
                                         </tr>
                                     </thead>
@@ -75,7 +75,6 @@
 
         </div>
     </div>
-
     {{-- gawe nyeluk modal create e om :d --}}
     @include('panel.pemesanan.create')
     {{-- @include('panel.kategori.edit') --}}

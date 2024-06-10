@@ -20,17 +20,13 @@ Route::get('/', function () {
 // Middleware untuk superadmin dan admin
 Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(function () {
     Route::get('panel', [\App\Http\Controllers\Panel\DashboardController::class, 'index'])->name('panel.dashboard');
-
     // Rute resource untuk produk
     Route::resource('/panel/produk', ProdukController::class);
     // Route::get('panel/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
-
     // Rute resource untuk kategori
     Route::resource('/panel/kategori', KategoriController::class);
-
     // Rute resource untuk supplier mas
     Route::resource('/panel/supplier', SupplierController::class);
-
     // Rute resource untuk supplier mas
     Route::resource('/panel/pemesanan', PemesananController::class);
 });

@@ -27,15 +27,15 @@ class ProdukController extends Controller
         $ingfo_sakkarepmu = "Data List Produk";
         $kategori = Kategori::all();
         $produk = Produk::first();
-        $suppliers = Supplier::all(); // Ubah ini menjadi all() agar mengambil semua data supplier
+        $suppliers = Supplier::all();
         $totalProduk = Produk::count();
 
         return view('panel.produk.index', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'kategoris' => $kategori,
             'suppliers' => $suppliers,
-            'totalProduk' => $totalProduk, // Ubah variabelnya menjadi 'suppliers'
-            'produk' => $produk // Pastikan produk dikirim ke view
+            'totalProduk' => $totalProduk,
+            'produk' => $produk
         ]);
     }
 

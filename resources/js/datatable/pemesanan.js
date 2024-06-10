@@ -5,8 +5,15 @@ $(function() {
         ajax: "/data/pemesanan",
         columns: [
             { data: "id", name: "id", visible: false },
-            { data: "kode_pesanan", name: "kode_pesanan" },
-            { data: "nama_user", name: "nama_user" },
+            {
+                data: null,
+                render: function(data, type, row) {
+                    // Menggabungkan gambar_user dan kode_pesanan dalam satu kolom
+                    return '<td data-label="Name"><div class="d-flex py-1 align-items-center"><span class="avatar me-2" style="background-image: url(/storage/user/' + data.gambar_profile + ')"></span><div class="flex-fill"><div class="font-weight-medium">' + data.nama_user + '</div><div class="text-muted"><a href="#" class="text-reset">' + data.kode_pesanan + '</a></div></div></div></td>';
+                }
+            },
+            { data: "kode_pesanan", name: "kode_pesanan", visible: false },
+            { data: "nama_user", name: "nama_user",visible: false },
             { data: "tanggal", name: "tanggal" },
             { 
                 data: "status", 

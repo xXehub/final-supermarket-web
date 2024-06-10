@@ -21,5 +21,5 @@ class Pemesanan extends Model
     {
         return $this->hasMany(DetailPemesanan::class);
     }
-    protected $fillable = ['kode_pesanan', 'user_id', 'tanggal', 'status'];
+    protected $fillable = ['kode_pesanan', 'name', 'user_id', 'tanggal', 'status', 'gambar_profile'];
 }

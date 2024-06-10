@@ -82,10 +82,26 @@ class PemesananController extends Controller
 
     public function show($id)
     {
-        $pemesanan = Pemesanan::findOrFail($id);
-        return view('pemesanan.show', compact('pemesanan'));
-    }
+        $pemesanan = Pemesanan::find($id);
+    
+        if (!$pemesanan) {
+            return abort(404); 
+        }
 
+        $detail_pemesanan = DetailPemesanan::where('pemesanan_id', $id)->first();
+        // Lakukan pemrosesan hanya jika pemesanan ditemukan
+        $ingfo_sakkarepmu = 'Detail Pesanan';
+        $user = User::all();
+        $produk = Produk::all();
+        
+        return view('panel.pemesanan.show', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'pemesanan' => $pemesanan,
+            'user' => $user,
+            'detail_pemesanan' => $detail_pemesanan,
+            'produks' => $produk
+        ]);
+    }
     public function edit($id)
     {
         $pemesanan = Pemesanan::findOrFail($id);
@@ -115,12 +131,15 @@ class PemesananController extends Controller
     public function getData(Request $request)
     {
         $pemesanans = Pemesanan::with('user');
-
+    
         if ($request->ajax()) {
             return datatables()->of($pemesanans)
                 ->addIndexColumn()
                 ->addColumn('nama_user', function ($pemesanan) {
                     return $pemesanan->user->name;
+                })
+                ->addColumn('gambar_profile', function ($pemesanan) {
+                    return $pemesanan->user->gambar_profile; // Gunakan first() di sini
                 })
                 ->addColumn('actions', function ($pemesanan) {
                     return view('panel.pemesanan.actions', compact('pemesanan'));
@@ -128,5 +147,6 @@ class PemesananController extends Controller
                 ->toJson();
         }
     }
+    
 
 }

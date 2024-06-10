@@ -115,6 +115,10 @@ class DetailPemesananController extends Controller
                 ->addColumn('subtotal', function ($detailPemesanan) {
                     return $detailPemesanan->subtotal;
                 })
+                
+                ->addColumn('total_harga', function ($detailPemesanan) {
+                    return $detailPemesanan->jumlah * $detailPemesanan->produk->harga;
+                })
                 ->addColumn('actions', function ($detailPemesanan) {
                     return view('panel.detail_pemesanan.actions', compact('detailPemesanan'));
                 })
