@@ -15,7 +15,7 @@
                     Detail
                 </a>
                 <a class="dropdown-item" href="{{ route('pemesanan.edit', ['pemesanan' => $pemesanan->id]) }}" data-bs-toggle="modal"
-                    data-bs-target="#modal-editData">
+                    data-bs-target="#modal-editPesanan">
                     Edit
                 </a>
             </div>

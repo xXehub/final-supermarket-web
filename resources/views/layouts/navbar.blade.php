@@ -285,7 +285,7 @@
 
                         {{-- penjualan --}}
                         <li
-                            class="nav-item dropdown {{ Route::is('penjualan.index', 'pemesanan.index') ? 'active' : '' }}">
+                            class="nav-item dropdown {{ Route::is('penjualan.index', 'pemesanan.index', 'pemesanan.show') ? 'active' : '' }}">
                             <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                                 data-bs-auto-close="outside" role="button" aria-expanded="false">
                                 <span
@@ -303,8 +303,9 @@
                                             href="{{ route('pemesanan.index') }}">
                                             Pesanan
                                         </a>
-                                        <a class="dropdown-item" href="./blank.html">
-                                            Pengiriman
+                                        <a class="dropdown-item {{ Route::is('pembayaran.index') ? 'active' : '' }}"
+                                        href="{{ route('pembayaran.index') }}">
+                                            Pembayaran
                                         </a>
                                     </div>
                                 </div>

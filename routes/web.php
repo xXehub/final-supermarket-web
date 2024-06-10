@@ -29,6 +29,8 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
     Route::resource('/panel/supplier', SupplierController::class);
     // Rute resource untuk supplier mas
     Route::resource('/panel/pemesanan', PemesananController::class);
+    // Rute resource untuk supplier mas
+    Route::resource('/panel/pembayaran', PembayaranController::class);
 });
 
 // Middleware untuk superadmin saja

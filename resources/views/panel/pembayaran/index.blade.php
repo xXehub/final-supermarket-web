@@ -8,7 +8,7 @@
                     <div class="row g-2 align-items-center">
                         <div class="col">
                             <h2 class="page-title">
-                                {{ $ingfo_sakkarepmu }}
+                                Pembayaran Test
                             </h2>
                         </div>
                         <!-- Page title actions -->
@@ -76,8 +76,8 @@
         </div>
     </div>
     {{-- gawe nyeluk modal create e om :d --}}
-    @include('panel.pemesanan.create')
-    @include('panel.pemesanan.edit')
+    {{-- @include('panel.pemesanan.create') --}}
+    {{-- @include('panel.kategori.edit') --}}
 
     {{-- gawe notif sukses --}}
     @if ($message = Session::get('hapus'))

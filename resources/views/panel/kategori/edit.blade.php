@@ -135,7 +135,13 @@
         e.target.value = formattedValue;
     });
 </script>
-
+<script>
+    jQuery(document).ready(function($) {
+        @if ($errors->any())
+            $('#modal-editKategori').modal('show');
+        @endif
+    });
+</script>
 <script>
     // gawe reset form
     function simpanForm() {

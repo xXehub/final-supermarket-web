@@ -10,7 +10,7 @@ class PembayaranController extends Controller
     public function index()
     {
         $pembayarans = Pembayaran::all();
-        return view('pembayaran.index', compact('pembayarans'));
+        return view('panel.pembayaran.index', compact('pembayarans'));
     }
 
     public function create()

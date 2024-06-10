@@ -14,7 +14,7 @@ class PemesananController extends Controller
     {
 
         $ingfo_sakkarepmu = 'List Pemesanan';
-        $pemesanans = Pemesanan::all();
+        $pemesanans = Pemesanan::first();
         $produks = Produk::select('id', 'kode_produk', 'nama_produk')->get();
         $users = User::select('id', 'name')->get(); // Ambil daftar pengguna
         return view('panel.pemesanan.index', [
@@ -118,7 +118,7 @@ class PemesananController extends Controller
 
         $pemesanan = Pemesanan::findOrFail($id);
         $pemesanan->update($request->all());
-        return redirect()->route('panel.pemesanan.index')->with('success', 'Pemesanan berhasil diperbarui.');
+        return redirect()->route('pemesanan.index')->with('success', 'Pemesanan berhasil diperbarui.');
     }
 
     public function destroy($id)
