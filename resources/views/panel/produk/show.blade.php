@@ -24,7 +24,8 @@
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-body p-4 py-5 text-center">
-                                            <span class="avatar avatar-xl mb-4 rounded" style="background-image: url('{{ $produk->gambar_produk ? asset('storage/produk/' . $produk->gambar_produk) : '' }}')"></span>
+                                            <span class="avatar avatar-xl mb-4 rounded"
+                                                style="background-image: url('{{ $produk->gambar_produk ? asset('storage/produk/' . $produk->gambar_produk) : '' }}')"></span>
 
                                             <h3 class="mb-0">{{ $produk->nama_produk }}</h3>
                                             <p class="text-muted">{{ $produk->created_at }}</p>
@@ -54,8 +55,8 @@
                                                     <div class="card-actions">
                                                         <a href="{{ route('produk.edit', ['produk' => $produk->id]) }}"data-bs-toggle="modal"
                                                             data-bs-target="#modal-editData">
-                                                            Edit
-                                                            Produk<!-- Download SVG icon from http://tabler-icons.io/i/edit -->
+                                                            Edit Produk
+                                                            <!-- Download SVG icon from http://tabler-icons.io/i/edit -->
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1"
                                                                 width="24" height="24" viewBox="0 0 24 24"
                                                                 stroke-width="2" stroke="currentColor" fill="none"

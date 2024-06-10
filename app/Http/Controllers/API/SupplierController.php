@@ -3,12 +3,14 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Exports\SupplierExport;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 
 class SupplierController extends Controller
@@ -147,5 +149,10 @@ class SupplierController extends Controller
                 ->toJson();
         }
 
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new SupplierExport, 'supplier.xlsx');
     }
 }

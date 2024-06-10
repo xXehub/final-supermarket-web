@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Exports\KategoriExport;
 use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KategoriController extends Controller
 {
@@ -111,5 +113,10 @@ class KategoriController extends Controller
                 ->toJson();
         }
     }
+    public function exportExcel()
+    {
+        return Excel::download(new KategoriExport, 'kategori.xlsx');
+    }
+
 
 }

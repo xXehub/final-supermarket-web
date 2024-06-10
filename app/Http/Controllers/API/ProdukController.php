@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Exports\ProdukExport;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Kategori;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 
 use DataTables;
@@ -266,6 +269,11 @@ class ProdukController extends Controller
                 ->toJson();
         }
 
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new ProdukExport, 'produk.xlsx');
     }
 
 }

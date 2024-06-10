@@ -31,6 +31,10 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
     Route::resource('/panel/pemesanan', PemesananController::class);
     // Rute resource untuk supplier mas
     Route::resource('/panel/pembayaran', PembayaranController::class);
+
+    Route::get('produk/exportExcel', [ProdukController::class, 'exportExcel'])->name('produk.exportExcel');
+    Route::get('kategori/exportExcel', [KategoriController::class, 'exportExcel'])->name('kategori.exportExcel');
+    Route::get('supplier/exportExcel', [SupplierController::class, 'exportExcel'])->name('supplier.exportExcel');
 });
 
 // Middleware untuk superadmin saja

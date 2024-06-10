@@ -83,9 +83,9 @@ class PemesananController extends Controller
     public function show($id)
     {
         $pemesanan = Pemesanan::find($id);
-    
+
         if (!$pemesanan) {
-            return abort(404); 
+            return abort(404);
         }
 
         $detail_pemesanan = DetailPemesanan::where('pemesanan_id', $id)->first();
@@ -93,11 +93,11 @@ class PemesananController extends Controller
         $ingfo_sakkarepmu = 'Detail Pesanan';
         $user = User::all();
         $produk = Produk::all();
-        
+
         return view('panel.pemesanan.show', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'pemesanan' => $pemesanan,
-            'user' => $user,
+            'users' => $user,
             'detail_pemesanan' => $detail_pemesanan,
             'produks' => $produk
         ]);
@@ -131,7 +131,7 @@ class PemesananController extends Controller
     public function getData(Request $request)
     {
         $pemesanans = Pemesanan::with('user');
-    
+
         if ($request->ajax()) {
             return datatables()->of($pemesanans)
                 ->addIndexColumn()
@@ -147,6 +147,6 @@ class PemesananController extends Controller
                 ->toJson();
         }
     }
-    
+
 
 }
