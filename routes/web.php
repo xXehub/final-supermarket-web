@@ -2,7 +2,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\API\KategoriController;
 use App\Http\Controllers\API\ProdukController;
-use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\DetailPemesananController;
 use App\Http\Controllers\PembayaranController;
@@ -32,6 +32,8 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
     // Rute resource untuk supplier mas
     Route::resource('/panel/pembayaran', PembayaranController::class);
 
+
+
     Route::get('produk/exportExcel', [ProdukController::class, 'exportExcel'])->name('produk.exportExcel');
     Route::get('kategori/exportExcel', [KategoriController::class, 'exportExcel'])->name('kategori.exportExcel');
     Route::get('supplier/exportExcel', [SupplierController::class, 'exportExcel'])->name('supplier.exportExcel');
@@ -46,7 +48,12 @@ Route::middleware(['role:superadmin'])->group(function () {
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+
+// Rute untuk profil pengguna
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
+Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.deleteAvatar');
+
 
 // Rute untuk mendapatkan data produk dan kategori
 Route::get('data/produk', [ProdukController::class, 'getData'])->name('produk.data');
