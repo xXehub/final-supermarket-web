@@ -5,6 +5,7 @@ $(function() {
         ajax: "/data/pemesanan",
         columns: [
             { data: "id", name: "id", visible: false },
+            { data: "kode_pesanan", name: "kode_pesanan" },
             { data: "nama_user", name: "nama_user" },
             { data: "tanggal", name: "tanggal" },
             { data: "status", name: "status" },

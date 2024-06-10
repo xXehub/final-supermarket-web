@@ -301,7 +301,7 @@
                                     <div class="dropdown-menu-column">
                                         <a class="dropdown-item {{ Route::is('pemesanan.index') ? 'active' : '' }}"
                                             href="{{ route('pemesanan.index') }}">
-                                            Order List
+                                            Pesanan
                                         </a>
                                         <a class="dropdown-item" href="./blank.html">
                                             Pengiriman

@@ -1,25 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <!DOCTYPE html>
-    <html dir="ltr" lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <!-- This page plugin CSS -->
-        <!-- <link href="../assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet"> -->
-        @vite('resources/assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css')
-        @vite('resources/assets/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css')
-        <!-- Memuat jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-        <!-- Memuat plugin DataTables -->
-        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    </head>
     <div class="page">
         <div class="page-wrapper">
             <!-- Page header -->
@@ -40,7 +21,7 @@
                                     </a>
                                 </span>
                                 <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-                                    data-bs-target="#modal-tambahKategori">
+                                    data-bs-target="#modal-tambahPesanan">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -49,7 +30,7 @@
                                         <path d="M12 5l0 14" />
                                         <path d="M5 12l14 0" />
                                     </svg>
-                                    Tambah Pemesanan
+                                    Tambah Pesanan
                                 </a>
                                 <a href="{{ route('kategori.create') }}" class="btn btn-primary d-sm-none btn-icon"
                                     data-bs-toggle="modal" data-bs-target="#modal-tambahData" aria-label="Tambah Produk">
@@ -67,7 +48,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Page body -->
             <div class="page-body">
                 <div class="container-xl">
@@ -79,8 +59,9 @@
                                         <br />
                                         <tr>
                                             <th style="width: 10%;">ID</th>
+                                            <th style="width: 20%;">Kode</th>
                                             <th style="width: 20%;">Username</th>
-                                            <th style="width: 25%;">Tanggal </th>
+                                            <th style="width: 25%;">Tanggal Pesan</th>
                                             <th style="width: 50%;">Status</th>
                                             <th style="width: 15%;">Action</th>
                                         </tr>
@@ -96,8 +77,8 @@
     </div>
 
     {{-- gawe nyeluk modal create e om :d --}}
-    {{-- @include('panel.kategori.create')
-    @include('panel.kategori.edit') --}}
+    @include('panel.pemesanan.create')
+    {{-- @include('panel.kategori.edit') --}}
 
     {{-- gawe notif sukses --}}
     @if ($message = Session::get('hapus'))
@@ -119,20 +100,4 @@
             });
         </script>
     @endif
-
-    @vite('resources/dist/libs/list.js/dist/list.min.js?1684106062')
-    {{-- tabel --}}
-    @vite('resources/dist/js/tabler.min.js?1684106062')
-    @vite('resources/dist/js/demo.min.js?1684106062')
-
-
-    {{-- jquery all --}}
-    {{-- @vite('resources/assets/libs/jquery/dist/jquery.min.js') --}}
-    <!-- Bootstrap tether Core JavaScript -->
-    {{-- @vite('resources/assets/libs/popper.js/dist/umd/popper.min.js') --}}
-    {{-- @vite('resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') --}}
-    {{-- plugin datatable --}}
-    @vite('resources/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')
-    {{-- @vite('resources/assets/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js') --}}
-    {{-- @vite('resources/dist/js/pages/datatable/datatable-basic.init.js') --}}
 @endsection

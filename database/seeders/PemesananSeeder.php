@@ -9,13 +9,11 @@ class PemesananSeeder extends Seeder
 {
     public function run()
     {
-        // Tambahkan contoh data pemesanan di sini
         Pemesanan::create([
-            'user_id' => 1, // Ganti dengan id pengguna yang sesuai
+            'kode_pesanan' => '6SJ-IVA-8KL',
+            'user_id' => 1, 
             'tanggal' => now(),
             'status' => 'pending',
         ]);
-
-        // Tambahkan data lain jika diperlukan
     }
 }

@@ -1,25 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <!DOCTYPE html>
-    <html dir="ltr" lang="en">
-
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <!-- This page plugin CSS -->
-        <!-- <link href="../assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet"> -->
-        @vite('resources/assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css')
-        @vite('resources/assets/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css')
-        <!-- Memuat jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- Memuat plugin DataTables -->
-        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    </head>
     <div class="page">
         <div class="page-wrapper">
             <!-- Page header -->
@@ -120,20 +101,4 @@
             });
         </script>
     @endif
-
-    @vite('resources/dist/libs/list.js/dist/list.min.js?1684106062')
-    {{-- tabel --}}
-    @vite('resources/dist/js/tabler.min.js?1684106062')
-    @vite('resources/dist/js/demo.min.js?1684106062')
-
-
-    {{-- jquery all --}}
-    {{-- @vite('resources/assets/libs/jquery/dist/jquery.min.js') --}}
-    <!-- Bootstrap tether Core JavaScript -->
-    {{-- @vite('resources/assets/libs/popper.js/dist/umd/popper.min.js') --}}
-    {{-- @vite('resources/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') --}}
-    {{-- plugin datatable --}}
-    @vite('resources/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')
-    {{-- @vite('resources/assets/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js') --}}
-    {{-- @vite('resources/dist/js/pages/datatable/datatable-basic.init.js') --}}
 @endsection

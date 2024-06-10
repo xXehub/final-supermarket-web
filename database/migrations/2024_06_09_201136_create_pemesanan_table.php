@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_pesanan', 20)->unique();
             $table->unsignedBigInteger('user_id');
             $table->date('tanggal');
             $table->enum('status', ['pending', 'dikemas', 'dikirim', 'diterima'])->default('pending');

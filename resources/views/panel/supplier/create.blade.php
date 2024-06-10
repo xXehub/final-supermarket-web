@@ -53,19 +53,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                        {{-- supplier --}}
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Telephone</label>
-                                <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
-                                    name="no_hp" id="no_hp" value="{{ old('no_hp') }}"
-                                    placeholder="Masukan Nomor Telephone">
-                                @error('no_hp')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="col-lg-12">
                             <div>
                                 <label class="form-label">Keterangan</label>

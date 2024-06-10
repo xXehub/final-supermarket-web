@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use App\Models\Pemesanan;
 
@@ -11,10 +12,11 @@ class PemesananController extends Controller
     {
         $ingfo_sakkarepmu = 'List Pemesanan';
         $pemesanans = Pemesanan::all();
+        $produks = Produk::select('id', 'kode_produk', 'nama_produk')->get();
         return view('panel.pemesanan.index', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'pemesanan' => $pemesanans,
-
+            'produks' => $produks,
         ]);
     }
 

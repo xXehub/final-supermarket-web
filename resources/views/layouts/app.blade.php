@@ -19,6 +19,16 @@
     @vite('resources/dist/css/tabler-vendors.min.css?1684106062')
     @vite('resources/dist/css/demo.min.css?1684106062')
 
+    {{-- datatable --}}
+    @vite('resources/assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css')
+    @vite('resources/assets/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css')
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- plugin datatable coo -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -57,7 +67,11 @@
     @vite('resources/dist/js/demo.min.js?1684106062')
 
     {{-- script --}}
-
+    @vite('resources/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js')
+    @vite('resources/dist/libs/list.js/dist/list.min.js?1684106062')
+    {{-- tabel --}}
+    @vite('resources/dist/js/tabler.min.js?1684106062')
+    @vite('resources/dist/js/demo.min.js?1684106062')
 </body>
 
 </html>
