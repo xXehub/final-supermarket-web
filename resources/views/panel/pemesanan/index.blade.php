@@ -60,9 +60,9 @@
                                         <tr>
                                             <th style="width: 10%;">ID</th>
                                             <th style="width: 20%;">Kode</th>
-                                            <th style="width: 20%;">Username</th>
-                                            <th style="width: 25%;">Tanggal Pesan</th>
-                                            <th style="width: 50%;">Status</th>
+                                            <th style="width: 30%;">Username</th>
+                                            <th style="width: 10%;">Tanggal Pesan</th>
+                                            <th style="width: 10%;">Status</th>
                                             <th style="width: 15%;">Action</th>
                                         </tr>
                                     </thead>
