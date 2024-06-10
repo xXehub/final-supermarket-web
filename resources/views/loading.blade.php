@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>Memuat Halaman...</title>
     <!-- Tambahkan CSS atau style lainnya di sini -->
 </head>
 <body>
