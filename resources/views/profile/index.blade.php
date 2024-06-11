@@ -23,7 +23,7 @@
                             <div class="row g-0">
                                 <div class="col-3 d-none d-md-block border-end">
                                     <div class="card-body">
-                                        <h4 class="subheader">Business settings</h4>
+                                        <h4 class="subheader">Settings Sidebar</h4>
                                         <div class="list-group list-group-transparent">
                                             <a href="./settings.html"
                                                 class="list-group-item list-group-item-action d-flex align-items-center active">My
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col d-flex flex-column">
                                     <div class="card-body">
-                                        <h2 class="mb-4">My Account</h2>
+                                        <h2 class="mb-4">Akun Saya</h2>
                                         <h3 class="card-title">Profile Details</h3>
                                         <div class="row align-items-center">
                                             <div class="col-auto">
@@ -91,11 +91,13 @@
                                             <div class="row g-3">
                                                 <div class="col-md">
                                                     <div class="form-label">Nama</div>
-                                                    <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}">
+                                                    <input type="text" name="name" class="form-control"
+                                                        value="{{ Auth::user()->name }}">
                                                 </div>
                                                 <div class="col-md">
                                                     <div class="form-label">Tanggal Pembuatan</div>
-                                                    <input type="text" class="form-control" value="{{ Auth::user()->created_at }}" disabled>
+                                                    <input type="text" class="form-control"
+                                                        value="{{ Auth::user()->created_at }}" disabled>
                                                 </div>
                                                 <div class="col-md">
                                                     <div class="form-label">Location</div>
@@ -103,29 +105,34 @@
                                                 </div>
                                             </div>
                                             <h3 class="card-title mt-4">Email</h3>
-                                            <p class="card-subtitle">This contact will be shown to others publicly, so choose it carefully.</p>
+                                            <p class="card-subtitle">This contact will be shown to others publicly, so
+                                                choose it carefully.</p>
                                             <div class="row g-2">
                                                 <div class="col-auto">
-                                                    <input type="email" name="email" class="form-control w-auto" value="{{ Auth::user()->email }}">
+                                                    <input type="email" name="email" class="form-control w-auto"
+                                                        value="{{ Auth::user()->email }}">
                                                 </div>
                                                 <div class="col-auto">
-                                                    <button type="submit" class="btn">Change</button>
+                                                    <button type="submit" class="btn">Ubah</button>
                                                 </div>
                                             </div>
                                             <h3 class="card-title mt-4">Password</h3>
-                                            <p class="card-subtitle">You can set a permanent password if you don't want to use temporary login codes.</p>
+                                            <p class="card-subtitle">Klik tombol dibawah untuk mengganti password.</p>
                                             <div id="changePasswordBtn" class="row g-2">
                                                 <div class="col-auto">
-                                                    <button type="button" class="btn btn-outline-primary">Ubah Password</button>
+                                                    <button type="button" class="btn btn-outline-primary">Ubah
+                                                        Password</button>
                                                 </div>
                                             </div>
                                             <div id="setNewPasswordFields" style="display: none;">
                                                 <div class="row g-2">
                                                     <div class="col-auto">
-                                                        <input type="password" name="password" class="form-control w-auto" placeholder="New password">
+                                                        <input type="password" name="password" class="form-control w-auto"
+                                                            placeholder="New password">
                                                     </div>
                                                     <div class="col-auto">
-                                                        <input type="password" name="password_confirmation" class="form-control w-auto"
+                                                        <input type="password" name="password_confirmation"
+                                                            class="form-control w-auto"
                                                             placeholder="Confirm new password">
                                                     </div>
                                                 </div>
@@ -133,13 +140,16 @@
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                            <h3 class="card-title mt-4">Public profile</h3>
-                                            <p class="card-subtitle">Making your profile public means that anyone on the Dashkit network will be able to find you.</p>
+                                            {{-- <h3 class="card-title mt-4">Public profile</h3>
+                                            <p class="card-subtitle">Making your profile public means that anyone on the
+                                                Dashkit network will be able to find you.</p> --}}
                                             <div>
                                                 <label class="form-check form-switch form-switch-lg">
-                                                    <input class="form-check-input" type="checkbox">
-                                                    <span class="form-check-label form-check-label-on">You're currently visible</span>
-                                                    <span class="form-check-label form-check-label-off">You're currently invisible</span>
+                                                    {{-- <input class="form-check-input" type="checkbox">
+                                                    <span class="form-check-label form-check-label-on">You're currently
+                                                        visible</span>
+                                                    <span class="form-check-label form-check-label-off">You're currently
+                                                        invisible</span> --}}
                                                 </label>
                                             </div>
                                             <div class="card-footer bg-transparent mt-auto">
@@ -150,7 +160,7 @@
                                             </div>
                                         </form>
                                         {{-- delete profile --}}
-                                        <h3 class="card-title mt-4">Delete Account</h3>
+                                        {{-- <h3 class="card-title mt-4">Delete Account</h3> --}}
                                         {{-- <form action="{{ route('profile.destroy') }}" method="POST">
                                         @csrf
                                         @method('DELETE')

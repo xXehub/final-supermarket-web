@@ -39,48 +39,44 @@ class PemesananController extends Controller
             'user_id' => 'required',
             'tanggal' => 'required',
             'status' => 'required',
-            'produk_id' => 'required', // Tambahkan validasi untuk produk_id
-            'jumlah' => 'required|numeric|min:1', // Validasi jumlah pesanan
+            'produk_id' => 'required',
+            'jumlah' => 'required|numeric|min:1',
         ]);
-
-        // Ambil harga produk berdasarkan produk_id dari permintaan
+    
+        // ambil harga produk berdasarkan produk id
         $produk = Produk::findOrFail($request->produk_id);
-        $hargaProduk = $produk->harga; // Misalnya harga produk diambil dari field 'harga' pada model Produk
-
-
-        // Simpan data pemesanan baru
+        $hargaProduk = $produk->harga;
+    
+        // fungsi cek stock
+        if ($produk->stock < $request->jumlah) {
+            // handle error stock bos
+            return redirect()->back()->with('gagal', 'Stok produk tidak mencukupi.');
+        }
+    
+        // gawe simpan data pemesanan baru
         $pemesanan = new Pemesanan();
         $pemesanan->kode_pesanan = $request->kode_pesanan;
         $pemesanan->user_id = $request->user_id;
         $pemesanan->tanggal = $request->tanggal;
         $pemesanan->status = $request->status;
         $pemesanan->save();
-
-        // Simpan detail pemesanan
+    
+        // gawe simpan detail pemesanan
         $detail_pemesanan = new DetailPemesanan();
         $detail_pemesanan->pemesanan_id = $pemesanan->id;
         $detail_pemesanan->produk_id = $request->produk_id;
         $detail_pemesanan->jumlah = $request->jumlah;
-        // Hitung subtotal
         $subtotal = $hargaProduk * $request->jumlah;
         $detail_pemesanan->subtotal = $subtotal;
         $detail_pemesanan->save();
-
-        // Mengurangi stok produk
-        $produk_id = $request->produk_id;
-        $jumlah_pesanan = $request->jumlah;
-
-        // Cek apakah stok mencukupi sebelum mengurangi
-        $produk = Produk::findOrFail($produk_id);
-        if ($produk->stock >= $jumlah_pesanan) {
-            $produk->stock -= $jumlah_pesanan;
-            $produk->save();
-        } else {
-            // Handle kasus ketika stok tidak mencukupi
-            return redirect()->back()->with('error', 'Stok produk tidak mencukupi.');
-        }
+    
+        // gawe ngurangi stock produk
+        $produk->stock -= $request->jumlah;
+        $produk->save();
+    
         return redirect()->route('pemesanan.index')->with('success', 'Pesanan berhasil ditambahkan.');
     }
+    
 
     public function show($id)
     {
