@@ -85,10 +85,11 @@ class ProfileController extends Controller
             'gambar_profile' => 'nullable|image|max:2048',
         ]);
 
+        $user = Auth::user();
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
-
+        $user->password = Hash::make($request->password);
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
@@ -163,12 +164,10 @@ class ProfileController extends Controller
         $user->gambar_profile = $avatarPath;
         $user->save();
 
-        return redirect()->route('profile.index')->with('success', 'Avatar has been updated successfully!');
+        return redirect()->route('profile.index')->with('success', 'Avatar profile berhasil diupdate!');
     }
 
     /**
-     *
-     *
      * @return \Illuminate\Http\Response
      */
     public function deleteAvatar()
@@ -181,6 +180,6 @@ class ProfileController extends Controller
             $user->save();
         }
 
-        return redirect()->route('profile.show')->with('success', 'Avatar has been deleted successfully!');
+        return redirect()->route('profile.index')->with('success', 'Avatar profile berhasil dihapus');
     }
 }

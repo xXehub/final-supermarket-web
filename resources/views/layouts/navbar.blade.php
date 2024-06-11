@@ -266,15 +266,15 @@
                             <div class="dropdown-menu">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
-                                        <a class="dropdown-item {{ Route::is('produk.index' , 'produk.show') ? 'active' : '' }}"
+                                        <a class="dropdown-item {{ Route::is('produk.index', 'produk.show') ? 'active' : '' }}"
                                             href="{{ route('produk.index') }}">
                                             Produk
                                         </a>
-                                        <a class="dropdown-item {{ Route::is('kategori.index' , 'kategori.show') ? 'active' : '' }}"
+                                        <a class="dropdown-item {{ Route::is('kategori.index', 'kategori.show') ? 'active' : '' }}"
                                             href="{{ route('kategori.index') }}">
                                             Kategori
                                         </a>
-                                        <a class="dropdown-item {{ Route::is('supplier.index' , 'supplier.show') ? 'active' : '' }}"
+                                        <a class="dropdown-item {{ Route::is('supplier.index', 'supplier.show') ? 'active' : '' }}"
                                             href="{{ Route('supplier.index') }}">
                                             Supplier
                                         </a>
