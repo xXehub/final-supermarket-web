@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,9 +8,12 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+
 class ProfileController extends Controller
 {
     /**
+     * Menampilkan daftar profil pengguna.
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -29,6 +33,8 @@ class ProfileController extends Controller
     }
 
     /**
+     * Menyimpan profil baru ke dalam database.
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -81,7 +87,6 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
             'gambar_profile' => 'nullable|image|max:2048',
         ]);
 
@@ -89,15 +94,11 @@ class ProfileController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
 
-        if ($request->password) {
+        if ($request->has('password')) {
             $user->password = Hash::make($request->password);
         }
 
         if ($request->hasFile('gambar_profile')) {
-            // Delete old avatar if exists
-            if ($user->gambar_profile) {
-                Storage::disk('public')->delete($user->gambar_profile);
-            }
             $gambarProfile = $request->file('gambar_profile');
             $path = $gambarProfile->store('gambar_profile', 'public');
             $user->gambar_profile = $path;
@@ -107,16 +108,11 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.index')->with('success', 'Profil pengguna berhasil diperbarui.');
     }
-
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
+    public function show($id)
     {
-        $user = Auth::user();
-        return view('profile.show', compact('user'));
+        $user = User::findOrFail($id);
+        return view('profiles.show', compact('user'));
     }
-
     /**
      * Menghapus profil dari database.
      *
@@ -131,56 +127,50 @@ class ProfileController extends Controller
         return redirect()->route('profile.index')->with('success', 'Profil pengguna berhasil dihapus.');
     }
 
-    /**
-     * Menampilkan formulir untuk mengunggah avatar.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function uploadAvatar()
     {
         return view('profile.upload_avatar');
     }
 
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function updateAvatar(Request $request)
     {
-        $request->validate([
-            'avatar' => 'required|image|max:2048',
-        ]);
+        // Validasi form jika diperlukan
 
-        $user = Auth::user();
+        // Simpan file gambar ke penyimpanan (storage)
+        if ($request->hasFile('avatar')) {
+            // Hapus avatar lama jika ada
+            $oldAvatar = Auth::user()->gambar_profile;
+            if ($oldAvatar) {
+                // Perbaiki path untuk menghapus avatar lama
+                Storage::disk('public')->delete('profile/'.$oldAvatar);
+         
+            }
 
-        // Delete old avatar if exists
-        if ($user->gambar_profile) {
-            Storage::disk('public')->delete($user->gambar_profile);
+            $avatar = $request->file('avatar');
+            // Perbaiki path untuk menyimpan file ke dalam direktori 'profile'
+            $avatarPath = $avatar->store('profile', 'public');
+
+            // Simpan nama file gambar ke basis data
+            Auth::user()->update(['gambar_profile' => $avatarPath]);
+
+            return redirect()->back()->with('success', 'Avatar has been updated successfully!');
         }
 
-        $avatar = $request->file('avatar');
-        $avatarPath = $avatar->store('profile', 'public');
-        $user->gambar_profile = $avatarPath;
-        $user->save();
-
-        return redirect()->route('profile.index')->with('success', 'Avatar has been updated successfully!');
+        return redirect()->back()->with('error', 'No file uploaded!');
     }
 
-    /**
-     *
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function deleteAvatar()
     {
-        $user = Auth::user();
-
-        if ($user->gambar_profile) {
-            Storage::disk('public')->delete($user->gambar_profile);
-            $user->gambar_profile = null;
-            $user->save();
+        // Hapus avatar dari penyimpanan
+        $oldAvatar = Auth::user()->gambar_profile;
+        if ($oldAvatar) {
+            Storage::delete('profile/' . $oldAvatar);
+            // Hapus referensi avatar dari basis data
+            Auth::user()->update(['gambar_profile' => null]);
         }
 
-        return redirect()->route('profile.show')->with('success', 'Avatar has been deleted successfully!');
+        return redirect()->back()->with('success', 'Avatar has been deleted successfully!');
     }
 }
