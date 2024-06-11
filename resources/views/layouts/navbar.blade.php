@@ -202,7 +202,7 @@
                         aria-label="Open user menu">
                         <span class="avatar avatar-sm"
                             style="background-image: url(
-                          @if (Auth::user()->gambar_profile) {{ url('storage/profile/' . Auth::user()->gambar_profile) }}
+                          @if (Auth::user()->gambar_profile) {{ url('storage/' . Auth::user()->gambar_profile) }}
                           @else
                             {{ url('storage/profile/default.WEBP') }} @endif
                         )">
