@@ -43,12 +43,18 @@
 </head>
 
 <body>
-    @if (!isset($ndeliknoNavbar) || !$ndeliknoNavbar)
-        @include('layouts.navbar')
-    @endif
+    @guest
+        @if (!isset($ndeliknoHeader) || !$ndeliknoHeader)
+            @include('layouts.navbar_user')
+        @endif
+    @else
+        @role('user')
+            @include('layouts.navbar_user')
+            @elserole('admin|superadmin')
+            @include('layouts.navbar')
+        @endrole
+    @endguest
     @yield('content')
-
-
     @if (!isset($ndeliknoFooter) || !$ndeliknoFooter)
         @include('layouts.footer')
     @endif

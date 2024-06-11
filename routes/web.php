@@ -7,15 +7,14 @@ use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\DetailPemesananController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\SupermarketController;
 use App\Http\Controllers\WhishlistController;
 use App\Http\Middleware\MultiRoleMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // Default route
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SupermarketController::class, 'index']);
 
 // Middleware untuk superadmin dan admin
 Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(function () {

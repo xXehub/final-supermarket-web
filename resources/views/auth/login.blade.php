@@ -2,9 +2,8 @@
 
 @section('content')
     @php
-        $ndeliknoNavbar = true;
+        $ndeliknoHeader = true;
     @endphp
-
     @php
         $ndeliknoFooter = true;
     @endphp

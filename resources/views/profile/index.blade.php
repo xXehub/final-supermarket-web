@@ -79,7 +79,6 @@
                                                         Delete avatar
                                                     </button>
                                                 </form>
-
                                             </div>
                                         </div>
                                         <h3 class="card-title mt-4">Edit Profile</h3>
