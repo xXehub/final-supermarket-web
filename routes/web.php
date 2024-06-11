@@ -37,6 +37,7 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
     Route::get('produk/exportExcel', [ProdukController::class, 'exportExcel'])->name('produk.exportExcel');
     Route::get('kategori/exportExcel', [KategoriController::class, 'exportExcel'])->name('kategori.exportExcel');
     Route::get('supplier/exportExcel', [SupplierController::class, 'exportExcel'])->name('supplier.exportExcel');
+    Route::get('pemesanan/exportExcel', [PemesananController::class, 'exportExcel'])->name('pemesanan.exportExcel');
 });
 
 // Middleware untuk superadmin saja

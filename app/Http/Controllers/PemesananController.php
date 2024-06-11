@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PemesananExport;
 use App\Models\DetailPemesanan;
 use App\Models\Produk;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Pemesanan;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PemesananController extends Controller
 {
@@ -139,13 +141,18 @@ class PemesananController extends Controller
                     return $pemesanan->user->name;
                 })
                 ->addColumn('gambar_profile', function ($pemesanan) {
-                    return $pemesanan->user->gambar_profile; 
+                    return $pemesanan->user->gambar_profile;
                 })
                 ->addColumn('actions', function ($pemesanan) {
                     return view('panel.pemesanan.actions', compact('pemesanan'));
                 })
                 ->toJson();
         }
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new PemesananExport, 'pemesanan.xlsx');
     }
 
 
