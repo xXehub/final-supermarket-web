@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -34,12 +35,22 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $messages = [
+            // validator message mas
+            'password.required' => 'Password baru harus diisi',
+            'password.string' => 'password sss',
+            'password.min' => 'Password harus memiliki minimal :min karakter',
+        ];
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'gambar_profile' => 'nullable|image|max:2048',
-        ]);
+        ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $user = User::create([
             'name' => $request->name,
