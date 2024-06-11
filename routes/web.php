@@ -37,6 +37,7 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
     Route::get('produk/exportExcel', [ProdukController::class, 'exportExcel'])->name('produk.exportExcel');
     Route::get('kategori/exportExcel', [KategoriController::class, 'exportExcel'])->name('kategori.exportExcel');
     Route::get('supplier/exportExcel', [SupplierController::class, 'exportExcel'])->name('supplier.exportExcel');
+    Route::get('pemesanan/exportExcel', [PemesananController::class, 'exportExcel'])->name('pemesanan.exportExcel');
 });
 
 // Middleware untuk superadmin saja
@@ -50,10 +51,14 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Rute untuk profil pengguna
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
-Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.deleteAvatar');
-
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile/delete/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile/updateAvatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
+    Route::delete('/profile/deleteAvatar', [ProfileController::class, 'deleteAvatar'])->name('profile.deleteAvatar');
+});
 
 // Rute untuk mendapatkan data produk dan kategori
 Route::get('data/produk', [ProdukController::class, 'getData'])->name('produk.data');

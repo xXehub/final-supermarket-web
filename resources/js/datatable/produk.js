@@ -6,7 +6,7 @@ $(function() {
         columns: [
             { data: "id", name: "id", visible: false },
             // gambar produk
-            { 
+            {
                 data: null,
                 render: function(data, type, row) {
                     // Menggabungkan gambar_produk dan kode_produk dalam satu kolom
@@ -14,8 +14,8 @@ $(function() {
                 }
             },
             { data: "kode_produk", name: "kode_produk" , visible: false},
-            { 
-                data: "nama_produk" , visible: false, 
+            {
+                data: "nama_produk" , visible: false,
                 name: "nama_produk",
                 render: function(data, type, row) {
                     // nama produk biar dadi kapital
@@ -36,8 +36,8 @@ $(function() {
                     return "Rp " + harga;
                 },
             },
-            { 
-                data: "stock", 
+            {
+                data: "stock",
                 name: "stock",
                 // pewarnaan badge stock sesuai dengan kondisi dibawah mas :D
                 render: function(data, type, row) {
@@ -54,7 +54,7 @@ $(function() {
             },
             { data: "actions", name: "actions", orderable: false, searchable: false },
         ],
-        
+
         order: [[0, "desc"]],
         lengthMenu: [
             [10, 25, 50, 100, -1],

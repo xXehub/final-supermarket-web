@@ -132,7 +132,7 @@
 <script>
     // gawe reset form
     function simpanForm() {
-        console.log("Simpan Form Successs ");
+        console.log("Simpan Form Success ");
 
         // sweet alert notif reset
         const Toast = Swal.mixin({

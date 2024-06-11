@@ -67,7 +67,7 @@
                                         <div class="datagrid-content">
                                             <div class="d-flex align-items-center">
                                                 <span class="avatar avatar-xs me-2 rounded"
-                                                    style="background-image: url('{{ asset('/storage/profile/' . $pemesanan->user->gambar_profile) }}')"></span>
+                                                    style="background-image: url('{{ asset('/storage/' . $pemesanan->user->gambar_profile) }}')"></span>
                                                 {{ $pemesanan->user->name }}
                                             </div>
                                         </div>
@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
     {{-- nyeluk modal edit mas --}}
     @include('panel.pemesanan.edit')
 

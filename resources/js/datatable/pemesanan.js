@@ -9,14 +9,14 @@ $(function() {
                 data: null,
                 render: function(data, type, row) {
                     // Menggabungkan gambar_user dan kode_pesanan dalam satu kolom
-                    return '<td data-label="Name"><div class="d-flex py-1 align-items-center"><span class="avatar me-2" style="background-image: url(/storage/profile/' + data.gambar_profile + ')"></span><div class="flex-fill"><div class="font-weight-medium">' + data.nama_user + '</div><div class="text-muted"><a href="#" class="text-reset">' + data.kode_pesanan + '</a></div></div></div></td>';
+                    return '<td data-label="Name"><div class="d-flex py-1 align-items-center"><span class="avatar me-2" style="background-image: url(/storage/' + data.gambar_profile + ')"></span><div class="flex-fill"><div class="font-weight-medium">' + data.nama_user + '</div><div class="text-muted"><a href="#" class="text-reset">' + data.kode_pesanan + '</a></div></div></div></td>';
                 }
             },
             { data: "kode_pesanan", name: "kode_pesanan", visible: false },
             { data: "nama_user", name: "nama_user",visible: false },
             { data: "tanggal", name: "tanggal" },
-            { 
-                data: "status", 
+            {
+                data: "status",
                 name: "status",
                 render: function(data, type, full, meta) {
                     var statusColor = "";
@@ -43,7 +43,7 @@ $(function() {
             },
             { data: "actions", name: "actions", orderable: false, searchable: false },
         ],
-        
+
         order: [[0, "desc"]],
         lengthMenu: [
             [10, 25, 50, 100, -1],
