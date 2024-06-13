@@ -50,7 +50,7 @@
 
     // Call the function to generate random string and update the kode_produk input
     document.addEventListener('DOMContentLoaded', function() {
-        var kode_produk_input = document.getElementById('kode_produk');
+        var kode_produk_input = document.getElementById('kode_produks');
         kode_produk_input.value = generateRandomCodeProduk();
     });
 

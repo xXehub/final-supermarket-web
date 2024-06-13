@@ -19,6 +19,8 @@ Route::get('/', [SupermarketController::class, 'index']);
 // Middleware untuk superadmin dan admin
 Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(function () {
     Route::get('panel', [\App\Http\Controllers\Panel\DashboardController::class, 'index'])->name('panel.dashboard');
+    Route::get('/panel/dashboard', [\App\Http\Controllers\Panel\DashboardController::class, 'index'])->name('dashboard');
+
     // Rute resource untuk produk
     Route::resource('/panel/produk', ProdukController::class);
     // Route::get('panel/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');

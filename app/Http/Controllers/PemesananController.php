@@ -42,17 +42,17 @@ class PemesananController extends Controller
             'produk_id' => 'required',
             'jumlah' => 'required|numeric|min:1',
         ]);
-    
+
         // ambil harga produk berdasarkan produk id
         $produk = Produk::findOrFail($request->produk_id);
         $hargaProduk = $produk->harga;
-    
+
         // fungsi cek stock
         if ($produk->stock < $request->jumlah) {
             // handle error stock bos
             return redirect()->back()->with('gagal', 'Stok produk tidak mencukupi.');
         }
-    
+
         // gawe simpan data pemesanan baru
         $pemesanan = new Pemesanan();
         $pemesanan->kode_pesanan = $request->kode_pesanan;
@@ -60,7 +60,7 @@ class PemesananController extends Controller
         $pemesanan->tanggal = $request->tanggal;
         $pemesanan->status = $request->status;
         $pemesanan->save();
-    
+
         // gawe simpan detail pemesanan
         $detail_pemesanan = new DetailPemesanan();
         $detail_pemesanan->pemesanan_id = $pemesanan->id;
@@ -69,14 +69,14 @@ class PemesananController extends Controller
         $subtotal = $hargaProduk * $request->jumlah;
         $detail_pemesanan->subtotal = $subtotal;
         $detail_pemesanan->save();
-    
+
         // gawe ngurangi stock produk
         $produk->stock -= $request->jumlah;
         $produk->save();
-    
+
         return redirect()->route('pemesanan.index')->with('success', 'Pesanan berhasil ditambahkan.');
     }
-    
+
 
     public function show($id)
     {

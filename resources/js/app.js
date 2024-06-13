@@ -6,3 +6,4 @@ import './datatable/supplier';
 import './datatable/pemesanan';
 import './kode';
 import './resetform';
+import './tom-select.base.min';

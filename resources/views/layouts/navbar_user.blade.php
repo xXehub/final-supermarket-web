@@ -26,7 +26,7 @@
         <div class="navbar-nav flex-row order-md-last">
             <div class="nav-item d-none d-md-flex me-3">
                 <div class="btn-list">
-                    <a href="" class="btn btn-outline-primary" rel="noreferrer">
+                    <a href="{{ route('register') }}" class="btn btn-outline-primary" rel="noreferrer">
                         Daftar
                     </a>
                     <a href="{{ route('login') }}" class="btn btn-primary" rel="noreferrer">

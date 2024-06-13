@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Dashboard</title>
+    <title> Gudang Rempah | Supermarket </title>
     {{-- <title>{{ $ingfo_sakkarepmu }}</title> --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- @vite('resources/sass/app.scss') --}}
@@ -78,6 +78,14 @@
     {{-- tabel --}}
     @vite('resources/dist/js/tabler.min.js?1684106062')
     @vite('resources/dist/js/demo.min.js?1684106062')
+
+    @vite('resources/dist/libs/apexcharts/dist/apexcharts.min.js?1684106062')
+    @vite('resources/dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062')
+    @vite('resources/dist/libs/jsvectormap/dist/maps/world.js?1684106062')
+    @vite('resources/dist/libs/jsvectormap/dist/maps/world-merc.js?1684106062')
+
+
+
 </body>
 
 </html>
