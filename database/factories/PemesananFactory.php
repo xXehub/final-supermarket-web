@@ -23,7 +23,7 @@ class PemesananFactory extends Factory
     public function definition()
     {
         return [
-            'kode_pesanan' => $this->faker->unique()->randomNumber(),
+            'kode_pesanan' => strtoupper($this->faker->regexify('[A-Za-z]{3}-[A-Za-z]{3}-[A-Za-z]{3}')),
             'user_id' => \App\Models\User::factory()->create()->id,
             'tanggal' => $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
             'status' => $this->faker->randomElement(['pending', 'dikemas', 'dikirim', 'diterima']),
