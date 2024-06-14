@@ -7,19 +7,20 @@ use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\DetailPemesananController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\SupermarketController;
 use App\Http\Controllers\WhishlistController;
 use App\Http\Middleware\MultiRoleMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // Default route
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SupermarketController::class, 'index']);
 
 // Middleware untuk superadmin dan admin
 Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(function () {
     Route::get('panel', [\App\Http\Controllers\Panel\DashboardController::class, 'index'])->name('panel.dashboard');
+    // Route::get('/panel/dashboard', [\App\Http\Controllers\Panel\DashboardController::class, 'index'])->name('dashboard');
+
     // Rute resource untuk produk
     Route::resource('/panel/produk', ProdukController::class);
     // Route::get('panel/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
@@ -52,6 +53,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Rute untuk profil pengguna
 Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\SupermarketController::class, 'index'])->name('supermarket.index');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
