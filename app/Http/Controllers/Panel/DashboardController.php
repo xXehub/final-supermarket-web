@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kategori;
 use App\Models\Pemesanan;
 use App\Models\Produk;
 use App\Models\User;
@@ -92,7 +93,22 @@ class DashboardController extends Controller
             'diterimaData' => $diterimaData,
             'dates' => $dates,
             'userAnyar' => $userAnyar, // Mengirimkan data pengguna baru ke view
+        ])->with('success', 'Berhasil login.');
+
+ 
+    }
+
+    public function create()
+    {
+        $ingfo_sakkarepmu = 'Tambah Kategori';
+        $produk = Kategori::all();
+        $kategoris = Kategori::all();
+        return view('panel.kategori.create', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'produks' => $produk,
+            'kategoris' => $kategoris,
         ]);
     }
+
 }
 

@@ -16,9 +16,6 @@ class Kategori extends Model
     }
 
     // validator
-    protected $fillable = [
-        'kode_kategori',
-        'nama_kategori',
-        'deskripsi'
-    ];
+    protected $primaryKey = 'id';
+    protected $fillable = ['kode_kategori', 'nama_kategori', 'deskripsi'];
 }

@@ -26,10 +26,11 @@ class KategoriController extends Controller
     {
         $ingfo_sakkarepmu = 'Tambah Kategori';
         $produk = Kategori::all();
+        $kategoris = Kategori::all();
         return view('panel.kategori.create', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'produks' => $produk,
-
+            'kategoris' => $kategoris,
         ]);
     }
 

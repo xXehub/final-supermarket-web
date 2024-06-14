@@ -12,7 +12,7 @@
                         <div class="row g-2 align-items-center">
                             <div class="col">
                                 <h2 class="page-title">
-                                    Search for Jobs
+                                    Cari Berdasarkan Kategori
                                 </h2>
                             </div>
                             <!-- Page title actions -->
@@ -38,34 +38,20 @@
                         <div class="row g-4">
                             <div class="col-md-3">
                                 <form action="./" method="get" autocomplete="off" novalidate class="sticky-top">
-                                    <div class="form-label">Job Types</div>
+                                    <div class="form-label">Kategori type</div>
                                     <div class="mb-4">
-                                        <label class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="form-type[]"
-                                                value="1" checked>
-                                            <span class="form-check-label">Programming</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="form-type[]"
-                                                value="2" checked>
-                                            <span class="form-check-label">Design</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="form-type[]"
-                                                value="3">
-                                            <span class="form-check-label">Management / Finance</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="form-type[]"
-                                                value="4">
-                                            <span class="form-check-label">Customer Support</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="form-type[]"
-                                                value="5">
-                                            <span class="form-check-label">Sales / Marketing</span>
-                                        </label>
+                                        @foreach ($kategoris as $kategori)
+                                        @if ($kategori)  <!-- Pastikan kategori tidak null -->
+                                            <label class="form-check">
+                                                <input type="checkbox" class="form-check-input" name="form-type[]"
+                                                    value="{{ $kategori->id }}">
+                                                <span class="form-check-label">{{ $kategori->nama_kategori }}</span>
+                                            </label>
+                                        @endif
+                                    @endforeach
                                     </div>
+                            
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                     <div class="form-label">Remote</div>
                                     <div class="mb-4">
                                         <label class="form-check form-switch">
@@ -210,4 +196,74 @@
         <script src="./dist/js/tabler.min.js?1684106062" defer></script>
         <script src="./dist/js/demo.min.js?1684106062" defer></script>
     </body>
+    <script>
+        // Add sorting functionality
+        document.addEventListener("DOMContentLoaded", function () {
+            const checkboxes = document.querySelectorAll('.form-check');
+            const container = document.querySelector('.mb-4');
+            
+            function sortCheckboxes() {
+                // Convert NodeList to Array
+                const checkboxesArray = Array.from(checkboxes);
+                
+                // Sort checkboxes based on the text label
+                checkboxesArray.sort((a, b) => {
+                    const textA = a.querySelector('.form-check-label').innerText.toUpperCase();
+                    const textB = b.querySelector('.form-check-label').innerText.toUpperCase();
+                    return textA.localeCompare(textB);
+                });
+                
+                // Clear the container
+                container.innerHTML = '';
+                
+                // Append sorted checkboxes
+                checkboxesArray.forEach(checkbox => {
+                    container.appendChild(checkbox);
+                });
+            }
+            
+            // Initial sort
+            sortCheckboxes();
+        });
+    </script>
+    {{-- gawe notif gagal --}}
+    @if ($message = Session::get('gagal'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: '{{ $message }}'
+            });
+        </script>
+    @endif
+    {{-- gawe notif sukses --}}
+    @if ($message = Session::get('success'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: '{{ $message }}'
+            });
+        </script>
+    @endif
 @endsection
