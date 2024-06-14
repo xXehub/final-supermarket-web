@@ -34,20 +34,27 @@ class LoginController extends Controller
      * @return void
      */
 
- 
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
 
-       //  gawe perms
-       public function authenticated(request $request, $user)
-       {
-        if ($user->hasRole(['admin', 'uperadmin'])) {
+    //  gawe perms
+    public function authenticated(request $request, $user)
+    {
+        if ($user->hasRole(['admin', 'superadmin'])) {
             return redirect()->route('panel.dashboard');
         }
-       
-           return redirect()->route('home');
-       }
+
+
+        return redirect()->route('supermarket.index')->with('success', 'Berhasil login.');
+    }
+
+
+    public function index()
+    {
+        return view('auth.login');
+    }
 }
