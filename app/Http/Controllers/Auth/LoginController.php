@@ -48,7 +48,9 @@ class LoginController extends Controller
             return redirect()->route('panel.dashboard');
         }
 
-        return redirect()->route('supermarket.index');
+
+
+        return redirect()->route('supermarket.index')->with('success', 'Berhasil login.');
     }
 
 
@@ -56,4 +58,6 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
+
 }
+
