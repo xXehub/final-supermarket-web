@@ -23,29 +23,30 @@
             Gudang Rempah
         </h1>
         @guest
-        <div class="navbar-nav flex-row order-md-last">
-            <div class="nav-item d-none d-md-flex me-3">
-                <div class="btn-list">
-                    <a href="{{ route('register') }}" class="btn btn-outline-primary" rel="noreferrer">
-                        Daftar
-                    </a>
-                    <a href="{{ route('login') }}" class="btn btn-primary" rel="noreferrer">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-login-2">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
-                            <path d="M3 12h13l-3 -3" />
-                            <path d="M13 15l3 -3" />
-                        </svg>
-                        Masuk
-                    </a>
+            <div class="navbar-nav flex-row order-md-last">
+                <div class="nav-item d-none d-md-flex me-3">
+                    <div class="btn-list">
+                        <a href="{{ route('register') }}" class="btn btn-outline-primary" rel="noreferrer">
+                            Daftar
+                        </a>
+                        <a href="{{ route('login') }}" class="btn btn-primary" rel="noreferrer">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-login-2">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
+                                <path d="M3 12h13l-3 -3" />
+                                <path d="M13 15l3 -3" />
+                            </svg>
+                            Masuk
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-@endguest
+        @endguest
         @role('user')
+        {{-- gawe gambar profile --}}
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                     aria-label="Open user menu">
@@ -89,14 +90,14 @@
         <div class="navbar">
             <div class="container-xl">
                 <ul class="navbar-nav">
-                    <li class="nav-item {{ Route::is('panel.dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('panel.dashboard') }}">
+                    <li class="nav-item {{ Route::is('supermarket.index') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('supermarket.index') }}">
                             <span
                                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                 <i class="fa-solid fa-database"></i>
                             </span>
                             <span class="nav-link-title">
-                                Dashboard
+                                Home
                             </span>
                         </a>
                     </li>
@@ -132,50 +133,7 @@
                             </div>
                         </div>
                     </li>
-
-                    {{-- penjualan --}}
-                    <li
-                        class="nav-item dropdown {{ Route::is('penjualan.index', 'pemesanan.index', 'pemesanan.show') ? 'active' : '' }}">
-                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside" role="button" aria-expanded="false">
-                            <span
-                                class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
-                                <i class="fa-solid fa-truck"></i>
-                            </span>
-                            <span class="nav-link-title">
-                                Penjualan
-                            </span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <div class="dropdown-menu-columns">
-                                <div class="dropdown-menu-column">
-                                    <a class="dropdown-item {{ Route::is('pemesanan.index', 'pemesanan.show') ? 'active' : '' }}"
-                                        href="{{ route('pemesanan.index') }}">
-                                        Pesanan
-                                    </a>
-                                    <a class="dropdown-item {{ Route::is('pembayaran.index', 'pembayaran.show') ? 'active' : '' }}"
-                                        href="{{ route('pembayaran.index') }}">
-                                        Pembayaran
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    {{-- permission superadmin aja yg bisa akses --}}
-                    <li class="nav-item {{ Route::is('panel.perms') ? 'active' : '' }}">
-                        <a class="nav-link @role('admin') disabled @endrole"
-                            href="@role('superadmin') {{ route('perms.index') }} @else # @endrole">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <i class="fa-solid fa-id-card"></i>
-                            </span>
-                            <span class="nav-link-title">
-                                Permission
-                            </span>
-                        </a>
-                    </li>
                 </ul>
-
                 <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
                     <form action="./" method="get" autocomplete="off" novalidate>
                         <div class="input-icon">

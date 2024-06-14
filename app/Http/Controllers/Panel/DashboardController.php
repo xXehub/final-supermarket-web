@@ -27,7 +27,7 @@ class DashboardController extends Controller
         // Mengelompokkan data pemesanan berdasarkan status
         $pemesananPerHari = [];
         foreach ($pemesanan as $data) {
-            $tanggal = $data->created_at->format('Y-m-d');
+            $tanggal = $data->created_at->format('l');
             if (!isset($pemesananPerHari[$tanggal])) {
                 $pemesananPerHari[$tanggal] = [
                     'pending' => 0,

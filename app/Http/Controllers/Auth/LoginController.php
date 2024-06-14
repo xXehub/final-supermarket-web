@@ -48,7 +48,7 @@ class LoginController extends Controller
             return redirect()->route('panel.dashboard');
         }
 
-        return redirect()->route('home');
+        return redirect()->route('supermarket.index');
     }
 
 
