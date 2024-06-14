@@ -80,7 +80,6 @@
 
             </div>
         </div>
-
         {{-- gawe nyeluk modal create e om :d --}}
         @include('panel.produk.create')
         @include('panel.produk.edit')

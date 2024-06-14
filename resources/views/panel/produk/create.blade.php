@@ -25,7 +25,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Kode Produk</label>
                                 <input type="text" class="form-control @error('kode_produk') is-invalid @enderror"
-                                    name="kode_produk" id="kode_produk" value="BRG-{{ old('kode_produk') }}" readonly
+                                    name="kode_produk" id="kode_produks" value="BRG-{{ old('kode_produk') }}" readonly
                                     disabled>
                             </div>
                         </div>
@@ -40,25 +40,50 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label class="form-label">Stock</label>
+                                <input class="form-control @error('stock') is-invalid @enderror" type="number"
+                                    name="stock" id="stock" value="{{ old('stock') }}" placeholder="1">
+                                @error('stock')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label class="form-label">Select with labels</label>
+                                <select type="text" class="form-select" id="select-labels" value="">
+                                    <option value="copy"
+                                        data-custom-properties="&lt;span class=&quot;badge bg-primary-lt&quot;&gt;cmd + C&lt;/span&gt;">
+                                        CopSSSy</option>
+                                    <option value="paste"
+                                        data-custom-properties="&lt;span class=&quot;badge bg-primary-lt&quot;&gt;cmd + V&lt;/span&gt;">
+                                        Paste</option>
+                                    <option value="cut"
+                                        data-custom-properties="&lt;span class=&quot;badge bg-primary-lt&quot;&gt;cmd + X&lt;/span&gt;">
+                                        Cut</option>
+                                </select>
+                            </div>
                             <div class="mb-3">
                                 <label class="form-label">Kategori</label>
-                                <select name="kategori_id" id="kategori_id" class="form-select">
-                                    {{-- <option value="" disabled selected>Pilih Kategori</option> --}}
+                                <select id="select-labels" class="form-select" name="kategori_id">
                                     @foreach ($kategoris as $kategori_sakkarepmu)
                                         <option value="{{ $kategori_sakkarepmu->id }}"
-                                            {{ old('kategori_id') == $kategori_sakkarepmu->id ? 'selected' : '' }}>
-                                            {{ $kategori_sakkarepmu->kode_kategori . ' - ' . $kategori_sakkarepmu->nama_kategori }}
+                                            {{ old('kategori_id') == $kategori_sakkarepmu->id ? 'selected' : '' }}
+                                            data-custom-properties="<span class='badge bg-primary-lt'>{{ $kategori_sakkarepmu->kode_kategori }}</span>">
+                                            {{ $kategori_sakkarepmu->nama_kategori }}
                                         </option>
                                     @endforeach
                                 </select>
+
                                 @error('kategori_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-6">
                             <div class="mb-3">
                                 <label class="form-label">Supplier</label>
                                 <select name="supplier_id" id="supplier_id" class="form-select">
@@ -75,16 +100,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="mb-3">
-                                <label class="form-label">Stock</label>
-                                <input class="form-control @error('stock') is-invalid @enderror" type="number"
-                                    name="stock" id="stock" value="{{ old('stock') }}" placeholder="1">
-                                @error('stock')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
+
                         <label class="form-label">Status</label>
                         <div class="form-selectgroup-boxes row mb-3">
                             <div class="col-lg-6">
@@ -97,7 +113,8 @@
                                         </span>
                                         <span class="form-selectgroup-label-content">
                                             <span class="form-selectgroup-title strong mb-1">Terverifikasi</span>
-                                            <span class="d-block text-muted">Produk telah diverifikasi oleh admin</span>
+                                            <span class="d-block text-muted">Produk telah diverifikasi oleh
+                                                admin</span>
                                         </span>
                                     </span>
                                 </label>
@@ -112,7 +129,8 @@
                                         </span>
                                         <span class="form-selectgroup-label-content">
                                             <span class="form-selectgroup-title strong mb-1">Tidak Terverifikasi</span>
-                                            <span class="d-block text-muted">Produk belum diverifikasi oleh admin</span>
+                                            <span class="d-block text-muted">Produk belum diverifikasi oleh
+                                                admin</span>
                                         </span>
                                     </span>
                                 </label>
@@ -121,8 +139,8 @@
                         <div class="col-lg-12">
                             <div>
                                 <label class="form-label">Keterangan</label>
-                                <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" rows="3" name="deskripsi"
-                                    placeholder="Produk ini adalah produk terlarang yang nantinya akan di ekspor ke berbagai negara "
+                                <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" rows="3"
+                                    name="deskripsi" placeholder="Produk ini adalah produk terlarang yang nantinya akan di ekspor ke berbagai negara "
                                     {{ old('deskripsi') }} rows="3"></textarea>
                             </div>
                         </div>
@@ -182,6 +200,39 @@
         </div>
     </div>
 </form>
+
+@vite('resources/dist/libs/nouislider/dist/nouislider.min.js?1684106062')
+@vite('resources/dist/libs/litepicker/dist/litepicker.js?1684106062')
+@vite('resources/libs/tom-select/dist/js/tom-select.base.min.js?1684106062')
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+<script>
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function() {
+        var el;
+        window.TomSelect && (new TomSelect(el = document.getElementById('select-labels'), {
+            copyClassesToDropdown: false,
+            dropdownParent: 'body',
+            controlInput: '<input>',
+            render: {
+                item: function(data, escape) {
+                    if (data.customProperties) {
+                        return '<div><span class="dropdown-item-indicator">' + data
+                            .customProperties + '</span>' + escape(data.text) + '</div>';
+                    }
+                    return '<div>' + escape(data.text) + '</div>';
+                },
+                option: function(data, escape) {
+                    var customProps = data.attributes['data-custom-properties'];
+                    if (customProps) {
+                        return '<div>' + customProps + escape(data.text) + '</div>';
+                    }
+                    return '<div>' + escape(data.text) + '</div>';
+                },
+            }
+        }));
+    });
+    // @formatter:on
+</script>
 <script>
     jQuery(document).ready(function($) {
         @if ($errors->any())
@@ -196,7 +247,7 @@
     // Tambahkan event listener untuk menangkap saat form disubmit
     form.addEventListener("submit", function() {
         // Hapus atribut readonly dari input kode_produk sebelum mengirimkan formulir
-        document.getElementById("kode_produk").removeAttribute("disabled");
+        document.getElementById("kode_produks").removeAttribute("disabled");
     });
 </script>
 {{-- gawe reopen modal lek enek validasi error --}}

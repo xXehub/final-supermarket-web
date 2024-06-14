@@ -259,7 +259,7 @@
             }
         });
         Toast.fire({
-            icon: "success",
+            icon: "error",
             title: '{{ $message }}'
         });
     </script>

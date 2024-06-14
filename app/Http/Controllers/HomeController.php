@@ -26,9 +26,12 @@ class HomeController extends Controller
     {
         $totalProduk = Produk::count();
         $ingfo_sakkarepmu = "Dashboard";
+        $produks = Produk::all(); // Tambahkan baris ini
         return view('home', [
             'totalProduk' => $totalProduk,
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'produks' => $produks, // Tambahkan ini untuk meneruskan data produk ke view
         ]);
     }
+    
 }

@@ -164,6 +164,11 @@
         </div>
     </div>
 </form>
+
+@if (!isset($isEdit) || !$isEdit)
+    @vite('resources/js/datatable/produk.js')
+@endif
+
 <script>
     document.getElementById('kode_produk').addEventListener('input', function(e) {
         var value = e.target.value.replace(/[^A-Za-z0-9]/g, ''); // Remove non-alphanumeric characters
