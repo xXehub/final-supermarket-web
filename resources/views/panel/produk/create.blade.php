@@ -1,4 +1,4 @@
-@vite('resources/dist/libs/tom-select/dist/js/tom-select.base.min.js?1684106062')
+
 <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data" id="formTambahData">
     @csrf
     <div class="modal modal-blur fade" id="modal-tambahData" tabindex="-1" role="dialog" aria-hidden="true"

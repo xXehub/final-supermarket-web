@@ -13,10 +13,12 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label class="form-label">Nama Pemesan</label>
-                                <select class="form-select @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
-                                    <option value="" disabled selected>Pilih User</option>
+                                <select class="form-select" id="select-username" name="user_id">
+                                    <option value="" disabled selected>Username</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                                        <option value="{{ $user->id }}"
+                                            data-custom-properties="<span class='avatar avatar-xs' style='background-image: url({{ $user->gambar_profile ? asset('storage/' . $user->gambar_profile) : '' }})'></span>"
+                                            {{ old('user_id') == $user->id ? 'selected' : '' }}>
                                             {{ $user->name }}
                                         </option>
                                     @endforeach
@@ -25,6 +27,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+
                         </div>
                         {{-- gawe kode pemesanan --}}
                         <div class="col-lg-6">
@@ -47,17 +50,19 @@
                         </div>
                         {{-- gawe nama produk / pilih produk --}}
                         <div class="col-lg-6">
-                            <div class="mb-3">
+                            <div class="mb-6">
                                 <label class="form-label">Nama Produk</label>
-                                <select name="produk_id" id="produk_id" class="form-select select2">
+                                <select class="form-select" id="produk_id" name="produk_id">
                                     <option value="" disabled selected>Pilih Produk</option>
                                     @foreach ($produks as $produk)
                                         <option value="{{ $produk->id }}"
+                                            data-custom-properties="<span class='badge bg-primary-lt'>{{ $produk->kode_produk }}</span>"{{ $produk->nama_produk }}
                                             {{ old('produk_id') == $produk->id ? 'selected' : '' }}>
-                                            {{ $produk->kode_pesanan . ' - ' . $produk->nama_produk }}
+                                            {{ $produk->kode_pesanan . '' . $produk->nama_produk }}
                                         </option>
                                     @endforeach
                                 </select>
+
                                 @error('produk_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -140,6 +145,59 @@
         </div>
     </div>
 </form>
+<script>
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function() {
+        var el;
+        window.TomSelect && (new TomSelect(el = document.getElementById('select-username'), {
+            copyClassesToDropdown: false,
+            render: {
+                item: function(data, escape) {
+                    if (data.customProperties) {
+                        return '<div><span class="dropdown-item-indicator">' + data
+                            .customProperties + '</span>' + escape(data.text) + '</div>';
+                    }
+                    return '<div>' + escape(data.text) + '</div>';
+                },
+                option: function(data, escape) {
+                    if (data.customProperties) {
+                        return '<div><span class="dropdown-item-indicator">' + data
+                            .customProperties + '</span>' + escape(data.text) + '</div>';
+                    }
+                    return '<div>' + escape(data.text) + '</div>';
+                },
+            },
+        }));
+    });
+    // @formatter:on
+</script>
+
+<script>
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function() {
+        var el;
+        window.TomSelect && (new TomSelect(el = document.getElementById('produk_id'), {
+            copyClassesToDropdown: false,
+            render: {
+                item: function(data, escape) {
+                    if (data.customProperties) {
+                        return '<div><span class="dropdown-item-indicator">' + data
+                            .customProperties + '</span>' + escape(data.text) + '</div>';
+                    }
+                    return '<div>' + escape(data.text) + '</div>';
+                },
+                option: function(data, escape) {
+                    if (data.customProperties) {
+                        return '<div><span class="dropdown-item-indicator">' + data
+                            .customProperties + '</span>' + escape(data.text) + '</div>';
+                    }
+                    return '<div>' + escape(data.text) + '</div>';
+                },
+            },
+        }));
+    });
+    // @formatter:on
+</script>
 <script>
     jQuery(document).ready(function($) {
         @if ($errors->any())

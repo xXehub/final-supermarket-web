@@ -45,26 +45,26 @@
 <body>
     @extends('loading')
     @guest
-    @if (!isset($ndeliknoHeader) || !$ndeliknoHeader)
-        @include('layouts.navbar_user')
-    @endif
-@else
-    @if (request()->is('home'))
-        @include('layouts.navbar_user')
-    @else
-        @role('user')
+        @if (!isset($ndeliknoHeader) || !$ndeliknoHeader)
             @include('layouts.navbar_user')
-        @elserole('admin|superadmin')
-            @include('layouts.navbar')
-        @endrole
+        @endif
+    @else
+        @if (request()->is('home'))
+            @include('layouts.navbar_user')
+        @else
+            @role('user')
+                @include('layouts.navbar_user')
+                @elserole('admin|superadmin')
+                @include('layouts.navbar')
+            @endrole
+        @endif
+    @endguest
+    @yield('content')
+    @if (!isset($ndeliknoFooter) || !$ndeliknoFooter)
+        @include('layouts.footer')
     @endif
-@endguest
-@yield('content')
-@if (!isset($ndeliknoFooter) || !$ndeliknoFooter)
-    @include('layouts.footer')
-@endif
 
-@vite('resources/js/app.js')
+    @vite('resources/js/app.js')
     <!-- Libs JS -->
     @vite('resources/dist/libs/apexcharts/dist/apexcharts.min.js?1684106062')
     @vite('resources/dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062')
@@ -87,7 +87,7 @@
     @vite('resources/dist/libs/jsvectormap/dist/maps/world.js?1684106062')
     @vite('resources/dist/libs/jsvectormap/dist/maps/world-merc.js?1684106062')
 
-
+    @vite('resources/dist/libs/tom-select/dist/js/tom-select.base.min.js?1684106062')
 
 </body>
 

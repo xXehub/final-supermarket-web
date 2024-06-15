@@ -18,7 +18,7 @@ class PemesananController extends Controller
         $ingfo_sakkarepmu = 'List Pemesanan';
         $pemesanans = Pemesanan::first();
         $produks = Produk::select('id', 'kode_produk', 'nama_produk')->get();
-        $users = User::select('id', 'name')->get(); // Ambil daftar pengguna
+        $users = User::all();
         return view('panel.pemesanan.index', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'pemesanan' => $pemesanans,
