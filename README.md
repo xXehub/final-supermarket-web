@@ -1,66 +1,154 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center" id="top"> 
+  <img src="https://raw.githubusercontent.com/xXehub/final-system-barang/main/screenshot/dashboard-ui.png" width="900" alt="System Management Barang" />
+
+  <a href="#">Demo</a>
+
+&#xa0;
+
+  <!-- <a href="https://systememployeemain.netlify.app">Demo</a> -->
+</div>
+
+<h1 align="center">Final Assigment Mini-Proect System Management Barang</h1>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/xXehub/final-supermarket-web?">
+
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/xXehub/final-supermarket-web?">
+
+<!-- commit frequency -->
+  <a href="https://github.com/xXehub/final-supermarket-web/commits/main" target="_blank">
+    <img src="https://img.shields.io/github/commit-activity/m/xXehub/final-supermarket-web?" alt="Badge showing average commit frequency per month"/>
+  </a>
+
+  <!-- last commit -->
+  <a href="https://github.com/xXehub/final-supermarket-web/commits/main" target="_blank">
+    <img src="https://img.shields.io/github/last-commit/xXehub/final-supermarket-web?" alt="Badge showing when the last commit was made"/>
+  </a>
+
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/xXehub/final-supermarket-web?">
+
+  <a href="https://github.com/xXehub/final-supermarket-web/blob/master/LICENSE.md" target="_blank">
+    <img alt="Badge showing project license type" src="https://img.shields.io/github/license/xXehub/final-supermarket-web?color=f85149">
+
+  </a>
+
+  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/xXehub/final-supermarket-web?color=56BEB8" /> -->
+
+  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/xXehub/final-supermarket-web?color=56BEB8" /> -->
+
+  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/xXehub/final-supermarket-web?color=56BEB8" /> -->
 </p>
 
-## About Laravel
+<!-- Status -->
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<!-- <h4 align="center">
+	🚧  System Employee Main 🚀 Under construction...  🚧
+</h4>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<hr> -->
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<p align="center">
+  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
+  <!-- <a href="#sparkles-features">Features</a> &#xa0; | &#xa0; -->
+  <!-- <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0; -->
+  <a href="#file_folder-requirements">Requirements</a> &#xa0; | &#xa0; 
+  <a href="#book-setup">Setup</a> &#xa0; | &#xa0;
+  <a href="#gear-konfigurasi">Konfigurasi</a> &#xa0; | &#xa0;
+  <a href="#memo-license">License</a> &#xa0; | &#xa0;
+  <a href="https://github.com/xXehub" target="_blank">Author</a>
+</p>
 
-## Learning Laravel
+<br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## :dart: Tentang Project
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+**This project is under development** - Aplikasi web berbasis Laravel ini adalah **proyek tugas kampus** yang dikembangkan menggunakan kerangka kerja PHP Laravel 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<!-- ## :sparkles: Features
 
-## Laravel Sponsors
+:heavy_check_mark: Feature 1;\
+:heavy_check_mark: Feature 2;\
+:heavy_check_mark: Feature 3; -->
+<!--
+## :rocket: Technologies
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+The following tools were used in this project:
 
-### Premium Partners
+-   [Xampp](https://expo.io/)
+-   [Node.js](https://nodejs.org/en/)
+-   [Composer](https://pt-br.reactjs.org/)
+-   [PHP](https://reactnative.dev/) -->
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## :file_folder: Requirements
 
-## Contributing
+![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?&style=for-the-badge&logo=laravel&logoColor=white)
+![Nodejs](https://img.shields.io/badge/node.js-%23339933.svg?&style=for-the-badge&logo=node.js&logoColor=white)
+![Composer](https://img.shields.io/badge/composer-%23885630.svg?&style=for-the-badge&logo=composer&logoColor=white)
+![PHP](https://img.shields.io/badge/php-%23777BB4.svg?&style=for-the-badge&logo=php&logoColor=white)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Sebelum melakukan setup / installasi, harus sudah menginstall **[Git](https://git-scm.com)**,  **[PHP 8.0 atau lebih tinggi](https://www.php.net/downloads.php)**, **Web server** (Apache, Nginx, dll.), **Database server** (MySQL, PostgreSQL, SQLite, dll.), **[Node](https://nodejs.org/en/)** dan **[Composer](https://getcomposer.org)**.
 
-## Code of Conduct
+## :book: Setup
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+# Clone project ke direktori lokal 
+$ git clone https://github.com/xXehub/final-supermarket-web
 
-## Security Vulnerabilities
+# Masuk ke dir project
+$ cd final-supermarket-web
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Install dependencies
+$ npm install
+$ composer install
 
-## License
+# Migrasi data dari seeder ke database
+php artisan migrate:fresh --seed
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Run project
+$ npm run dev
+$ php artisan serve
+
+# The server will initialize in the <http://127.0.0.1:8000>
+```
+
+## :gear: Konfigurasi
+
+Copy file .env.example dan ubah nama file menjadi .env lalu sesuaikan degan konfigurasi kalian
+<details>
+<summary>
+ Penjelasan Singkat
+</summary>
+
+####
+
+| Usernane | Contoh     | Penjelasan                |
+| :-------- | :------- | :------------------------- |
+| ` APP_KEY ` | ` base64:Mx6z7+GzDxxrQhnXGeMrjcKmYhIIlHI0q8pKwAyYycI= ` | untuk melakukan enkripsi dan dekripsi data. Ini berfungsi saat Laravel menggunakan fitur enkripsi dan dekripsi, serta dalam proses enkripsi dan dekripsi cookie.  |
+| ` APP_URL `| ` http://localhost ` | untuk menentukan URL dasar dari aplikasi Laravel. Ini akan digunakan oleh beberapa fitur Laravel seperti routing |
+| ` DB_DATABASE `| `laravel_sakkarepmu` | untuk menentukan nama **database** yang akan digunakan oleh aplikasi|
+| ` DB_USERNAME `| ` root ` | untuk menentukan **nama** atau **username** database yang akan digunakan oleh aplikasi default **root**|
+| ` DB_PASSWORD `| ` root123 ` | untuk menentukan nama **password** yang akan digunakan oleh aplikasi, Anda harus mengganti **password** dengan password yang sesuai dengan konfigurasi database Anda|
+</details>
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_sakkarepmu
+DB_USERNAME=root
+DB_PASSWORD=root123
+```
+
+## :memo: License
+
+This project is licensed under the MIT License. For more details, please refer to the [LICENSE](LICENSE.md) File.
+
+**Authors** : [@xXehub](https://www.github.com/xXehub)
+
+<!-- Made with :heart: by <a href="https://github.com/xXehub" target="_blank">{{YOUR_NAME}}</a>
+
+&#xa0; -->
+<!-- 
+## :label: Authors
+
+-   [@xXehub](https://www.github.com/xXehub) -->
