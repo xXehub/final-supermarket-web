@@ -8,7 +8,7 @@
   <!-- <a href="https://systememployeemain.netlify.app">Demo</a> -->
 </div>
 
-<h1 align="center">Final Assigment Mini-Proect System Management Barang</h1>
+<h1 align="center">Final Assigment UAS System Supermarket</h1>
 
 <p align="center">
   <img alt="Github top language" src="https://img.shields.io/github/languages/top/xXehub/final-supermarket-web?">

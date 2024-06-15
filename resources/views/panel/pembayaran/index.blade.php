@@ -58,9 +58,9 @@
                                         <tr>
                                             <th style="width: 10%;">ID</th>
                                             <th style="width: 35%;">Kode Pesanan</th>
-                                            <th>Total</th>
-                                            <th>Total</th>
-                                            <th>Metode Pembayaran</th>
+                                            <th style="width: 15%;">Total</th>
+                                            <th style="width: 15%;">Total</th>
+                                            <th style="width: 15%;">Metode</th>
                                             <th style="width: 15%;">Tanggal Pesan</th>
                                             <th style="width: 15%;">Status</th>
                                             <th style="width: 15%;">Action</th>
@@ -72,10 +72,38 @@
                     </div>
                 </div>
             </div>
-            
+
 
         </div>
     </div>
+
+    <script>
+        $(function() {
+            $("#pembayaranTable").on("click", ".status-pending", function() {
+                var row = $(this).closest("tr");
+                var data = $("#pembayaranTable").DataTable().row(row).data();
+                var pembayaranId = data.id; // Ambil ID pembayaran dari data baris yang diklik
+                var token = $('meta[name="csrf-token"]').attr('content'); // Ambil CSRF token
+
+                // Kirim permintaan AJAX untuk memperbarui status pembayaran menjadi "Dibayar"
+                $.ajax({
+                    url: '/update-status/' + pembayaranId,
+                    type: 'POST',
+                    data: {
+                        _token: token,
+                        status: 'dibayar' // Atur status menjadi "Dibayar"
+                    },
+                    success: function(response) {
+                        // Jika permintaan berhasil, perbarui status pada tampilan
+                        if (response.success) {
+                            row.find('.badge').removeClass('bg-red').addClass('bg-green').text(
+                                'Dibayar');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
     {{-- gawe nyeluk modal create e om :d --}}
     {{-- @include('panel.pemesanan.create') --}}
     {{-- @include('panel.kategori.edit') --}}

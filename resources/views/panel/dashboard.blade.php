@@ -78,10 +78,10 @@
                                             </div>
                                             <div class="col">
                                                 <div class="font-weight-medium">
-                                                    132 Sales
+                                                    {{ $totalKabehPembayaran }} Penjualan
                                                 </div>
                                                 <div class="text-muted">
-                                                    12 waiting payments
+                                                    {{ $totalBelumDibayar }} Pending pembayaran
                                                 </div>
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@
                                             </div>
                                             <div class="col">
                                                 <div class="font-weight-medium">
-                                                    {{ $totalSemuaPesanan }} Pesanan
+                                                    {{ $totalKabehPesanan }} Pesanan
                                                 </div>
                                                 <div class="text-muted">
                                                     {{ $totalPesananDiterima }} Diterima Customer
@@ -218,7 +218,8 @@
                                                         {{ $user->name }}
                                                     </div>
                                                 </td>
-                                                <td class="text-nowrap text-muted">{{ $user->created_at->format('d M Y') }}
+                                                <td class="text-nowrap text-muted">
+                                                    {{ $user->created_at->format('d M Y') }}
                                                 </td>
                                             </tr>
                                     @endforeach

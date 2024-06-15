@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kategori;
+use App\Models\Pembayaran;
 use App\Models\Pemesanan;
 use App\Models\Produk;
 use App\Models\User;
@@ -24,7 +25,7 @@ class DashboardController extends Controller
 
         // Mengambil data pemesanan dari database
         $pemesanan = Pemesanan::all();
-
+        $totalBelumDibayar = Pembayaran::where('status', 'pending')->count();
         // Mengelompokkan data pemesanan berdasarkan status
         $pemesananPerHari = [];
         foreach ($pemesanan as $data) {
@@ -71,7 +72,8 @@ class DashboardController extends Controller
         $userBaruToday = User::whereDate('created_at', Carbon::today())->count();
 
         // gawe total pesanana
-        $totalSemuaPesanan = Pemesanan::count();
+        $totalKabehPesanan = Pemesanan::count();
+        $totalKabehPembayaran = Pembayaran::count();
         $totalPesananDiterima = Pemesanan::where('status', 'diterima')->count();
         $totalPemesanan = Pemesanan::count();
 
@@ -83,7 +85,7 @@ class DashboardController extends Controller
             'barangBaruToday' => $barangBaruToday,
             'totalUser' => $totalUser,
             'userBaruToday' => $userBaruToday,
-            'totalSemuaPesanan' => $totalSemuaPesanan,
+            'totalKabehPesanan' => $totalKabehPesanan,
             'totalPesananDiterima' => $totalPesananDiterima,
             'totalPemesanan' => $totalPemesanan,
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
@@ -92,6 +94,8 @@ class DashboardController extends Controller
             'dikirimData' => $dikirimData,
             'diterimaData' => $diterimaData,
             'dates' => $dates,
+            'totalBelumDibayar' => $totalBelumDibayar,
+            'totalKabehPembayaran' => $totalKabehPembayaran,
             'userAnyar' => $userAnyar, // Mengirimkan data pengguna baru ke view
         ])->with('success', 'Berhasil login.');
 

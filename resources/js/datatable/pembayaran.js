@@ -13,7 +13,12 @@ $(function() {
                 }
             },
             { data: "pemesanan_id", name: "pemesanan_id", visible: false },
-            { data: "total", name: "total" },
+            {   data: "total",
+                name: "total",
+                render: function(data, type, row) {
+                    var harga = data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                    return "Rp " + harga;
+                }, },
             {    data: "metode_pembayaran",
                 name: "metode_pembayaran",
                 render: function(data, type, full, meta) {
