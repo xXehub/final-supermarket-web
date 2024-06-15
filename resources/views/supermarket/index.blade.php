@@ -7,25 +7,27 @@
             <!-- Navbar -->
             <div class="page-wrapper">
                 <!-- Page header -->
-       
+
                 <!-- Page body -->
                 <div class="page-body">
                     <div class="container-xl">
                         <div class="row g-4">
                             <div class="col-md-3">
-                                <form action="{{ route('filter.produk') }}" method="POST" autocomplete="off" novalidate class="sticky-top">
+                                <form action="{{ route('filter.produk') }}" method="POST" autocomplete="off" novalidate
+                                    class="sticky-top">
                                     @csrf
                                     <div class="form-label">Kategori type</div>
                                     <div class="mb-4">
                                         <label class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="kategori[]" value="all" id="select-all">
+                                            <input type="checkbox" class="form-check-input" name="kategori[]" value="all"
+                                                id="select-all">
                                             <span class="form-check-label">All Categories</span>
                                         </label>
                                         @foreach ($kategoris as $kategori)
                                             @if ($kategori && !is_null($kategori->nama_kategori))
                                                 <label class="form-check">
-                                                    <input type="checkbox" class="form-check-input kategori-checkbox" name="kategori[]"
-                                                        value="{{ $kategori->id }}">
+                                                    <input type="checkbox" class="form-check-input kategori-checkbox"
+                                                        name="kategori[]" value="{{ $kategori->id }}">
                                                     <span class="form-check-label">{{ $kategori->nama_kategori }}</span>
                                                 </label>
                                             @endif
@@ -33,7 +35,8 @@
                                     </div>
                                     <div class="mt-5">
                                         <button class="btn btn-primary w-100">Confirm changes</button>
-                                        <a href="#" class="btn btn-link w-100" id="reset-defaults">Reset to defaults</a>
+                                        <a href="#" class="btn btn-link w-100" id="reset-defaults">Reset to
+                                            defaults</a>
                                     </div>
                                 </form>
                             </div>
@@ -42,7 +45,7 @@
                                     let checkboxes = document.querySelectorAll('.kategori-checkbox');
                                     checkboxes.forEach(checkbox => checkbox.checked = this.checked);
                                 });
-                            
+
                                 document.getElementById('reset-defaults').addEventListener('click', function(e) {
                                     e.preventDefault();
                                     document.getElementById('select-all').checked = true;
@@ -50,7 +53,7 @@
                                     checkboxes.forEach(checkbox => checkbox.checked = false);
                                 });
                             </script>
-                            
+
                             <div class="col-md-9">
                                 <div class="row row-cards">
                                     <div class="space-y">
@@ -113,9 +116,7 @@
                                                                                 <path d="M6 5l14 1l-1 7h-13" />
                                                                             </svg> Keranjang</button>
                                                                     </div>
-
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -128,12 +129,16 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <!-- Your existing code to display products -->
-                                    
+
                                                 <ul class="pagination">
                                                     @if ($produks->onFirstPage())
                                                         <li class="page-item disabled">
-                                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <a class="page-link" href="#" tabindex="-1"
+                                                                aria-disabled="true">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                                    stroke-width="2" stroke="currentColor" fill="none"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
                                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                                     <path d="M15 6l-6 6l6 6" />
                                                                 </svg>
@@ -142,9 +147,14 @@
                                                         </li>
                                                     @else
                                                         <li class="page-item">
-                                                            <a class="page-link" href="{{ $produks->previousPageUrl() }}" tabindex="-1" aria-disabled="true">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <a class="page-link" href="{{ $produks->previousPageUrl() }}"
+                                                                tabindex="-1" aria-disabled="true">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                                    stroke-width="2" stroke="currentColor" fill="none"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z"
+                                                                        fill="none" />
                                                                     <path d="M15 6l-6 6l6 6" />
                                                                 </svg>
                                                                 prev
@@ -152,16 +162,22 @@
                                                         </li>
                                                     @endif
                                                     @foreach ($produks->getUrlRange(1, $produks->lastPage()) as $page => $url)
-                                                        <li class="page-item {{ $page == $produks->currentPage() ? 'active' : '' }}">
-                                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                                        <li
+                                                            class="page-item {{ $page == $produks->currentPage() ? 'active' : '' }}">
+                                                            <a class="page-link"
+                                                                href="{{ $url }}">{{ $page }}</a>
                                                         </li>
                                                     @endforeach
                                                     @if ($produks->hasMorePages())
                                                         <li class="page-item">
                                                             <a class="page-link" href="{{ $produks->nextPageUrl() }}">
                                                                 next
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                                    stroke-width="2" stroke="currentColor" fill="none"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z"
+                                                                        fill="none" />
                                                                     <path d="M9 6l6 6l-6 6" />
                                                                 </svg>
                                                             </a>
@@ -170,8 +186,12 @@
                                                         <li class="page-item disabled">
                                                             <a class="page-link" href="#">
                                                                 next
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                                    stroke-width="2" stroke="currentColor" fill="none"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z"
+                                                                        fill="none" />
                                                                     <path d="M9 6l6 6l-6 6" />
                                                                 </svg>
                                                             </a>
@@ -188,7 +208,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
         <!-- Libs JS -->
         <!-- Tabler Core -->

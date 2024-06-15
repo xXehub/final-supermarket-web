@@ -29,7 +29,7 @@
                                         <path d="M12 5l0 14" />
                                         <path d="M5 12l14 0" />
                                     </svg>
-                                    Tambah Pesanan
+                                    Tambah Pembayaran
                                 </a>
                                 <a href="{{ route('kategori.create') }}" class="btn btn-primary d-sm-none btn-icon"
                                     data-bs-toggle="modal" data-bs-target="#modal-tambahData" aria-label="Tambah Produk">

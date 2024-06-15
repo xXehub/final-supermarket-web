@@ -154,44 +154,54 @@
 @vite('resources/dist/libs/litepicker/dist/litepicker.js?1684106062')
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var el = document.getElementById('select-labels-kategori');
-        if (window.TomSelect && el) {
-            new TomSelect(el, {
-                copyClassesToDropdown: true,
-                render: {
-                    item: function(data, escape) {
-                        if (data.customProperties) {
-                            return '<div><span class="dropdown-item-indicator">' + data
-                                .customProperties + '</span>' + escape(data.text) + '</div>';
-                        }
-                        return '<div>' + escape(data.text) + '</div>';
-                    },
-                }
-            });
-        }
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function () {
+    	var el;
+    	window.TomSelect && (new TomSelect(el = document.getElementById('select-labels-kategori'), {
+    		copyClassesToDropdown: false,
+    		render:{
+    			item: function(data,escape) {
+    				if( data.customProperties ){
+    					return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+    				}
+    				return '<div>' + escape(data.text) + '</div>';
+    			},
+    			option: function(data,escape){
+    				if( data.customProperties ){
+    					return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+    				}
+    				return '<div>' + escape(data.text) + '</div>';
+    			},
+    		},
+    	}));
     });
-</script>
+    // @formatter:on
+  </script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var el = document.getElementById('select-labels-supplier');
-        if (window.TomSelect && el) {
-            new TomSelect(el, {
-                copyClassesToDropdown: true,
-                render: {
-                    item: function(data, escape) {
-                        if (data.customProperties) {
-                            return '<div><span class="dropdown-item-indicator">' + data
-                                .customProperties + '</span>' + escape(data.text) + '</div>';
-                        }
-                        return '<div>' + escape(data.text) + '</div>';
-                    },
-                }
-            });
-        }
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function () {
+    	var el;
+    	window.TomSelect && (new TomSelect(el = document.getElementById('select-labels-supplier'), {
+    		copyClassesToDropdown: false,
+    		render:{
+    			item: function(data,escape) {
+    				if( data.customProperties ){
+    					return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+    				}
+    				return '<div>' + escape(data.text) + '</div>';
+    			},
+    			option: function(data,escape){
+    				if( data.customProperties ){
+    					return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+    				}
+    				return '<div>' + escape(data.text) + '</div>';
+    			},
+    		},
+    	}));
     });
-</script>
+    // @formatter:on
+  </script>
 <script>
     jQuery(document).ready(function($) {
         @if ($errors->any())

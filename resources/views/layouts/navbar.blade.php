@@ -285,7 +285,7 @@
 
                         {{-- penjualan --}}
                         <li
-                            class="nav-item dropdown {{ Route::is('penjualan.index', 'pemesanan.index', 'pemesanan.show') ? 'active' : '' }}">
+                            class="nav-item dropdown {{ Route::is('penjualan.index', 'pemesanan.index', 'pembayaran.index', 'pemesanan.show') ? 'active' : '' }}">
                             <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                                 data-bs-auto-close="outside" role="button" aria-expanded="false">
                                 <span

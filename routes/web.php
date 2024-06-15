@@ -2,6 +2,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\API\KategoriController;
 use App\Http\Controllers\API\ProdukController;
+use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\DetailPemesananController;
@@ -53,6 +54,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/filter-produk', [SupermarketController::class, 'filterProduk'])->name('filter.produk');
 Route::post('/filter-produk', [ProdukController::class, 'filterProduk'])->name('filter.produk');
 
+
+Route::resource('/keranjang', KeranjangController::class);
+Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');
+Route::post('/keranjang/tambah', 'KeranjangController@tambahProduk')->name('keranjang.tambah');
+
+
 // Rute untuk profil pengguna
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\SupermarketController::class, 'index'])->name('supermarket.index');
@@ -72,3 +79,4 @@ Route::get('data/pemesanan', [PemesananController::class, 'getData'])->name('pem
 Route::get('data/detail-pemesanan', [DetailPemesananController::class, 'getData'])->name('detail_pemesanan.data');
 Route::get('data/wishlist', [WhishlistController::class, 'getData'])->name('wishlist.data');
 Route::get('data/pembayaran', [PembayaranController::class, 'getData'])->name('pembayaran.data');
+Route::get('data/keranjang', [KeranjangController::class, 'getData'])->name('keranjang.data');

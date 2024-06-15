@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PemesananSeeder::class,
             DetailPemesananSeeder::class,
             PembayaranSeeder::class,
+            KeranjangSeeder::class,
             // add seeder disini ngab 
         ]);
     }
