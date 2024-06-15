@@ -276,4 +276,19 @@ class ProdukController extends Controller
         return Excel::download(new ProdukExport, 'produk.xlsx');
     }
 
+
+    public function filterProduk(Request $request)
+    {
+        $kategoriIds = $request->input('kategori');
+        
+        if ($kategoriIds) {
+            $produks = Produk::whereIn('kategori_id', $kategoriIds)->paginate(5);
+        } else {
+            $produks = Produk::paginate(5);
+        }
+        
+        $kategoris = Kategori::all();
+
+        return view('supermarket.index', compact('produks', 'kategoris'));
+    }
 }

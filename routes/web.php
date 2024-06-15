@@ -50,6 +50,8 @@ Route::middleware(['role:superadmin'])->group(function () {
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/filter-produk', [SupermarketController::class, 'filterProduk'])->name('filter.produk');
+Route::post('/filter-produk', [ProdukController::class, 'filterProduk'])->name('filter.produk');
 
 // Rute untuk profil pengguna
 Route::middleware('auth')->group(function () {

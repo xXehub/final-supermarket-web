@@ -37,80 +37,32 @@
                     <div class="container-xl">
                         <div class="row g-4">
                             <div class="col-md-3">
-                                <form action="./" method="get" autocomplete="off" novalidate class="sticky-top">
-                                    <div class="form-label">Kategori type</div>
-                                    <div class="mb-4">
-                                        @foreach ($kategoris as $kategori)
-                                        @if ($kategori)  <!-- Pastikan kategori tidak null -->
-                                            <label class="form-check">
-                                                <input type="checkbox" class="form-check-input" name="form-type[]"
-                                                    value="{{ $kategori->id }}">
-                                                <span class="form-check-label">{{ $kategori->nama_kategori }}</span>
-                                            </label>
-                                        @endif
-                                    @endforeach
-                                    </div>
                             
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <div class="form-label">Remote</div>
-                                    <div class="mb-4">
-                                        <label class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox">
-                                            <span class="form-check-label form-check-label-on">On</span>
-                                            <span class="form-check-label form-check-label-off">Off</span>
-                                        </label>
-                                    </div>
-                                    <div class="form-label">Salary Range</div>
-                                    <div class="mb-4">
-                                        <label class="form-check">
-                                            <input type="radio" class="form-check-input" name="form-salary" value="1"
-                                                checked>
-                                            <span class="form-check-label">$20K - $50K</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="radio" class="form-check-input" name="form-salary" value="2"
-                                                checked>
-                                            <span class="form-check-label">$50K - $100K</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="radio" class="form-check-input" name="form-salary"
-                                                value="3">
-                                            <span class="form-check-label">> $100K</span>
-                                        </label>
-                                        <label class="form-check">
-                                            <input type="radio" class="form-check-input" name="form-salary"
-                                                value="4">
-                                            <span class="form-check-label">Drawing / Painting</span>
-                                        </label>
-                                    </div>
-                                    <div class="form-label">Immigration</div>
-                                    <div class="mb-4">
-                                        <label class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox">
-                                            <span class="form-check-label form-check-label-on">On</span>
-                                            <span class="form-check-label form-check-label-off">Off</span>
-                                        </label>
-                                        <div class="small text-muted">Only show companies that can sponsor a visa</div>
-                                    </div>
-                                    <div class="form-label">Location</div>
-                                    <div class="mb-4">
-                                        <select class="form-select">
-                                            <option>Anywhere</option>
-                                            <option>London</option>
-                                            <option>San Francisco</option>
-                                            <option>New York</option>
-                                            <option>Berlin</option>
-                                        </select>
-                                    </div>
-                                    <div class="mt-5">
-                                        <button class="btn btn-primary w-100">
-                                            Confirm changes
-                                        </button>
-                                        <a href="#" class="btn btn-link w-100">
-                                            Reset to defaults
-                                        </a>
-                                    </div>
-                                </form>
+                                    {{-- <form action="}" method="POST"> --}}
+                                        @csrf
+                                        <form action="{{ route('filter.produk') }}" method="POST" autocomplete="off" novalidate class="sticky-top">
+                                            @csrf
+                                            <div class="form-label">Kategori type</div>
+                                            <div class="mb-4">
+                                                @foreach ($kategoris as $kategori)
+                                                    @if ($kategori && !is_null($kategori->nama_kategori))
+                                                        <label class="form-check">
+                                                            <input type="checkbox" class="form-check-input" name="kategori[]" value="{{ $kategori->id }}">
+                                                            <span class="form-check-label">{{ $kategori->nama_kategori }}</span>
+                                                        </label>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                            <div class="mt-5">
+                                                <button class="btn btn-primary w-100">Confirm changes</button>
+                                                <a href="#" class="btn btn-link w-100">Reset to defaults</a>
+                                            </div>
+                                        </form>
+
+              
+                                  
+        
+                                   
                             </div>
                             <div class="col-md-9">
                                 <div class="row row-cards">
@@ -172,7 +124,7 @@
                                                                                     d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                                                                 <path d="M17 17h-11v-14h-2" />
                                                                                 <path d="M6 5l14 1l-1 7h-13" />
-                                                                            </svg> Beli</button>
+                                                                            </svg> Keranjang</button>
                                                                     </div>
 
                                                                 </div>
@@ -198,30 +150,30 @@
     </body>
     <script>
         // Add sorting functionality
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const checkboxes = document.querySelectorAll('.form-check');
             const container = document.querySelector('.mb-4');
-            
+
             function sortCheckboxes() {
                 // Convert NodeList to Array
                 const checkboxesArray = Array.from(checkboxes);
-                
+
                 // Sort checkboxes based on the text label
                 checkboxesArray.sort((a, b) => {
                     const textA = a.querySelector('.form-check-label').innerText.toUpperCase();
                     const textB = b.querySelector('.form-check-label').innerText.toUpperCase();
                     return textA.localeCompare(textB);
                 });
-                
+
                 // Clear the container
                 container.innerHTML = '';
-                
+
                 // Append sorted checkboxes
                 checkboxesArray.forEach(checkbox => {
                     container.appendChild(checkbox);
                 });
             }
-            
+
             // Initial sort
             sortCheckboxes();
         });
