@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memuat Halaman...</title>
     <style>
-        /* Tambahkan CSS untuk style loading page */
         #loading {
             position: fixed;
             width: 100%;
@@ -18,30 +18,42 @@
             justify-content: center;
             align-items: center;
         }
+
         #loading p {
             font-size: 1.5em;
             color: #000;
         }
     </style>
 </head>
+
 <body>
     <div id="loading">
-        <p>Memuat halaman...</p>
-        <!-- Tambahkan animasi atau gambar loading di sini -->
+        <div class="page page-center">
+            <div class="container container-slim py-4">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <a href="." class="navbar-brand navbar-brand-autodark"><img
+                                src="{{ asset('/static/gudangrempah/gricon.png') }}" height="36" alt=""></a>
+                    </div>
+                    <div class="text-muted mb-3">Halaman sedang dimuat</div>
+                    <div class="progress progress-sm">
+                        <div class="progress-bar progress-bar-indeterminate"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Konten halaman Anda -->
     <div id="content" style="display: none;">
-        <!-- Semua konten halaman Anda di sini -->
     </div>
-
     <script>
-        // JavaScript untuk menghilangkan loading page setelah halaman selesai dimuat
-        window.addEventListener('load', function () {
-            var loading = document.getElementById('loading');
-            var content = document.getElementById('content');
-            loading.style.display = 'none';
-            content.style.display = 'block';
+
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var loading = document.getElementById('loading');
+                var content = document.getElementById('content');
+                loading.style.display = 'none';
+                content.style.display = 'block';
+            }, 2000); //iki interval e mas
         });
     </script>
 </body>

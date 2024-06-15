@@ -1,3 +1,4 @@
+@vite('resources/dist/libs/tom-select/dist/js/tom-select.base.min.js?1684106062')
 <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data" id="formTambahData">
     @csrf
     <div class="modal modal-blur fade" id="modal-tambahData" tabindex="-1" role="dialog" aria-hidden="true"
@@ -52,22 +53,8 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label class="form-label">Select with labels</label>
-                                <select type="text" class="form-select" id="select-labels" value="">
-                                    <option value="copy"
-                                        data-custom-properties="&lt;span class=&quot;badge bg-primary-lt&quot;&gt;cmd + C&lt;/span&gt;">
-                                        CopSSSy</option>
-                                    <option value="paste"
-                                        data-custom-properties="&lt;span class=&quot;badge bg-primary-lt&quot;&gt;cmd + V&lt;/span&gt;">
-                                        Paste</option>
-                                    <option value="cut"
-                                        data-custom-properties="&lt;span class=&quot;badge bg-primary-lt&quot;&gt;cmd + X&lt;/span&gt;">
-                                        Cut</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
                                 <label class="form-label">Kategori</label>
-                                <select id="select-labels" class="form-select" name="kategori_id">
+                                <select id="select-labels-kategori" class="form-select" name="kategori_id">
                                     @foreach ($kategoris as $kategori_sakkarepmu)
                                         <option value="{{ $kategori_sakkarepmu->id }}"
                                             {{ old('kategori_id') == $kategori_sakkarepmu->id ? 'selected' : '' }}
@@ -76,64 +63,26 @@
                                         </option>
                                     @endforeach
                                 </select>
-
                                 @error('kategori_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label class="form-label">Supplier</label>
-                                <select name="supplier_id" id="supplier_id" class="form-select">
-                                    {{-- <option value="" disabled selected>Pilih Kategori</option> --}}
+                                <select id="select-labels-supplier" class="form-select" name="supplier_id">
                                     @foreach ($suppliers as $supplier_sakkarepmu)
                                         <option value="{{ $supplier_sakkarepmu->id }}"
-                                            {{ old('supplier_id') == $supplier_sakkarepmu->id ? 'selected' : '' }}>
-                                            {{ $supplier_sakkarepmu->kode_supplier . ' - ' . $supplier_sakkarepmu->nama_supplier }}
+                                            {{ old('supplier_id') == $supplier_sakkarepmu->id ? 'selected' : '' }}
+                                            data-custom-properties="<span class='badge bg-primary-lt'>{{ $supplier_sakkarepmu->kode_supplier }}</span>">
+                                            {{ $supplier_sakkarepmu->nama_supplier }}
                                         </option>
                                     @endforeach
                                 </select>
                                 @error('supplier_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div>
-                        </div>
-
-                        <label class="form-label">Status</label>
-                        <div class="form-selectgroup-boxes row mb-3">
-                            <div class="col-lg-6">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" name="report-type" value="1"
-                                        class="form-selectgroup-input" checked>
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Terverifikasi</span>
-                                            <span class="d-block text-muted">Produk telah diverifikasi oleh
-                                                admin</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" name="report-type" value="0"
-                                        class="form-selectgroup-input">
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Tidak Terverifikasi</span>
-                                            <span class="d-block text-muted">Produk belum diverifikasi oleh
-                                                admin</span>
-                                        </span>
-                                    </span>
-                                </label>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -203,35 +152,45 @@
 
 @vite('resources/dist/libs/nouislider/dist/nouislider.min.js?1684106062')
 @vite('resources/dist/libs/litepicker/dist/litepicker.js?1684106062')
-@vite('resources/libs/tom-select/dist/js/tom-select.base.min.js?1684106062')
-<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
 <script>
-    // @formatter:off
     document.addEventListener("DOMContentLoaded", function() {
-        var el;
-        window.TomSelect && (new TomSelect(el = document.getElementById('select-labels'), {
-            copyClassesToDropdown: false,
-            dropdownParent: 'body',
-            controlInput: '<input>',
-            render: {
-                item: function(data, escape) {
-                    if (data.customProperties) {
-                        return '<div><span class="dropdown-item-indicator">' + data
-                            .customProperties + '</span>' + escape(data.text) + '</div>';
-                    }
-                    return '<div>' + escape(data.text) + '</div>';
-                },
-                option: function(data, escape) {
-                    var customProps = data.attributes['data-custom-properties'];
-                    if (customProps) {
-                        return '<div>' + customProps + escape(data.text) + '</div>';
-                    }
-                    return '<div>' + escape(data.text) + '</div>';
-                },
-            }
-        }));
+        var el = document.getElementById('select-labels-kategori');
+        if (window.TomSelect && el) {
+            new TomSelect(el, {
+                copyClassesToDropdown: true,
+                render: {
+                    item: function(data, escape) {
+                        if (data.customProperties) {
+                            return '<div><span class="dropdown-item-indicator">' + data
+                                .customProperties + '</span>' + escape(data.text) + '</div>';
+                        }
+                        return '<div>' + escape(data.text) + '</div>';
+                    },
+                }
+            });
+        }
     });
-    // @formatter:on
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var el = document.getElementById('select-labels-supplier');
+        if (window.TomSelect && el) {
+            new TomSelect(el, {
+                copyClassesToDropdown: true,
+                render: {
+                    item: function(data, escape) {
+                        if (data.customProperties) {
+                            return '<div><span class="dropdown-item-indicator">' + data
+                                .customProperties + '</span>' + escape(data.text) + '</div>';
+                        }
+                        return '<div>' + escape(data.text) + '</div>';
+                    },
+                }
+            });
+        }
+    });
 </script>
 <script>
     jQuery(document).ready(function($) {

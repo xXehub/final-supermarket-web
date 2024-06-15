@@ -94,6 +94,7 @@
                 @endif
             });
         </script>
+        
         {{-- gawe notif sukses --}}
         @if ($message = Session::get('hapus'))
             <script>
