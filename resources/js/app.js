@@ -4,6 +4,7 @@ import './datatable/produk';
 import './datatable/kategori';
 import './datatable/supplier';
 import './datatable/pemesanan';
+import './datatable/pembayaran';
 import './kode';
 import './resetform';
 import './tom-select.base.min';

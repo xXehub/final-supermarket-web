@@ -53,14 +53,14 @@
                     <div class="card">
                         <div class="card-body">
                             <div id="table-default" class="table-responsive">
-                                <table class="table" id="pemesananTable">
+                                <table class="table" id="pembayaranTable">
                                     <thead>
-                                        <br />
                                         <tr>
                                             <th style="width: 10%;">ID</th>
-                                            <th style="width: 35%;">Kode</th>
-                                            <th>Kode</th>
-                                            <th>Username</th>
+                                            <th style="width: 35%;">Kode Pesanan</th>
+                                            <th>Total</th>
+                                            <th>Total</th>
+                                            <th>Metode Pembayaran</th>
                                             <th style="width: 15%;">Tanggal Pesan</th>
                                             <th style="width: 15%;">Status</th>
                                             <th style="width: 15%;">Action</th>
@@ -72,6 +72,7 @@
                     </div>
                 </div>
             </div>
+            
 
         </div>
     </div>

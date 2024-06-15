@@ -61,4 +61,41 @@ class PembayaranController extends Controller
         $pembayaran->delete();
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil dihapus.');
     }
+
+    public function getData(Request $request)
+    {
+        $pembayarans = Pembayaran::with('pemesanan.user');
+    
+        if ($request->ajax()) {
+            return datatables()->of($pembayarans)
+                ->addIndexColumn()
+                ->addColumn('total', function ($pembayaran) {
+                    return number_format($pembayaran->total, 2);
+                })
+                ->addColumn('nama_user', function ($pembayaran) {
+                    return $pembayaran->pemesanan && $pembayaran->pemesanan->user ? $pembayaran->pemesanan->user->name : '';
+                })
+                
+                ->addColumn('metode_pembayaran', function ($pembayaran) {
+                    return $pembayaran->metode_pembayaran;
+                })
+                ->addColumn('kode_pesanan', function ($pembayaran) {
+                    // Gunakan optional helper untuk memeriksa apakah pemesanan tidak null
+                    return optional($pembayaran->pemesanan)->kode_pesanan;
+                })
+                ->addColumn('tanggal_pesan', function ($pembayaran) {
+                    return $pembayaran->created_at->format('Y-m-d');
+                })
+                ->addColumn('gambar_profile', function ($pembayaran) {
+                    // Periksa apakah ada relasi user dan user memiliki gambar_profile
+                    return $pembayaran->user ? $pembayaran->user->gambar_profile : '';
+                })
+                ->addColumn('actions', function ($pembayaran) {
+                    return view('panel.pembayaran.actions', compact('pembayaran'));
+                })
+                ->toJson();
+        }
+    }
+    
+    
 }

@@ -7,63 +7,50 @@
             <!-- Navbar -->
             <div class="page-wrapper">
                 <!-- Page header -->
-                <div class="page-header d-print-none">
-                    <div class="container-xl">
-                        <div class="row g-2 align-items-center">
-                            <div class="col">
-                                <h2 class="page-title">
-                                    Cari Berdasarkan Kategori
-                                </h2>
-                            </div>
-                            <!-- Page title actions -->
-                            <div class="col-auto ms-auto d-print-none">
-                                <a href="#" class="btn btn-primary">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M12 5l0 14" />
-                                        <path d="M5 12l14 0" />
-                                    </svg>
-                                    Post a job
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+       
                 <!-- Page body -->
                 <div class="page-body">
                     <div class="container-xl">
                         <div class="row g-4">
                             <div class="col-md-3">
-                            
-                                    {{-- <form action="}" method="POST"> --}}
-                                        @csrf
-                                        <form action="{{ route('filter.produk') }}" method="POST" autocomplete="off" novalidate class="sticky-top">
-                                            @csrf
-                                            <div class="form-label">Kategori type</div>
-                                            <div class="mb-4">
-                                                @foreach ($kategoris as $kategori)
-                                                    @if ($kategori && !is_null($kategori->nama_kategori))
-                                                        <label class="form-check">
-                                                            <input type="checkbox" class="form-check-input" name="kategori[]" value="{{ $kategori->id }}">
-                                                            <span class="form-check-label">{{ $kategori->nama_kategori }}</span>
-                                                        </label>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                            <div class="mt-5">
-                                                <button class="btn btn-primary w-100">Confirm changes</button>
-                                                <a href="#" class="btn btn-link w-100">Reset to defaults</a>
-                                            </div>
-                                        </form>
-
-              
-                                  
-        
-                                   
+                                <form action="{{ route('filter.produk') }}" method="POST" autocomplete="off" novalidate class="sticky-top">
+                                    @csrf
+                                    <div class="form-label">Kategori type</div>
+                                    <div class="mb-4">
+                                        <label class="form-check">
+                                            <input type="checkbox" class="form-check-input" name="kategori[]" value="all" id="select-all">
+                                            <span class="form-check-label">All Categories</span>
+                                        </label>
+                                        @foreach ($kategoris as $kategori)
+                                            @if ($kategori && !is_null($kategori->nama_kategori))
+                                                <label class="form-check">
+                                                    <input type="checkbox" class="form-check-input kategori-checkbox" name="kategori[]"
+                                                        value="{{ $kategori->id }}">
+                                                    <span class="form-check-label">{{ $kategori->nama_kategori }}</span>
+                                                </label>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="mt-5">
+                                        <button class="btn btn-primary w-100">Confirm changes</button>
+                                        <a href="#" class="btn btn-link w-100" id="reset-defaults">Reset to defaults</a>
+                                    </div>
+                                </form>
                             </div>
+                            <script>
+                                document.getElementById('select-all').addEventListener('change', function() {
+                                    let checkboxes = document.querySelectorAll('.kategori-checkbox');
+                                    checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+                                });
+                            
+                                document.getElementById('reset-defaults').addEventListener('click', function(e) {
+                                    e.preventDefault();
+                                    document.getElementById('select-all').checked = true;
+                                    let checkboxes = document.querySelectorAll('.kategori-checkbox');
+                                    checkboxes.forEach(checkbox => checkbox.checked = false);
+                                });
+                            </script>
+                            
                             <div class="col-md-9">
                                 <div class="row row-cards">
                                     <div class="space-y">
@@ -135,13 +122,73 @@
                                                 </div>
                                             </div>
                                         @endforeach
+
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <!-- Your existing code to display products -->
+                                    
+                                                <ul class="pagination">
+                                                    @if ($produks->onFirstPage())
+                                                        <li class="page-item disabled">
+                                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                    <path d="M15 6l-6 6l6 6" />
+                                                                </svg>
+                                                                prev
+                                                            </a>
+                                                        </li>
+                                                    @else
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="{{ $produks->previousPageUrl() }}" tabindex="-1" aria-disabled="true">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                    <path d="M15 6l-6 6l6 6" />
+                                                                </svg>
+                                                                prev
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                    @foreach ($produks->getUrlRange(1, $produks->lastPage()) as $page => $url)
+                                                        <li class="page-item {{ $page == $produks->currentPage() ? 'active' : '' }}">
+                                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                    @if ($produks->hasMorePages())
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="{{ $produks->nextPageUrl() }}">
+                                                                next
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                    <path d="M9 6l6 6l-6 6" />
+                                                                </svg>
+                                                            </a>
+                                                        </li>
+                                                    @else
+                                                        <li class="page-item disabled">
+                                                            <a class="page-link" href="#">
+                                                                next
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                    <path d="M9 6l6 6l-6 6" />
+                                                                </svg>
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
+            
         </div>
         <!-- Libs JS -->
         <!-- Tabler Core -->

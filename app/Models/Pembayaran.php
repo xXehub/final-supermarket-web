@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Pembayaran extends Model
 {
     protected $table = 'pembayaran';
-    protected $fillable = ['pemesanan_id', 'total', 'metode_pembayaran'];
+    protected $fillable = ['pemesanan_id', 'total', 'metode_pembayaran', 'gambar_profile'];
+
+    public function pemesanan()
+    {
+        return $this->belongsTo(Pemesanan::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

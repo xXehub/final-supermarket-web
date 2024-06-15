@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
@@ -11,7 +12,7 @@ class SupermarketController extends Controller
     public function index()
     {
         $ingfo_sakkarepmu = 'Tambah Kategori';
-        $produks = Produk::all();
+        $produks = Produk::paginate(10); // Paginate the products, 10 per page
         $kategoris = Kategori::all()->filter(function ($kategori) {
             return !is_null($kategori);
         });
@@ -32,9 +33,9 @@ class SupermarketController extends Controller
         $kategoriIds = $request->input('kategori_id');
 
         if ($kategoriIds) {
-            $produk = Produk::whereIn('kategori_id', $kategoriIds)->get();
+            $produk = Produk::whereIn('kategori_id', $kategoriIds)->paginate(10); // Paginate the filtered products
         } else {
-            $produk = Produk::all();
+            $produk = Produk::paginate(10); // Paginate all products
         }
 
         $kategoris = Kategori::all();
@@ -45,5 +46,4 @@ class SupermarketController extends Controller
             'kategoris' => $kategoris,
         ]);
     }
-
 }

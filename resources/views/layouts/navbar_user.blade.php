@@ -102,7 +102,7 @@
                         </a>
                     </li>
                     {{-- penyimpanan --}}
-                    <li
+                    {{-- <li
                         class="nav-item dropdown {{ Route::is('produk.index', 'kategori.index', 'supplier.index', 'produk.show', 'kategori.show', 'supplier.show') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" role="button" aria-expanded="false">
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li> --}}
                 </ul>
                 <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
                     <form action="./" method="get" autocomplete="off" novalidate>

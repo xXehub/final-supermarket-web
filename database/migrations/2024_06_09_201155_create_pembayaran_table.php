@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pemesanan_id');
-            $table->decimal('total', 10, 2);
-            $table->string('metode_pembayaran');
+            $table->integer('total');
+            $table->enum('metode_pembayaran', ['dana', 'ovo', 'gopay'])->default('dana');
+            $table->enum('status', ['pending', 'dibayar'])->default('pending');
             $table->timestamps();
         });
     }

@@ -33,7 +33,7 @@ class DashboardController extends Controller
             // Ambil nama hari berdasarkan indeks hari dalam $daysOfWeek
             $hari = $daysOfWeek[($todayIndex + $i) % 7];
             // Ubah nama hari menjadi format l
-            $hari = Carbon::createFromFormat('l', $hari)->locale('id')->isoFormat('dddd');
+            $hari = Carbon::createFromFormat('l', $hari)->format('l');
             // Masukkan nama hari ke dalam array $pemesananPerHari
             $pemesananPerHari[$hari] = [
                 'pending' => 0,
