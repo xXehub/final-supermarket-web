@@ -2,6 +2,7 @@ $(function() {
     $("#produkTable").DataTable({
         serverSide: true,
         processing: true,
+            destroy: true,
         ajax: "/data/produk",
         columns: [
             { data: "id", name: "id", visible: false },
@@ -49,7 +50,8 @@ $(function() {
                     } else {
                         badgeClass = "badge bg-success me-1";
                     }
-                    return '<span class="' + badgeClass + '"></span> ' + data ;
+                    var badgeWidth = 50;
+                    return '<span class="' + badgeClass + '" style="width: ' + badgeWidth + 'px;">' + data + '</span>';
                 }
             },
             { data: "actions", name: "actions", orderable: false, searchable: false },

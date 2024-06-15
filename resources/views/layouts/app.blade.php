@@ -43,6 +43,7 @@
 </head>
 
 <body>
+    @extends('loading')
     @guest
     @if (!isset($ndeliknoHeader) || !$ndeliknoHeader)
         @include('layouts.navbar_user')

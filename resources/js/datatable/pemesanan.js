@@ -38,7 +38,9 @@ $(function() {
                             break;
                     }
                     var capitalizedStatus = data.charAt(0).toUpperCase() + data.slice(1);
-                    return '<span class="badge ' + statusColor + '">' + capitalizedStatus + '</span>';
+                    var badgeWidth = 100;
+                    return '<span class="badge ' + statusColor + '" style="width: ' + badgeWidth + 'px;">' + capitalizedStatus + '</span>';
+                    
                 }
             },
             { data: "actions", name: "actions", orderable: false, searchable: false },

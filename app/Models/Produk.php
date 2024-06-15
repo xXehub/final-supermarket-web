@@ -22,6 +22,7 @@ class Produk extends Model
 
     // validator
     protected $fillable = [
+        'id',
         'kode_produk',
         'nama_produk',
         'kategori_id',

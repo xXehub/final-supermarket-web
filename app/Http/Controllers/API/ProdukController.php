@@ -159,11 +159,11 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(string $id)
     {
         $ingfo_sakkarepmu = 'Edit Data Kategori';
         $kategoris = Kategori::find($id);
-        $produk = Produk::find($id);
+        $produk = Produk::all($id);
         return view('panel.produk.edit', compact('ingfo_sakkarepmu', 'kategoris', 'produk'));
     }
 
@@ -223,9 +223,6 @@ class ProdukController extends Controller
 
         return redirect()->route('produk.index')->with('success', 'Data produk berhasil diperbarui.');
     }
-
-
-
 
     /**
      * Remove the specified resource from storage.

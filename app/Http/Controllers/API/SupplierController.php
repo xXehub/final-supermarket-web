@@ -90,7 +90,7 @@ class SupplierController extends Controller
     public function show($id)
     {
         $supplier = Supplier::findOrFail($id);
-        return view('suppliers.show', compact('supplier'));
+        return view('panel.supplier.show', compact('supplier'));
     }
 
     /**
