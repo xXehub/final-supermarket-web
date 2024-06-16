@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <body>
         <script src="./dist/js/demo-theme.min.js?1684106062"></script>
@@ -97,24 +98,35 @@
 
                                                                 <div class="col-md-auto">
                                                                     <div class="col-auto">
-                                                                        <button type="button"
-                                                                            class="btn btn-primary btn-md"><svg
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                width="24" height="24"
-                                                                                viewBox="0 0 24 24" fill="none"
-                                                                                stroke="currentColor" stroke-width="2"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round"
-                                                                                class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
-                                                                                <path stroke="none" d="M0 0h24v24H0z"
-                                                                                    fill="none" />
-                                                                                <path
-                                                                                    d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                                                                                <path
-                                                                                    d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                                                                                <path d="M17 17h-11v-14h-2" />
-                                                                                <path d="M6 5l14 1l-1 7h-13" />
-                                                                            </svg> Keranjang</button>
+                                                                        <form id="keranjangForm"
+                                                                            action="{{ route('keranjang.tambah') }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            <input type="hidden" name="produk_id"
+                                                                                value="{{ $produk->id }}">
+                                                                            <input type="hidden" name="jumlah"
+                                                                                value="1">
+                                                                            <!-- Atur jumlah sesuai kebutuhan -->
+                                                                            <button id="keranjangButton" type="submit" class="btn btn-primary">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24" height="24"
+                                                                                    viewBox="0 0 24 24" fill="none"
+                                                                                    stroke="currentColor" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
+                                                                                    <path stroke="none" d="M0 0h24v24H0z"
+                                                                                        fill="none" />
+                                                                                    <path
+                                                                                        d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                                                    <path
+                                                                                        d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                                                    <path d="M17 17h-11v-14h-2" />
+                                                                                    <path d="M6 5l14 1l-1 7h-13" />
+                                                                                </svg>
+                                                                                Keranjang
+                                                                            </button>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -139,7 +151,8 @@
                                                                     width="24" height="24" viewBox="0 0 24 24"
                                                                     stroke-width="2" stroke="currentColor" fill="none"
                                                                     stroke-linecap="round" stroke-linejoin="round">
-                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                    <path stroke="none" d="M0 0h24v24H0z"
+                                                                        fill="none" />
                                                                     <path d="M15 6l-6 6l6 6" />
                                                                 </svg>
                                                                 prev
@@ -215,6 +228,42 @@
         <script src="./dist/js/tabler.min.js?1684106062" defer></script>
         <script src="./dist/js/demo.min.js?1684106062" defer></script>
     </body>
+    {{-- sweetalert --}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('keranjangButton').addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the form from submitting immediately
+                Swal.fire({
+                    title: 'Tambahkan ke keranjang?',
+                    text: "Apakah Anda yakin ingin menambahkan produk ini ke keranjang?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Iya',
+                    cancelButtonText: 'Tidak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('keranjangForm').submit();
+                    }
+                });
+            });
+
+            @if(session('status') == 'added')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Produk berhasil ditambahkan ke keranjang.'
+                });
+            @elseif(session('status') == 'updated')
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Produk sudah ada',
+                    text: 'Produk sudah ada di keranjang, jumlah telah ditambahkan.'
+                });
+            @endif
+        });
+    </script>
+
     <script>
         // Add sorting functionality
         document.addEventListener("DOMContentLoaded", function() {
@@ -265,6 +314,7 @@
             });
         </script>
     @endif
+
     {{-- gawe notif sukses --}}
     @if ($message = Session::get('success'))
         <script>

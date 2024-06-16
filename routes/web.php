@@ -24,6 +24,7 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
 
     // Rute resource untuk produk
     Route::resource('/panel/produk', ProdukController::class);
+    
     // Route::get('panel/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
     // Rute resource untuk kategori
     Route::resource('/panel/kategori', KategoriController::class);
@@ -55,9 +56,17 @@ Route::post('/filter-produk', [SupermarketController::class, 'filterProduk'])->n
 Route::post('/filter-produk', [ProdukController::class, 'filterProduk'])->name('filter.produk');
 
 
-Route::resource('/keranjang', KeranjangController::class);
-Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');
-Route::post('/keranjang/tambah', 'KeranjangController@tambahProduk')->name('keranjang.tambah');
+Route::resource('/keranjang', KeranjangController::class)->names('supermarket.keranjang');
+Route::post('/keranjang/tambah', [KeranjangController::class, 'tambahProduk'])->name('keranjang.tambah');
+
+Route::put('/keranjang/{keranjang}', [KeranjangController::class, 'update'])->name('keranjang.update');
+Route::delete('/keranjang/{keranjang}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
+Route::get('/keranjang/{keranjang}/edit', [KeranjangController::class, 'edit'])->name('keranjang.edit');
+
+
+
+// Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');
+
 
 
 // Rute untuk profil pengguna

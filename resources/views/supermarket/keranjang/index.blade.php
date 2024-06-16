@@ -32,7 +32,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Page body -->
             <div class="page-body">
                 <div class="container-xl">
@@ -64,19 +63,14 @@
                                     </table>
                                 </div>
                             </div>
-
                         </div>
-                        
                     </div>
-     
-
                 </div>
-
             </div>
         </div>
         {{-- gawe nyeluk modal create e om :d --}}
-        {{-- @include('panel.produk.create')
-        @include('panel.produk.edit') --}}
+        {{-- @include('panel.produk.create') --}}
+        @include('supermarket.keranjang.edit') 
         <script>
             jQuery(document).ready(function($) {
                 // Periksa apakah sedang dalam mode edit dan terdapat kesalahan validasi pada form edit

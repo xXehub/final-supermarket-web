@@ -29,9 +29,11 @@ class ProdukController extends Controller
     {
         $ingfo_sakkarepmu = "Data List Produk";
         $kategori = Kategori::all();
+
         $produk = Produk::first();
         $suppliers = Supplier::all();
         $totalProduk = Produk::count();
+
 
         return view('panel.produk.index', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
@@ -163,7 +165,7 @@ class ProdukController extends Controller
     {
         $ingfo_sakkarepmu = 'Edit Data Kategori';
         $kategoris = Kategori::find($id);
-        $produk = Produk::all($id);
+        $produk = Produk::findOrFail($id);
         return view('panel.produk.edit', compact('ingfo_sakkarepmu', 'kategoris', 'produk'));
     }
 
