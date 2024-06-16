@@ -5,8 +5,8 @@ $(function() {
         ajax: "/data/detail_pemesanan",
         columns: [
             { data: "id", name: "id", visible: false },
-            { data: "pemesanan_id", name: "pemesanan_id" },
-            { data: "produk_id", name: "produk_id" },
+            { data: "nama_pemesanan", name: "nama_pemesanan" }, // Mengubah data dan nama kolom
+            { data: "nama_produk", name: "nama_produk" }, // Mengubah data dan nama kolom
             { data: "jumlah", name: "jumlah" },
             { data: "subtotal", name: "subtotal" },
             { data: "actions", name: "actions", orderable: false, searchable: false },
@@ -39,4 +39,3 @@ $(function() {
         });
     });
 });
-

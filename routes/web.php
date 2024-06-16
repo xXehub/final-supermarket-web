@@ -65,6 +65,7 @@ Route::get('/keranjang/{keranjang}/edit', [KeranjangController::class, 'edit'])-
 
 // gawe pesanan user
 Route::get('/pesanan', [PesanController::class, 'index'])->name('pesanan.index');
+Route::post('/pesan', [PesanController::class, 'pesan'])->name('pesan');
 Route::post('/pesanan/tambah', [PesanController::class, 'pesanKeranjang'])->name('pesanan.tambah');
 
 // Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');

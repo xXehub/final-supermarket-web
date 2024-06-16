@@ -8,8 +8,10 @@ use App\Models\Pembayaran;
 use App\Models\Pemesanan;
 use App\Models\Produk;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PesanController extends Controller
 {
@@ -34,6 +36,76 @@ class PesanController extends Controller
             'jumlahProdukKeranjang' => $jumlahProdukKeranjang,
             'totalBayar' => $produks,
         ]);
+    }
+
+    // gawe pesan
+    public function pesan(Request $request)
+{
+    // Mulai transaksi database
+    DB::beginTransaction();
+
+    try {
+        // Ambil data yang diperlukan dari request
+        $kode_pesanan = $this->generateRandomCodePemesanan();
+        $user_id = Auth::id();
+    
+        // Simpan data ke dalam database pemesanan
+        $pemesanan = new Pemesanan();
+        $pemesanan->kode_pesanan = $kode_pesanan;
+        $pemesanan->user_id = $user_id;
+        $pemesanan->status = 'pending';
+        $pemesanan->tanggal = now();
+        $pemesanan->save();
+
+        // Ambil semua item dalam keranjang pengguna
+        $itemsKeranjang = Keranjang::where('user_id', $user_id)->get();
+
+        // Iterasi setiap item dalam keranjang belanja
+        foreach ($itemsKeranjang as $item) {
+            $produk = Produk::find($item->produk_id);
+            if ($produk) {
+                // Hitung subtotal untuk item dalam keranjang
+                $subtotal = $item->jumlah * $produk->harga;
+
+                // Simpan data ke dalam database detail_pemesanan
+                $detailPemesanan = new DetailPemesanan();
+                $detailPemesanan->pemesanan_id = $pemesanan->id;
+                $detailPemesanan->produk_id = $item->produk_id;
+                $detailPemesanan->jumlah = $item->jumlah;
+                $detailPemesanan->subtotal = $subtotal;
+                $detailPemesanan->save();
+            }
+        }
+
+        // Hapus semua item dalam keranjang setelah ditambahkan ke detail pesanan
+        Keranjang::where('user_id', $user_id)->delete();
+    
+        // Commit transaksi jika berhasil
+        DB::commit();
+    
+        // Berikan respons ke frontend
+        return redirect()->back()->with('success', 'Pesanan berhasil ditambahkan!');
+    } catch (\Exception $e) {
+        // Rollback transaksi jika terjadi kesalahan
+        DB::rollBack();
+        return redirect()->back()->with('error', 'Terjadi kesalahan. Pesanan gagal ditambahkan.');
+    }
+}
+
+    // Generate random code for the pesanan
+    private function generateRandomCodePemesanan()
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $result = '';
+        for ($i = 0; $i < 3; $i++) {
+            for ($j = 0; $j < 3; $j++) {
+                $result .= $characters[rand(0, strlen($characters) - 1)];
+            }
+            if ($i < 2) {
+                $result .= '-'; // Add hyphen after each group of characters except the last one
+            }
+        }
+        return $result;
     }
 
     public function pesanKeranjang(Request $request)

@@ -56,6 +56,7 @@ class KeranjangController extends Controller
         $request->validate([
             'jumlah' => 'required|integer|min:1',
         ]);
+        
         $keranjang = Keranjang::findOrFail($id);
         $keranjang->jumlah = $request->jumlah;
         $keranjang->save();

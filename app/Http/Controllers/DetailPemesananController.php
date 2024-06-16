@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPemesanan;
 use App\Models\Pemesanan;
 use App\Models\Produk;
 use Illuminate\Http\Request;
-use App\Models\DetailPemesanan;
 
 class DetailPemesananController extends Controller
 {
@@ -98,7 +98,14 @@ class DetailPemesananController extends Controller
     // gawe get Data
     public function getData(Request $request)
     {
-        $detailPemesanans = DetailPemesanan::with('pemesanan', 'produk');
+        // Mengambil ID pengguna yang sedang login
+        $userId = Auth::id();
+
+        // Mengambil detail pemesanans yang terkait dengan pengguna saat ini
+        $detailPemesanans = DetailPemesanan::with('pemesanan', 'produk')
+            ->whereHas('pemesanan', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            });
 
         if ($request->ajax()) {
             return datatables()->of($detailPemesanans)
@@ -115,7 +122,6 @@ class DetailPemesananController extends Controller
                 ->addColumn('subtotal', function ($detailPemesanan) {
                     return $detailPemesanan->subtotal;
                 })
-                
                 ->addColumn('total_harga', function ($detailPemesanan) {
                     return $detailPemesanan->jumlah * $detailPemesanan->produk->harga;
                 })
@@ -125,5 +131,4 @@ class DetailPemesananController extends Controller
                 ->toJson();
         }
     }
-
 }

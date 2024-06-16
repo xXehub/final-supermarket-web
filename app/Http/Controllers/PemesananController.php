@@ -81,7 +81,7 @@ class PemesananController extends Controller
     public function show($id)
     {
         $pemesanan = Pemesanan::find($id);
-
+        $totalBarangDipesan = DetailPemesanan::where('pemesanan_id', $pemesanan->id)->sum('jumlah');
         if (!$pemesanan) {
             return abort(404);
         }
@@ -97,6 +97,7 @@ class PemesananController extends Controller
             'pemesanan' => $pemesanan,
             'users' => $user,
             'detail_pemesanan' => $detail_pemesanan,
+            'totalBarangDipesan' => $totalBarangDipesan,
             'produks' => $produk
         ]);
     }

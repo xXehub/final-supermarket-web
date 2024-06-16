@@ -46,8 +46,16 @@
                                         <div class="datagrid-content">{{ $pemesanan->kode_pesanan }}</div>
                                     </div>
                                     <div class="datagrid-item">
-                                        <div class="datagrid-title">Nama pemesanan</div>
-                                        <div class="datagrid-content">{{ $detail_pemesanan->pemesanan_id }}</div>
+                                        <div class="datagrid-title">Produk dipesan</div>
+                                        @foreach ($pemesanan->detailPemesanan as $detail_pemesanan)
+                                            {{-- <div class="datagrid-content">{{ $detail_pemesanan->produk->kode_produk }}
+                                                {{ $detail_pemesanan->jumlah }}
+                                            </div> --}}
+                                            <div class="input-group" style="display: inline-flex;">
+                                                <input type="text" class="form-control" value="{{ $detail_pemesanan->produk->kode_produk }}" readonly>
+                                                <a type="submit" class="btn"  style="width: 50px;">x {{ $detail_pemesanan->jumlah }}</a>
+                                            </div>
+                                        @endforeach
                                     </div>
                                     <div class="datagrid-item">
                                         <div class="datagrid-title">Tanggal pemesanan</div>
@@ -58,7 +66,7 @@
                                         <div class="datagrid-title">Status</div>
                                         <div class="datagrid-content">
                                             <span id="statusSpan">
-                                                {{ $pemesanan->status }} {{-- Tampilkan status dari variabel $pemesanan --}}
+                                                {{ $pemesanan->status }}
                                             </span>
                                         </div>
                                     </div>
@@ -72,25 +80,32 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    {{-- Iterasi untuk menampilkan detail produk --}}
+
                                     <div class="datagrid-item">
-                                        <div class="datagrid-title">Jumlah pemesanan</div>
-                                        <div class="datagrid-content">{{ $detail_pemesanan->jumlah }}</div>
+                                        <div class="datagrid-title">Total Produk</div>
+                                        <div class="datagrid-content">{{ $totalBarangDipesan }}</div>
                                     </div>
                                     <div class="datagrid-item">
                                         <div class="datagrid-title">Subtotal</div>
                                         <div class="datagrid-content">
-                                            {{ 'Rp ' . number_format($detail_pemesanan->subtotal, 0, ',', '.') }}</div>
+                                            {{ 'Rp ' . number_format($detail_pemesanan->subtotal, 0, ',', '.') }}
+                                        </div>
                                     </div>
 
-                                    {{-- total belom ke fix --}}
+
+                                    {{-- Menampilkan total dari seluruh detail pemesanan --}}
                                     <div class="datagrid-item">
-                                        <div class="datagrid-title">total</div>
+                                        <div class="datagrid-title">Total</div>
                                         <div class="datagrid-content">
-                                            {{ 'Rp ' . number_format($detail_pemesanan->subtotal, 0, ',', '.') }}</div>
+                                            {{ 'Rp ' . number_format($pemesanan->detailPemesanan->sum('subtotal'), 0, ',', '.') }}
+                                        </div>
                                     </div>
 
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
