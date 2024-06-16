@@ -107,7 +107,8 @@
                                                                             <input type="hidden" name="jumlah"
                                                                                 value="1">
                                                                             <!-- Atur jumlah sesuai kebutuhan -->
-                                                                            <button id="keranjangButton" type="submit" class="btn btn-primary">
+                                                                            <button id="keranjangButton" type="submit"
+                                                                                class="btn btn-primary">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                                     width="24" height="24"
                                                                                     viewBox="0 0 24 24" fill="none"
@@ -231,8 +232,8 @@
     {{-- sweetalert --}}
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('keranjangButton').addEventListener('click', function (event) {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('keranjangButton').addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent the form from submitting immediately
                 Swal.fire({
                     title: 'Tambahkan ke keranjang?',
@@ -248,13 +249,13 @@
                 });
             });
 
-            @if(session('status') == 'added')
+            @if (session('status') == 'added')
                 Swal.fire({
                     icon: 'success',
                     title: 'Berhasil',
                     text: 'Produk berhasil ditambahkan ke keranjang.'
                 });
-            @elseif(session('status') == 'updated')
+            @elseif (session('status') == 'updated')
                 Swal.fire({
                     icon: 'info',
                     title: 'Produk sudah ada',
@@ -332,6 +333,17 @@
             Toast.fire({
                 icon: "success",
                 title: '{{ $message }}'
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <!-- Tampilkan SweetAlert untuk pesan error -->
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal...',
+                text: '{{ session('error') }}',
             });
         </script>
     @endif
