@@ -6,6 +6,7 @@ use App\Exports\ProdukExport;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Kategori;
+use App\Models\Keranjang;
 use App\Models\Supplier;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
@@ -279,7 +280,7 @@ class ProdukController extends Controller
     public function filterProduk(Request $request)
     {
         $kategoriIds = $request->input('kategori');
-        
+        $jumlahProdukKeranjang = Keranjang::where('user_id', auth()->id())->count();
         if ($kategoriIds) {
             $produks = Produk::whereIn('kategori_id', $kategoriIds)->paginate(5);
         } else {
@@ -288,6 +289,6 @@ class ProdukController extends Controller
         
         $kategoris = Kategori::all();
 
-        return view('supermarket.index', compact('produks', 'kategoris'));
+        return view('supermarket.index', compact('produks', 'kategoris','jumlahProdukKeranjang'));
     }
 }

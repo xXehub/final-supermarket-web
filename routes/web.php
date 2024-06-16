@@ -3,6 +3,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\API\KategoriController;
 use App\Http\Controllers\API\ProdukController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\DetailPemesananController;
@@ -35,8 +36,6 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
     // Rute resource untuk supplier mas
     Route::resource('/panel/pembayaran', PembayaranController::class);
 
-
-
     Route::get('produk/exportExcel', [ProdukController::class, 'exportExcel'])->name('produk.exportExcel');
     Route::get('kategori/exportExcel', [KategoriController::class, 'exportExcel'])->name('kategori.exportExcel');
     Route::get('supplier/exportExcel', [SupplierController::class, 'exportExcel'])->name('supplier.exportExcel');
@@ -64,6 +63,9 @@ Route::delete('/keranjang/{keranjang}', [KeranjangController::class, 'destroy'])
 Route::get('/keranjang/{keranjang}/edit', [KeranjangController::class, 'edit'])->name('keranjang.edit');
 
 
+// gawe pesanan user
+Route::get('/pesanan', [PesanController::class, 'index'])->name('pesanan.index');
+Route::post('/pesanan/tambah', [PesanController::class, 'pesanKeranjang'])->name('pesanan.tambah');
 
 // Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');
 
@@ -89,3 +91,4 @@ Route::get('data/detail-pemesanan', [DetailPemesananController::class, 'getData'
 Route::get('data/wishlist', [WhishlistController::class, 'getData'])->name('wishlist.data');
 Route::get('data/pembayaran', [PembayaranController::class, 'getData'])->name('pembayaran.data');
 Route::get('data/keranjang', [KeranjangController::class, 'getData'])->name('keranjang.data');
+Route::get('data/pesanan', [PesanController::class, 'getData'])->name('pesanan.data');

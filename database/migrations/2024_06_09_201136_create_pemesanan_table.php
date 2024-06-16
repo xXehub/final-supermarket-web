@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('tanggal');
             $table->enum('status', ['pending', 'dikemas', 'dikirim', 'diterima'])->default('pending');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

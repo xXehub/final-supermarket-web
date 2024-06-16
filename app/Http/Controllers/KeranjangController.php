@@ -13,7 +13,7 @@ class KeranjangController extends Controller
     // Menampilkan semua entri dalam tabel keranjang
     public function index()
     {
-        $userId = Auth::id(); // Dapatkan ID pengguna yang sedang masuk
+        $userId = Auth::id();
         $keranjang = Keranjang::where('user_id', $userId)->get();
         $jumlahProdukKeranjang = $keranjang->count();
         // Hitung total bayar

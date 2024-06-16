@@ -15,5 +15,12 @@ class PemesananSeeder extends Seeder
             'tanggal' => now(),
             'status' => 'pending',
         ]);
+
+        Pemesanan::create([
+            'kode_pesanan' => 'SSI-09A-BBC',
+            'user_id' => 2, 
+            'tanggal' => now(),
+            'status' => 'pending',
+        ]);
     }
 }

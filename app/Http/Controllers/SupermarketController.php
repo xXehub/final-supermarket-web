@@ -1,13 +1,12 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use App\Models\Keranjang;
 use App\Models\Produk;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SupermarketController extends Controller
 {
@@ -37,7 +36,7 @@ class SupermarketController extends Controller
     public function filterProduk(Request $request)
     {
         $kategoriIds = $request->input('kategori_id');
-
+        $jumlahProdukKeranjang = Keranjang::where('user_id', auth()->id())->count();
         if ($kategoriIds) {
             $produk = Produk::whereIn('kategori_id', $kategoriIds)->paginate(10); // Paginate the filtered products
         } else {
@@ -50,6 +49,7 @@ class SupermarketController extends Controller
             'ingfo_sakkarepmu' => 'Hasil Filter',
             'produks' => $produk,
             'kategoris' => $kategoris,
+            'jumlahProdukKeranjang' => $jumlahProdukKeranjang,
         ]);
     }
 }

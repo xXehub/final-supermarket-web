@@ -15,9 +15,11 @@ class KategoriController extends Controller
     { {
             $ingfo_sakkarepmu = "List Kategori";
             $kategori = Kategori::first();
+            $jumlahProdukKeranjang = Keranjang::where('user_id', auth()->id())->count();
             return view('panel.kategori.index', [
                 'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
-                'kategori' => $kategori
+                'kategori' => $kategori,
+                'jumlahProdukKeranjang' => $jumlahProdukKeranjang
             ]);
         }
     }

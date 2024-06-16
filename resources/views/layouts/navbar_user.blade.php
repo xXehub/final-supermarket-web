@@ -50,12 +50,38 @@
             <div class="navbar-nav flex-row order-md-last">
                 <div class="d-none d-md-flex">
                     {{-- gawe notif --}}
-                    <div class="nav-item dropdown d-none d-md-flex me-3">
+                    <div class="nav-item dropdown d-none d-md-flex me-1">
+                        {{-- default e <div class="nav-item dropdown d-none d-md-flex me-3">--}}
                         <a href="{{ route('supermarket.keranjang.index') }}" class="nav-link px-0" tabindex="-1"
                             aria-label="Show notifications">
                             <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
-                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 17h-11v-14h-2" />
+                                <path d="M6 5l14 1l-1 7h-13" />
+                            </svg>
                             <span class="badge bg-red ">{{ $jumlahProdukKeranjang }}</span>
+                        </a>
+                    </div>
+                    <div class="nav-item dropdown d-none d-md-flex me-3">
+                        <a href="{{ route('pesanan.index') }}" class="nav-link px-0" tabindex="-1"
+                            aria-label="Show notifications">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-backpack">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M5 18v-6a6 6 0 0 1 6 -6h2a6 6 0 0 1 6 6v6a3 3 0 0 1 -3 3h-8a3 3 0 0 1 -3 -3z" />
+                                <path d="M10 6v-1a2 2 0 1 1 4 0v1" />
+                                <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
+                                <path d="M11 10h2" />
+                            </svg>
+                            <span class="badge bg-red badge-sm">2</span>
                         </a>
                         {{-- <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
                             <div class="card">

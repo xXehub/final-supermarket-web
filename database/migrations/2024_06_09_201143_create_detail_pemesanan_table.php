@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pemesanan_id');
             $table->unsignedBigInteger('produk_id');
             $table->integer('jumlah');
-            $table->decimal('subtotal', 10, 2);
+            $table->integer('subtotal');
             $table->foreign('pemesanan_id')->references('id')->on('pemesanan')->onDelete('cascade');
             $table->foreign('produk_id')->references('id')->on('produk')->onDelete('cascade');
             $table->timestamps();
