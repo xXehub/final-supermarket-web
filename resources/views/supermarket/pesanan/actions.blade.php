@@ -13,13 +13,15 @@
                 <a class="dropdown-item" href="{{ route('pesanan.show', ['id' => $pesanan->id]) }}">
                     Detail
                 </a>
-                <a class="dropdown-item" href="{{ route('pesanan.payment') }}" data-bs-toggle="modal" data-bs-target="#modal-methodBayar">
-                    Bayar
-                </a>
+            </form>
+            <a class="dropdown-item" href="{{ route('pesanan.bayar', ['id' => $pesanan->id]) }}">
+                Bayar
+            </a>
+            
             </div>
         </div>
     </div>
-</form>
+
 {{-- SweetAlert Library --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

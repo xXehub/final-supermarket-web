@@ -71,8 +71,10 @@ Route::post('/pesanan/tambah', [PesanController::class, 'pesanBayar'])->name('pe
 Route::get('/pesanan/{id}/edit', 'PesananController@edit')->name('pesanan.edit');
 Route::put('/pesanan/{id}', [PesanController::class, 'update'])->name('pesanan.update');
 Route::delete('/pesanan/{id}', [PesanController::class, 'destroy'])->name('pesanan.destroy');
-Route::get('/pesanan/payment', [PesananController::class, 'payment'])->name('pesanan.payment');
+Route::post('/pesanan/payment', [PesanController::class, 'bayar'])->name('pesanan.payment');
 
+
+Route::get('/pesanan/payment/{id}', [PesanController::class, 'bayar'])->name('pesanan.payment');
 
 // Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');
 

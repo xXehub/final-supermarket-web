@@ -125,30 +125,30 @@ class PesanController extends Controller
         }
     }
 
-    public function pesanBayar(Request $request)
-    {
-        // Proses pesanan dari keranjang
-        // Ambil data keranjang pengguna
-        $keranjang = Keranjang::where('user_id', auth()->user()->id)->get();
-        // njupuk fungsi random data sing nde ngisor
-        $kode_pesanan = $this->generateRandomCodePemesanan();
-        $user_id = Auth::id();
-        // Buat entri baru dalam tabel pemesanan
-        $pemesanan = Pemesanan::create([
-            'user_id' => auth()->user()->id,
-            'tanggal' => now(),
-            'status' => 'pending',
-        ]);
+    // public function pesanBayar(Request $request)
+    // {
+    //     // Proses pesanan dari keranjang
+    //     // Ambil data keranjang pengguna
+    //     $keranjang = Keranjang::where('user_id', auth()->user()->id)->get();
+    //     // njupuk fungsi random data sing nde ngisor
+    //     $kode_pesanan = $this->generateRandomCodePemesanan();
+    //     $user_id = Auth::id();
+    //     // Buat entri baru dalam tabel pemesanan
+    //     $pemesanan = Pemesanan::create([
+    //         'user_id' => auth()->user()->id,
+    //         'tanggal' => now(),
+    //         'status' => 'pending',
+    //     ]);
 
-        // Buat entri baru dalam tabel pembayaran
-        $pembayaran = Pembayaran::create([
-            'pemesanan_id' => $pemesanan->id, // Gunakan ID pemesanan yang baru dibuat
-            'total' => 0, // Atur total pembayaran sesuai kebutuhan
-            'status' => 'pending', // Atur status pembayaran sesuai kebutuhan
-        ]);
+    //     // Buat entri baru dalam tabel pembayaran
+    //     $pembayaran = Pembayaran::create([
+    //         'pemesanan_id' => $pemesanan->id, // Gunakan ID pemesanan yang baru dibuat
+    //         'total' => 0, // Atur total pembayaran sesuai kebutuhan
+    //         'status' => 'pending', // Atur status pembayaran sesuai kebutuhan
+    //     ]);
 
-        return redirect()->route('supermarket.pesanan')->with('success', 'Pesanan berhasil diproses.');
-    }
+    //     return redirect()->route('supermarket.pesanan')->with('success', 'Pesanan berhasil diproses.');
+    // }
 
     // Generate random code for the pesanan
     private function generateRandomCodePemesanan()
@@ -237,5 +237,19 @@ class PesanController extends Controller
     {
         return view('pesanan.payment');
     }
+
+    public function bayar($id)
+    {
+        // Temukan pembayaran berdasarkan ID
+        $pembayaran = Pembayaran::findOrFail($id);
+        
+        // Perbarui status pembayaran menjadi "dibayar"
+        $pembayaran->status = 'dibayar';
+        $pembayaran->save();
+        
+        // Redirect kembali ke halaman pembayaran dengan pesan sukses
+        return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil dilakukan.');
+    }
+    
 
 }

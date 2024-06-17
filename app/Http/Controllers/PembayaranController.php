@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MetodePembayaran;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
@@ -98,6 +97,25 @@ class PembayaranController extends Controller
                 })
                 ->toJson();
         }
+    }
+
+    public function bayar()
+    {
+        // Mendapatkan pembayaran yang sesuai untuk pengguna yang sedang login
+        $pembayaran = Pembayaran::whereHas('pemesanan', function ($query) {
+            $query->where('user_id', auth()->id());
+        })->where('status', 'pending')->first();
+
+        if ($pembayaran) {
+            // Update status pembayaran menjadi "dibayar"
+            $pembayaran->update([
+                'status' => 'dibayar',
+            ]);
+
+            return redirect()->route('home')->with('success', 'Pembayaran berhasil dilakukan.');
+        }
+
+        return redirect()->route('home')->with('error', 'Pembayaran tidak dapat diproses.');
     }
 
 }
