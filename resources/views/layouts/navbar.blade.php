@@ -23,7 +23,7 @@
                 </a>
                 Gudang Rempah
             </h1>
-            <div class="navbar-nav flex-row order-md-last">
+            <div class="navbar-nav fleFx-row order-md-last">
                 <div class="nav-item d-none d-md-flex me-3">
                     <div class="btn-list">
                         {{-- <a href="https://github.com/xXehub/final-supermarket-web" class="btn" target="_blank"

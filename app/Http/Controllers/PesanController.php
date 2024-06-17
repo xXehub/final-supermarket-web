@@ -8,7 +8,6 @@ use App\Models\Pembayaran;
 use App\Models\Pemesanan;
 use App\Models\Produk;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,79 +17,107 @@ class PesanController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $ingfo_sakkarepmu = 'List Pemesanan';
+        $ingfo_sakkarepmu = 'List Pesanan Anda';
         $keranjang = Keranjang::where('user_id', $userId)->get();
-        $pemesanans = Pemesanan::first();
+        $pemesanans = Pemesanan::where('user_id', $userId)->get();
         $produks = Produk::select('id', 'kode_produk', 'nama_produk')->get();
         $users = User::all();
         $jumlahProdukKeranjang = $keranjang->count();
-        $totalBayar = $keranjang->sum(function ($keranjang) {
-            return $keranjang->jumlah * $keranjang->produk->harga;
-        });
+        $metode_pembayaran = Pembayaran::select('metode_pembayaran')->distinct()->get(); 
+        $jumlahPemesanan = $pemesanans->count();
+
+        // Ambil total bayar dari tabel Pembayaran berdasarkan pemesanan
+        $totalBayar = Pembayaran::whereIn('pemesanan_id', $pemesanans->pluck('id'))
+            ->where('status', '!=', 'dibatalkan')
+            ->sum('total');
+
         return view('supermarket.pesanan.index', [
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
-            'pemesanan' => $pemesanans,
+            'pemesanans' => $pemesanans,
             'keranjang' => $keranjang,
             'users' => $users,
             'produks' => $produks,
             'jumlahProdukKeranjang' => $jumlahProdukKeranjang,
-            'totalBayar' => $produks,
+            'jumlahPemesanan' => $jumlahPemesanan,
+            'metode_pembayaran' => $metode_pembayaran,
+            'totalBayar' => $totalBayar,
         ]);
+    }
+
+    public function show($id)
+    {
+        $pesanan = Pemesanan::findOrFail($id);
+        return view('supermarket.pesanan.show', compact('pesanan'));
     }
 
     // gawe pesan
     public function pesan(Request $request)
-{
-    // Mulai transaksi database
-    DB::beginTransaction();
+    {
+        DB::beginTransaction();
 
-    try {
-        // Ambil data yang diperlukan dari request
-        $kode_pesanan = $this->generateRandomCodePemesanan();
-        $user_id = Auth::id();
-    
-        // Simpan data ke dalam database pemesanan
-        $pemesanan = new Pemesanan();
-        $pemesanan->kode_pesanan = $kode_pesanan;
-        $pemesanan->user_id = $user_id;
-        $pemesanan->status = 'pending';
-        $pemesanan->tanggal = now();
-        $pemesanan->save();
+        try {
+            // njupuk fungsi random data sing nde ngisor
+            $kode_pesanan = $this->generateRandomCodePemesanan();
+            $user_id = Auth::id();
 
-        // Ambil semua item dalam keranjang pengguna
-        $itemsKeranjang = Keranjang::where('user_id', $user_id)->get();
+            // simpen ndek db
+            $pemesanan = new Pemesanan();
+            $pemesanan->kode_pesanan = $kode_pesanan;
+            $pemesanan->user_id = $user_id;
+            $pemesanan->status = 'pending';
+            $pemesanan->tanggal = now();
+            $pemesanan->save();
 
-        // Iterasi setiap item dalam keranjang belanja
-        foreach ($itemsKeranjang as $item) {
-            $produk = Produk::find($item->produk_id);
-            if ($produk) {
-                // Hitung subtotal untuk item dalam keranjang
-                $subtotal = $item->jumlah * $produk->harga;
+            // Ambil semua item dalam keranjang pengguna
+            $itemsKeranjang = Keranjang::where('user_id', $user_id)->get();
 
-                // Simpan data ke dalam database detail_pemesanan
-                $detailPemesanan = new DetailPemesanan();
-                $detailPemesanan->pemesanan_id = $pemesanan->id;
-                $detailPemesanan->produk_id = $item->produk_id;
-                $detailPemesanan->jumlah = $item->jumlah;
-                $detailPemesanan->subtotal = $subtotal;
-                $detailPemesanan->save();
+            // Simpan data pembayaran
+            $totalBayar = $itemsKeranjang->sum(function ($item) {
+                return $item->jumlah * $item->produk->harga;
+            });
+
+            Pembayaran::create([
+                'pemesanan_id' => $pemesanan->id,
+                'total' => $totalBayar,
+                'metode_pembayaran' => 'dana',
+                'status' => 'pending',
+            ]);
+
+            // Iterasi setiap item dalam keranjang belanja
+            foreach ($itemsKeranjang as $item) {
+                $produk = Produk::find($item->produk_id);
+                if ($produk) {
+                    // Hitung subtotal untuk item dalam keranjang
+                    $subtotal = $item->jumlah * $produk->harga;
+
+                    // Simpan data ke dalam database detail_pemesanan
+                    $detailPemesanan = new DetailPemesanan();
+                    $detailPemesanan->pemesanan_id = $pemesanan->id;
+                    $detailPemesanan->produk_id = $item->produk_id;
+                    $detailPemesanan->jumlah = $item->jumlah;
+                    $detailPemesanan->subtotal = $subtotal;
+                    $detailPemesanan->save();
+
+                    // Kurangi stok produk
+                    $produk->stock -= $item->jumlah;
+                    $produk->save();
+                }
             }
-        }
 
-        // Hapus semua item dalam keranjang setelah ditambahkan ke detail pesanan
-        Keranjang::where('user_id', $user_id)->delete();
-    
-        // Commit transaksi jika berhasil
-        DB::commit();
-    
-        // Berikan respons ke frontend
-        return redirect()->back()->with('success', 'Pesanan berhasil ditambahkan!');
-    } catch (\Exception $e) {
-        // Rollback transaksi jika terjadi kesalahan
-        DB::rollBack();
-        return redirect()->back()->with('error', 'Terjadi kesalahan. Pesanan gagal ditambahkan.');
+            // Hapus semua item dalam keranjang setelah ditambahkan ke detail pesanan
+            Keranjang::where('user_id', $user_id)->delete();
+
+            // Commit transaksi jika berhasil
+            DB::commit();
+
+            // Berikan respons ke frontend
+            return redirect()->back()->with('success', 'Pesanan berhasil ditambahkan!');
+        } catch (\Exception $e) {
+            // Rollback transaksi jika terjadi kesalahan
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan. Pesanan gagal ditambahkan.');
+        }
     }
-}
 
     // Generate random code for the pesanan
     private function generateRandomCodePemesanan()
@@ -139,10 +166,9 @@ class PesanController extends Controller
 
     public function getData(Request $request)
     {
-        $userId = Auth::id(); // Mendapatkan user_id yang sedang login
-
+        $userId = Auth::id(); // gawe njupuk user sing lagi login
         $pemesanans = Pemesanan::with('user')
-            ->where('user_id', $userId); // Menambahkan kondisi where
+            ->where('user_id', $userId);
 
         if ($request->ajax()) {
             return datatables()->of($pemesanans)
@@ -154,7 +180,7 @@ class PesanController extends Controller
                     return $pemesanan->user->gambar_profile;
                 })
                 ->addColumn('total_bayar', function ($pemesanan) {
-                    // kalkulasi total bayar
+                    // itungan totalan
                     $total_bayar = Pembayaran::where('pemesanan_id', $pemesanan->id)->sum('total');
                     return $total_bayar;
                 })
@@ -173,11 +199,35 @@ class PesanController extends Controller
                             return 'pending';
                     }
                 })
-                ->addColumn('actions', function ($pemesanan) {
-                    return view('supermarket.pesanan.actions', compact('pemesanan'));
+                ->addColumn('actions', function ($pesanan) {
+                    return view('supermarket.pesanan.actions', compact('pesanan'));
                 })
                 ->toJson();
         }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $pesanan = Pesanan::findOrFail($id);
+        $pesanan->name = $request->name;
+        $pesanan->save();
+        return redirect()->route('pesanan.index', ['id' => $pesanan->id])->with('success', 'Pesanan berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $pesanan = Pemesanan::findOrFail($id);
+        $pesanan->delete();
+
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan deleted successfully.');
+    }
+
+    public function payment()
+    {
+        return view('pesanan.payment');
     }
 
 }

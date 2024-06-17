@@ -7,7 +7,14 @@ $(function () {
             { data: "id", name: "id", visible: false }, // Primary Key column
             { data: "kode_pesanan", name: "kode_pesanan" },
             { data: "tanggal", name: "tanggal" },
-            { data: "total_bayar", name: "total_bayar" },
+            {
+                data: "total_bayar",
+                name: "total_bayar",
+                render: function (data, type, row) {
+                    var harga = data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                    return "Rp " + harga;
+                },
+            },
             {
                 data: "status",
                 name: "status",

@@ -81,7 +81,7 @@
                                 <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
                                 <path d="M11 10h2" />
                             </svg>
-                            <span class="badge bg-red badge-sm">2</span>
+                            <span class="badge bg-red badge-sm">{{ $jumlahPemesanan }}</span>
                         </a>
                         {{-- <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
                             <div class="card">
@@ -237,14 +237,14 @@
         <div class="navbar">
             <div class="container-xl">
                 <ul class="navbar-nav">
-                    <li class="nav-item {{ Route::is('supermarket.index') ? 'active' : '' }}">
+                    <li class="nav-item {{ Route::is('supermarket.index', 'supermarket.keranjang.index', 'supermarket.pesanan.index') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('supermarket.index') }}">
                             <span
                                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                                <i class="fa-solid fa-database"></i>
+                                <i class="fa-solid fa-home"></i>
                             </span>
                             <span class="nav-link-title">
-                                Home
+                                Beranda
                             </span>
                         </a>
                     </li>

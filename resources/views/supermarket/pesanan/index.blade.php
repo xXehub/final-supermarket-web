@@ -9,7 +9,7 @@
                     <div class="row g-2 align-items-center">
                         <div class="col">
                             <h2 class="page-title">
-                                Keranjang Anda
+                                {{ $ingfo_sakkarepmu }}
                             </h2>
                         </div>
                         <!-- Page title actions -->
@@ -17,8 +17,7 @@
                             <div class="col-auto ms-auto d-print-none">
                                 <div class="btn-list">
                                     <div class="input-group" style="display:inline-flex; width:auto;">
-                                        <input type="text" class="form-control"
-                                            value="Rp. {{$totalBayar}}" readonly>
+                                        <input type="text" class="form-control" value="Rp. {{ $totalBayar }}" readonly>
                                         <button type="button" class="btn">Bayar</button>
                                         <button data-bs-toggle="dropdown" type="button"
                                             class="btn dropdown-toggle dropdown-toggle-split"></button>
@@ -44,9 +43,9 @@
                                             <br />
                                             <tr>
                                                 <th style="width: 10%;">ID</th>
-                                                <th style="width: 45%;">Kode Pesanan</th>
-                                                <th style="width: 45%;">Tanggal Pesanan</th>
-                                                <th style="width: 15%;">Total bayar</th>
+                                                <th style="width: 20%;">Kode Pesanan</th>
+                                                <th style="width: 15%;">Tanggal Pesanan</th>
+                                                <th style="width: 35%;">Total bayar</th>
                                                 <th style="width: 15%;">Status Pengiriman</th>
                                                 <th style="width: 15%;">Status Pembayaran</th>
                                                 <th style="width: 15%;">Actions</th>
@@ -65,8 +64,8 @@
             </div>
         </div>
         {{-- gawe nyeluk modal create e om :d --}}
-        {{-- @include('panel.produk.create') --}}
-        @include('supermarket.keranjang.edit') 
+        @include('supermarket.pesanan.payment')
+        @include('supermarket.keranjang.edit')
         <script>
             jQuery(document).ready(function($) {
                 // Periksa apakah sedang dalam mode edit dan terdapat kesalahan validasi pada form edit

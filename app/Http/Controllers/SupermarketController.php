@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use App\Models\Keranjang;
+use App\Models\Pemesanan;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,10 @@ class SupermarketController extends Controller
         $produks = Produk::paginate(10); // Paginate the products, 10 per page
         $userId = Auth::id(); // Dapatkan ID pengguna yang sedang masuk
         $keranjang = Keranjang::where('user_id', $userId)->get();
+        $pemesanan = Pemesanan::where('user_id', $userId)->get();
         $jumlahProdukKeranjang = $keranjang->count();
+        $jumlahPemesanan = $pemesanan->count();
+
         $kategoris = Kategori::all()->filter(function ($kategori) {
             return !is_null($kategori);
         });
@@ -30,6 +34,7 @@ class SupermarketController extends Controller
             'produks' => $produks,
             'kategoris' => $kategoris,
             'jumlahProdukKeranjang' => $jumlahProdukKeranjang,
+            'jumlahPemesanan' => $jumlahPemesanan,
         ]);
     }
 

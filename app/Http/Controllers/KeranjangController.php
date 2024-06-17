@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Keranjang;
+use App\Models\Pemesanan;
 use App\Models\Produk;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,11 +17,13 @@ class KeranjangController extends Controller
         $userId = Auth::id();
         $keranjang = Keranjang::where('user_id', $userId)->get();
         $jumlahProdukKeranjang = $keranjang->count();
+        $pemesanan = Pemesanan::where('user_id', $userId)->get();
+        $jumlahPemesanan = $pemesanan->count();
         // Hitung total bayar
         $totalBayar = $keranjang->sum(function ($keranjang) {
             return $keranjang->jumlah * $keranjang->produk->harga;
         });
-        return view('supermarket.keranjang.index', compact('keranjang', 'totalBayar', 'jumlahProdukKeranjang'));
+        return view('supermarket.keranjang.index', compact('keranjang', 'totalBayar', 'jumlahProdukKeranjang', 'jumlahPemesanan'));
     }
 
     public function create()
