@@ -1,4 +1,4 @@
-<form action="{{ route('pesanan.tambah') }}" method="POST" enctype="multipart/form-data" id="formTambahData">
+<form action="{{ route('pesan') }}" method="POST" enctype="multipart/form-data" id="formTambahData">
     @csrf
     <div class="modal modal-blur fade" id="modal-methodBayar" tabindex="-1" role="dialog" aria-hidden="true"
         data-bs-backdrop="static">

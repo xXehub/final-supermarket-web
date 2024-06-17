@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\MetodePembayaran;
 use App\Models\Pembayaran;
+use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
 {
@@ -64,8 +65,8 @@ class PembayaranController extends Controller
 
     public function getData(Request $request)
     {
-        $pembayarans = Pembayaran::with('pemesanan.user');
-    
+        $pembayarans = Pembayaran::with(['pemesanan.user', 'metode_pembayaran']);
+
         if ($request->ajax()) {
             return datatables()->of($pembayarans)
                 ->addIndexColumn()
@@ -75,10 +76,12 @@ class PembayaranController extends Controller
                 ->addColumn('nama_user', function ($pembayaran) {
                     return $pembayaran->pemesanan && $pembayaran->pemesanan->user ? $pembayaran->pemesanan->user->name : '';
                 })
-                
+
                 ->addColumn('metode_pembayaran', function ($pembayaran) {
-                    return $pembayaran->metode_pembayaran;
+                    // Mengambil nama berdasarkan ID pada metode_pembayaran
+                    return $pembayaran->metode_pembayaran ? $pembayaran->metode_pembayaran->nama : 'Metode Pembayaran Tidak Diketahui';
                 })
+
                 ->addColumn('kode_pesanan', function ($pembayaran) {
                     // Gunakan optional helper untuk memeriksa apakah pemesanan tidak null
                     return optional($pembayaran->pemesanan)->kode_pesanan;
@@ -96,6 +99,5 @@ class PembayaranController extends Controller
                 ->toJson();
         }
     }
-    
-    
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailPemesanan;
 use App\Models\Keranjang;
+use App\Models\MetodePembayaran;
 use App\Models\Pembayaran;
 use App\Models\Pemesanan;
 use App\Models\Produk;
@@ -23,7 +24,7 @@ class PesanController extends Controller
         $produks = Produk::select('id', 'kode_produk', 'nama_produk')->get();
         $users = User::all();
         $jumlahProdukKeranjang = $keranjang->count();
-        $metode_pembayaran = Pembayaran::select('metode_pembayaran')->distinct()->get(); 
+        $metode_pembayaran = MetodePembayaran::select('id', 'nama')->get();
         $jumlahPemesanan = $pemesanans->count();
 
         // Ambil total bayar dari tabel Pembayaran berdasarkan pemesanan
@@ -56,6 +57,10 @@ class PesanController extends Controller
         DB::beginTransaction();
 
         try {
+            $request->validate([
+                'metode_pembayaran' => 'required', // pastikan metode pembayaran terpilih
+            ]);
+
             // njupuk fungsi random data sing nde ngisor
             $kode_pesanan = $this->generateRandomCodePemesanan();
             $user_id = Auth::id();
@@ -71,6 +76,7 @@ class PesanController extends Controller
             // Ambil semua item dalam keranjang pengguna
             $itemsKeranjang = Keranjang::where('user_id', $user_id)->get();
 
+            $metode_pembayaran_id = $request->input('metode_pembayaran');
             // Simpan data pembayaran
             $totalBayar = $itemsKeranjang->sum(function ($item) {
                 return $item->jumlah * $item->produk->harga;
@@ -79,7 +85,7 @@ class PesanController extends Controller
             Pembayaran::create([
                 'pemesanan_id' => $pemesanan->id,
                 'total' => $totalBayar,
-                'metode_pembayaran' => 'dana',
+                'metode_pembayaran_id' => $metode_pembayaran_id,
                 'status' => 'pending',
             ]);
 
@@ -119,6 +125,31 @@ class PesanController extends Controller
         }
     }
 
+    public function pesanBayar(Request $request)
+    {
+        // Proses pesanan dari keranjang
+        // Ambil data keranjang pengguna
+        $keranjang = Keranjang::where('user_id', auth()->user()->id)->get();
+        // njupuk fungsi random data sing nde ngisor
+        $kode_pesanan = $this->generateRandomCodePemesanan();
+        $user_id = Auth::id();
+        // Buat entri baru dalam tabel pemesanan
+        $pemesanan = Pemesanan::create([
+            'user_id' => auth()->user()->id,
+            'tanggal' => now(),
+            'status' => 'pending',
+        ]);
+
+        // Buat entri baru dalam tabel pembayaran
+        $pembayaran = Pembayaran::create([
+            'pemesanan_id' => $pemesanan->id, // Gunakan ID pemesanan yang baru dibuat
+            'total' => 0, // Atur total pembayaran sesuai kebutuhan
+            'status' => 'pending', // Atur status pembayaran sesuai kebutuhan
+        ]);
+
+        return redirect()->route('supermarket.pesanan')->with('success', 'Pesanan berhasil diproses.');
+    }
+
     // Generate random code for the pesanan
     private function generateRandomCodePemesanan()
     {
@@ -135,40 +166,12 @@ class PesanController extends Controller
         return $result;
     }
 
-    public function pesanKeranjang(Request $request)
-    {
-        // Proses pesanan dari keranjang
-        // Ambil data keranjang pengguna
-        $keranjang = Keranjang::where('user_id', auth()->user()->id)->get();
-
-        // Buat entri baru dalam tabel pemesanan
-        $pemesanan = Pemesanan::create([
-            'user_id' => auth()->user()->id,
-            'tanggal' => now(),
-            'status' => 'pending',
-        ]);
-
-        // Loop melalui setiap item keranjang dan buat entri detail pemesanan
-        foreach ($keranjang as $item) {
-            DetailPemesanan::create([
-                'pemesanan_id' => $pemesanan->id,
-                'produk_id' => $item->produk_id,
-                'jumlah' => $item->jumlah,
-                'subtotal' => $item->produk->harga * $item->jumlah,
-            ]);
-
-            // Hapus item keranjang setelah dipesan
-            $item->delete();
-        }
-
-        return redirect()->route('supermarket.pesanan')->with('success', 'Pesanan berhasil diproses.');
-    }
-
     public function getData(Request $request)
     {
         $userId = Auth::id(); // gawe njupuk user sing lagi login
-        $pemesanans = Pemesanan::with('user')
-            ->where('user_id', $userId);
+        $pemesanans = Pemesanan::with(['user', 'metode_pembayaran'])
+            ->where('user_id', $userId)
+            ->get();
 
         if ($request->ajax()) {
             return datatables()->of($pemesanans)
@@ -179,6 +182,11 @@ class PesanController extends Controller
                 ->addColumn('gambar_profile', function ($pemesanan) {
                     return $pemesanan->user->gambar_profile;
                 })
+                ->addColumn('metode_pembayaran', function ($pemesanan) {
+                    // Mengambil nama berdasarkan ID pada metode_pembayaran
+                    return $pemesanan->metode_pembayaran ? $pemesanan->metode_pembayaran->nama : 'Metode Pembayaran Tidak Diketahui';
+                })
+
                 ->addColumn('total_bayar', function ($pemesanan) {
                     // itungan totalan
                     $total_bayar = Pembayaran::where('pemesanan_id', $pemesanan->id)->sum('total');

@@ -12,14 +12,14 @@ class PembayaranSeeder extends Seeder
         Pembayaran::create([
             'pemesanan_id' => 1, // Ganti dengan id pemesanan yang sesuai
             'total' => 20000,
-            'metode_pembayaran' => 'dana', // Sesuaikan dengan salah satu dari enum yang ada
+            'metode_pembayaran_id' => 1, // Ganti dengan id metode_pembayaran yang sesuai
             'status' => 'pending', // Default status
         ]);
 
         Pembayaran::create([
             'pemesanan_id' => 2, // Ganti dengan id pemesanan yang sesuai
             'total' => 15000,
-            'metode_pembayaran' => 'ovo', // Sesuaikan dengan salah satu dari enum yang ada
+            'metode_pembayaran_id' => 2, // Ganti dengan id metode_pembayaran yang sesuai
             'status' => 'dibayar', // Status yang telah dibayar
         ]);
 

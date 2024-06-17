@@ -67,7 +67,7 @@ Route::get('/keranjang/{keranjang}/edit', [KeranjangController::class, 'edit'])-
 Route::get('/pesanan', [PesanController::class, 'index'])->name('pesanan.index');
 Route::get('/pesanan/{id}', [PesanController::class, 'index'])->name('pesanan.show');
 Route::post('/pesan', [PesanController::class, 'pesan'])->name('pesan');
-Route::post('/pesanan/tambah', [PesanController::class, 'pesanKeranjang'])->name('pesanan.tambah');
+Route::post('/pesanan/tambah', [PesanController::class, 'pesanBayar'])->name('pesanan.tambah');
 Route::get('/pesanan/{id}/edit', 'PesananController@edit')->name('pesanan.edit');
 Route::put('/pesanan/{id}', [PesanController::class, 'update'])->name('pesanan.update');
 Route::delete('/pesanan/{id}', [PesanController::class, 'destroy'])->name('pesanan.destroy');
