@@ -14,6 +14,9 @@ use App\Http\Middleware\MultiRoleMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+// Rute login untuk sign in register
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+
 // Default route
 Route::get('/', [SupermarketController::class, 'index']);
 
