@@ -49,7 +49,7 @@
             @include('layouts.navbar_user')
         @endif
     @else
-        @if (request()->is('home'))
+    @if (request()->is('home') || request()->is('keranjang')  || request()->is('pesanan') )
             @include('layouts.navbar_user')
         @else
             @role('user')
