@@ -34,14 +34,26 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Tetapkan peran "user" ke pengguna baru
+        $user->assignRole('user');
+
+        // Tambahkan debug untuk memastikan role telah diberikan
+        if ($user->hasRole('user')) {
+            $message = "Role 'user' has been assigned successfully.";
+        } else {
+            $message = "Failed to assign role 'user'.";
+        }
+
+        event(new Registered($user));
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
+            'message' => $message,
         ], 201);
     }
-
     /**
      * Login user and create token
      *

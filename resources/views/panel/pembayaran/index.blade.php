@@ -15,7 +15,7 @@
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
                                 <span class="d-none d-sm-inline">
-                                    <a href="#" class="btn">
+                                    <a href="{{ route('pembayaran.exportExcel') }}" class="btn">
                                         Cetak
                                     </a>
                                 </span>

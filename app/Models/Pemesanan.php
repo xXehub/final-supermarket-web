@@ -27,5 +27,10 @@ class Pemesanan extends Model
         return $this->belongsTo(MetodePembayaran::class);
     }
 
+    public function pembayaran()
+    {
+        return $this->belongsTo(Pembayaran::class);
+    }
+
     protected $fillable = ['id', 'kode_pesanan', 'name', 'user_id', 'tanggal', 'status', 'gambar_profile'];
 }

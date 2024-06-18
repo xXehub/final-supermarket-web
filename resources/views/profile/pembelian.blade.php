@@ -26,8 +26,8 @@
                                 <div class="col d-flex flex-column">
                                     <div class="card-body">
                                         <div class="container-xl">
-                                            <div class="card">
-                                                <div class="card-body">
+                                            {{-- <div class="card"> --}}
+                                                {{-- <div class="card-body"> --}}
                                                     <div class="col-12">
                                                         <div class="table-responsive">
                                                             <table class="table table-vcenter table-mobile-md card-table" id="pesananlogsTable">
@@ -50,8 +50,8 @@
                                                             </table>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                {{-- </div> --}}
+                                            {{-- </div> --}}
                                         </div>
                                     </div>
                                 </div>

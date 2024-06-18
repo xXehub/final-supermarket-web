@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PembayaranExport;
 use App\Models\metodePembayaran;
 use App\Models\Pembayaran;
 use App\Models\Pemesanan;
 use App\Models\Produk;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
@@ -140,6 +142,12 @@ class PembayaranController extends Controller
         }
 
         return redirect()->route('pesanan.index')->with('error', 'Pembayaran tidak dapat diproses.');
+    }
+
+    // fungsi gawe export excel
+    public function exportExcel()
+    {
+        return Excel::download(new PembayaranExport, 'pembayaran.xlsx');
     }
     // public function bayar(Request $request, $id)
     // {

@@ -17,7 +17,7 @@
                 </div>
                 <div class="card card-md">
                     <div class="card-body">
-                        <h2 class="h2 text-center mb-4">Login to your account</h2>
+                        <h2 class="h2 text-center mb-4">Masuk ke akun anda</h2>
                         {{-- form login e mas --}}
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
@@ -69,16 +69,16 @@
                                 <label class="form-check">
                                     <input type="checkbox" class="form-check-input" name="remember" id="remember"
                                         {{ old('remember') ? 'checked' : '' }} />
-                                    <span class="form-check-label" for="remember">Remember me on this device</span>
+                                    <span class="form-check-label" for="remember">Ingat saya di perangkat ini</span>
                                 </label>
                             </div>
                             <div class="form-footer">
-                                <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                                <button type="submit" class="btn btn-primary w-100">Masuk</button>
                             </div>
                         </form>
                     </div>
-                    <div class="hr-text">or</div>
-                    <div class="card-body">
+                    {{-- <div class="hr-text">or</div> --}}
+                    {{-- <div class="card-body">
                         <div class="row">
                             <div class="col"><a href="#" class="btn w-100">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
@@ -103,10 +103,10 @@
                                     Login with Twitter
                                 </a></div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="text-center text-muted mt-3">
-                    Don't have account yet? <a href="./sign-up.html" tabindex="-1">Sign up</a>
+                    Belum punya akun ? <a href="{{ route('register') }}" tabindex="-1">Daftar</a>
                 </div>
             </div>
         </div>

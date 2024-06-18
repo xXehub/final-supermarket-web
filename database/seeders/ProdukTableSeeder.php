@@ -24,7 +24,7 @@ class ProdukTableSeeder extends Seeder
                 'gambar_produk' => 'marlborogold.jpg'
             ],
             [
-                'kode_produk' => 'ASW-TAI-OKE',
+                'kode_produk' => 'UNE-SA1-ONE',
                 'nama_produk' => 'Marlboro Rokok Filter Gold Lights Special Edition 20',
                 'kategori_id' => 2,
                 'supplier_id' => 2,

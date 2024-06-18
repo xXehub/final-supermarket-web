@@ -75,8 +75,8 @@
                                                         value="{{ Auth::user()->created_at }}" disabled>
                                                 </div>
                                                 <div class="col-md">
-                                                    <div class="form-label">Location</div>
-                                                    <input type="text" class="form-control" value="Peimei, China">
+                                                    <div class="form-label">Lokasi</div>
+                                                    <input type="text" class="form-control" value="Wuhan, Kalijudan" disabled>
                                                 </div>
                                             </div>
                                             <h3 class="card-title mt-4">Email</h3>

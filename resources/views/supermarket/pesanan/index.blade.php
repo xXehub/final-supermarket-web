@@ -17,13 +17,9 @@
                             <div class="col-auto ms-auto d-print-none">
                                 <div class="btn-list">
                                     <div class="input-group" style="display:inline-flex; width:auto;">
-                                        <input type="text" class="form-control" value="Rp. {{ $totalBayar }}" readonly>
-                                        <button type="button" class="btn">Bayar</button>
-                                        <button data-bs-toggle="dropdown" type="button"
-                                            class="btn dropdown-toggle dropdown-toggle-split"></button>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="#">Kosongkan</a>
-                                        </div>
+                                        <input type="text" class="form-control" value="Rp. {{ number_format($totalBayar, 0, ',', '.') }}" readonly disabled>
+                                        <button type="button" class="btn" readonly>Total Harga</button>
+                            
                                     </div>
                                 </div>
                             </div>

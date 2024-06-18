@@ -179,6 +179,7 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         // Validasi input
         $validator = Validator::make($request->all(), [
             'kode_produk' => 'required|regex:/[A-Z]+/',
@@ -223,7 +224,8 @@ class ProdukController extends Controller
 
         // Simpan perubahan
         $produk->save();
-
+        $produk = Produk::findOrFail($id);
+        $produk->update($request->all());
         return redirect()->route('produk.index')->with('success', 'Data produk berhasil diperbarui.');
     }
 

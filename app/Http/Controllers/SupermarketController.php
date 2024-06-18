@@ -33,6 +33,7 @@ class SupermarketController extends Controller
             'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
             'produks' => $produks,
             'kategoris' => $kategoris,
+            'keranjang' => $keranjang,
             'jumlahProdukKeranjang' => $jumlahProdukKeranjang,
             'jumlahPemesanan' => $jumlahPemesanan,
         ]);

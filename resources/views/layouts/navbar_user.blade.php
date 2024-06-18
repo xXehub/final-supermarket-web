@@ -45,7 +45,6 @@
                 </div>
             </div>
         @endguest
-
         @role('user|admin|superadmin')
             <div class="navbar-nav flex-row order-md-last">
                 <div class="d-none d-md-flex">
