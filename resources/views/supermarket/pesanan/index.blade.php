@@ -98,4 +98,33 @@
                 });
             </script>
         @endif
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Setelah halaman selesai dimuat
+    document.addEventListener('DOMContentLoaded', function () {
+        // Cek apakah ada pesan sukses
+        @if(session('success'))
+            // Tampilkan SweetAlert dengan pesan sukses
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 3000 // Durasi tampilan SweetAlert dalam milidetik (ms)
+            });
+        @endif
+
+        // Cek apakah ada pesan error
+        @if(session('error'))
+            // Tampilkan SweetAlert dengan pesan error
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 3000 // Durasi tampilan SweetAlert dalam milidetik (ms)
+            });
+        @endif
+    });
+</script>
     @endsection

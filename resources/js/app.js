@@ -5,6 +5,7 @@ import './datatable/kategori';
 import './datatable/supplier';
 import './datatable/pemesanan';
 import './datatable/pembayaran';
+import './datatable/pembayaran-logs';
 import './datatable/keranjang';
 import './datatable/pesanan_user';
 import './kode';

@@ -1,14 +1,13 @@
 <?php
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\API\KategoriController;
 use App\Http\Controllers\API\ProdukController;
-use App\Http\Controllers\KeranjangController;
-use App\Http\Controllers\PesanController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\DetailPemesananController;
+use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\PesanController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupermarketController;
 use App\Http\Controllers\WhishlistController;
 use App\Http\Middleware\MultiRoleMiddleware;
@@ -25,7 +24,7 @@ Route::middleware([MultiRoleMiddleware::class . ':superadmin,admin'])->group(fun
 
     // Rute resource untuk produk
     Route::resource('/panel/produk', ProdukController::class);
-    
+
     // Route::get('panel/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
     // Rute resource untuk kategori
     Route::resource('/panel/kategori', KategoriController::class);
@@ -54,14 +53,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/filter-produk', [SupermarketController::class, 'filterProduk'])->name('filter.produk');
 Route::post('/filter-produk', [ProdukController::class, 'filterProduk'])->name('filter.produk');
 
-
 Route::resource('/keranjang', KeranjangController::class)->names('supermarket.keranjang');
 Route::post('/keranjang/tambah', [KeranjangController::class, 'tambahProduk'])->name('keranjang.tambah');
 
 Route::put('/keranjang/{keranjang}', [KeranjangController::class, 'update'])->name('keranjang.update');
 Route::delete('/keranjang/{keranjang}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
 Route::get('/keranjang/{keranjang}/edit', [KeranjangController::class, 'edit'])->name('keranjang.edit');
-
 
 // gawe pesanan user
 Route::get('/pesanan', [PesanController::class, 'index'])->name('pesanan.index');
@@ -77,7 +74,7 @@ Route::post('/pesanan/payment', [PesanController::class, 'bayar'])->name('pesana
 // Route::post('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
 
 // Route::match(['get', 'post'], '/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
-Route::post('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('bayar');
+Route::post('/bayar/{id}', [PesanController::class, 'bayar'])->name('bayar');
 
 // Route::get('/pesanan/payment/{id}', [PesanController::class, 'bayar'])->name('pesanan.payment');
 // Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');
@@ -86,6 +83,7 @@ Route::post('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('bayar'
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\SupermarketController::class, 'index'])->name('supermarket.index');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/history-pembelian', [ProfileController::class, 'pembelian'])->name('profile.pembelian');
     Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile/delete/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');

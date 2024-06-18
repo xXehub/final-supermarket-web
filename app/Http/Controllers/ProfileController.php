@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Produk;
+use App\Models\Keranjang;
+use App\Models\Pemesanan;
+use App\Models\Kategori;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -15,8 +19,29 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profiles = User::all();
-        return view('profile.index', compact('profiles'));
+        $ingfo_sakkarepmu = 'ingfo';
+        $produks = Produk::paginate(10); // Paginate the products, 10 per page
+        $userId = Auth::id(); // Dapatkan ID pengguna yang sedang masuk
+        $keranjang = Keranjang::where('user_id', $userId)->get();
+        $pemesanan = Pemesanan::where('user_id', $userId)->get();
+        $jumlahProdukKeranjang = $keranjang->count();
+        $jumlahPemesanan = $pemesanan->count();
+
+        $kategoris = Kategori::all()->filter(function ($kategori) {
+            return !is_null($kategori);
+        });
+
+        // Log data untuk debugging
+        \Log::info('Produks: ' . $produks);
+        \Log::info('Kategoris: ' . $kategoris);
+
+        return view('profile.index', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'produks' => $produks,
+            'kategoris' => $kategoris,
+            'jumlahProdukKeranjang' => $jumlahProdukKeranjang,
+            'jumlahPemesanan' => $jumlahPemesanan,
+        ]);
     }
 
     /**
@@ -192,5 +217,36 @@ class ProfileController extends Controller
         }
 
         return redirect()->route('profile.index')->with('success', 'Avatar profile berhasil dihapus');
+    }
+
+    public function pembelian()
+    {
+        $ingfo_sakkarepmu = 'ingfo';
+        $produks = Produk::paginate(10); // Paginate the products, 10 per page
+        $userId = Auth::id(); // Dapatkan ID pengguna yang sedang masuk
+        $keranjang = Keranjang::where('user_id', $userId)->get();
+        $pemesanan = Pemesanan::where('user_id', $userId)->get();
+        $jumlahProdukKeranjang = $keranjang->count();
+        $profiles = User::all();
+        $jumlahPemesanan = $pemesanan->count();
+
+        $kategoris = Kategori::all()->filter(function ($kategori) {
+            return !is_null($kategori);
+        });
+
+        // Log data untuk debugging
+        \Log::info('Produks: ' . $produks);
+        \Log::info('Kategoris: ' . $kategoris);
+
+        return view('profile.pembelian', [
+            'ingfo_sakkarepmu' => $ingfo_sakkarepmu,
+            'produks' => $produks,
+            'kategoris' => $kategoris,
+            'jumlahProdukKeranjang' => $jumlahProdukKeranjang,
+            'jumlahPemesanan' => $jumlahPemesanan,
+            'profiles' => $profiles,
+        ]);
+
+        // return view('profile.pembelian', compact('profiles'));
     }
 }

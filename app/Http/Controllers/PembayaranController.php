@@ -139,7 +139,7 @@ class PembayaranController extends Controller
             return redirect()->route('pesanan.index')->with('success', 'Pembayaran berhasil dilakukan.');
         }
 
-        return redirect()->route('home')->with('error', 'Pembayaran tidak dapat diproses.');
+        return redirect()->route('pesanan.index')->with('error', 'Pembayaran tidak dapat diproses.');
     }
     // public function bayar(Request $request, $id)
     // {

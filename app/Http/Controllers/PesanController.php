@@ -140,21 +140,21 @@ class PesanController extends Controller
         return response()->json(['success' => true, 'message' => 'Status pembayaran berhasil diubah']);
     }
 
-    public function bayar(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'pembayaran_id' => 'required|exists:pembayaran,id',
-        ]);
+    // public function bayar(Request $request)
+    // {
+    //     // Validasi input
+    //     $request->validate([
+    //         'pembayaran_id' => 'required|exists:pembayaran,id',
+    //     ]);
 
-        // Temukan pembayaran dan ubah statusnya
-        $pembayaran = Pembayaran::find($request->pembayaran_id);
-        $pembayaran->status = 'dibayar'; // Atau nilai status yang Anda inginkan
-        $pembayaran->save();
+    //     // Temukan pembayaran dan ubah statusnya
+    //     $pembayaran = Pembayaran::find($request->pembayaran_id);
+    //     $pembayaran->status = 'dibayar'; // Atau nilai status yang Anda inginkan
+    //     $pembayaran->save();
 
-        // Kembalikan respons sesuai kebutuhan
-        return response()->json(['success' => true, 'message' => 'Status pembayaran berhasil diubah']);
-    }
+    //     // Kembalikan respons sesuai kebutuhan
+    //     return response()->json(['success' => true, 'message' => 'Status pembayaran berhasil diubah']);
+    // }
     // public function pesanBayar(Request $request)
     // {
     //     // Proses pesanan dari keranjang
@@ -269,17 +269,24 @@ class PesanController extends Controller
         return view('pesanan.payment');
     }
 
-    // public function bayar($id)
-    // {
-    //     // Temukan pembayaran berdasarkan ID
-    //     $pembayaran = Pembayaran::findOrFail($id);
+    
+    public function bayar()
+    {
+        // Mendapatkan pembayaran yang sesuai untuk pengguna yang sedang login
+        $pesanan = Pembayaran::whereHas('pemesanan', function ($query) {
+            $query->where('user_id', auth()->id());
+        })->where('status', 'pending')->first();
 
-    //     // Perbarui status pembayaran menjadi "dibayar"
-    //     $pembayaran->status = 'dibayar';
-    //     $pembayaran->save();
+        if ($pesanan) {
+            // Update status pembayaran menjadi "dibayar"
+            $pesanan->update([
+                'status' => 'diproses',
+            ]);
 
-    //     // Redirect kembali ke halaman pembayaran dengan pesan sukses
-    //     return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil dilakukan.');
-    // }
+            return redirect()->route('pesanan.index')->with('success', 'Pembayaran berhasil dilakukan.');
+        }
+
+        return redirect()->route('pesanan.index')->with('error', 'Pembayaran tidak dapat diproses.');
+    }
 
 }
