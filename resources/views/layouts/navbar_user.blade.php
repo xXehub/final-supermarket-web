@@ -98,3 +98,57 @@
                         </span>
                         <div class="d-none d-xl-block ps-2">
                             <div>{{ Auth::user()->name }}</div>
+                            <div class="mt-1 small text-muted">{{ Auth::user()->roles->pluck('name')->implode(', ') }}
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        {{-- <a href="#" class="dropdown-item">Status</a> --}}
+                        <a href="{{ route('profile.index') }}" class="dropdown-item">Profile Saya</a>
+                        <a href="#" class="dropdown-item">Laporkan Bug</a>
+                        {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
+                        <div class="dropdown-divider"></div>
+                        {{-- <a href="./settings.html" class="dropdown-item">Settings</a> --}}
+                        {{-- gawe logout --}}
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}</a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endauth
+    </div>
+</header>
+{{-- navbar --}}
+<header class="navbar-expand-md">
+    <div class="collapse navbar-collapse" id="navbar-menu">
+        <div class="navbar">
+            <div class="container-xl">
+                <ul class="navbar-nav">
+                    <li
+                        class="nav-item {{ Route::is('supermarket.index', 'supermarket.keranjang.index', 'supermarket.pesanan.index') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('supermarket.index') }}">
+                            <span
+                                class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                <i class="fa-solid fa-home"></i>
+                            </span>
+                            <span class="nav-link-title">
+                                Beranda
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+                    <form action="./" method="get" autocomplete="off" novalidate>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
