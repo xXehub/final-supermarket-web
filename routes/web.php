@@ -54,32 +54,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/filter-produk', [SupermarketController::class, 'filterProduk'])->name('filter.produk');
 Route::post('/filter-produk', [ProdukController::class, 'filterProduk'])->name('filter.produk');
 
-Route::resource('/keranjang', KeranjangController::class)->names('supermarket.keranjang');
-Route::post('/keranjang/tambah', [KeranjangController::class, 'tambahProduk'])->name('keranjang.tambah');
-
-Route::put('/keranjang/{keranjang}', [KeranjangController::class, 'update'])->name('keranjang.update');
-Route::delete('/keranjang/{keranjang}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
-Route::get('/keranjang/{keranjang}/edit', [KeranjangController::class, 'edit'])->name('keranjang.edit');
-
-// gawe pesanan user
-Route::get('/pesanan', [PesanController::class, 'index'])->name('pesanan.index');
-Route::get('/pesanan/{id}', [PesanController::class, 'index'])->name('pesanan.show');
-Route::post('/pesan', [PesanController::class, 'pesan'])->name('pesan');
-Route::post('/pesanan/tambah', [PesanController::class, 'pesanBayar'])->name('pesanan.tambah');
-Route::get('/pesanan/{id}/edit', 'PesananController@edit')->name('pesanan.edit');
-Route::put('/pesanan/{id}', [PesanController::class, 'update'])->name('pesanan.update');
-Route::delete('/pesanan/{id}', [PesanController::class, 'destroy'])->name('pesanan.destroy');
-Route::post('/pesanan/payment', [PesanController::class, 'bayar'])->name('pesanan.payment');
-
-// Route::get('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
-// Route::post('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
-
-// Route::match(['get', 'post'], '/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
-Route::post('/bayar/{id}', [PesanController::class, 'bayar'])->name('bayar');
-
-// Route::get('/pesanan/payment/{id}', [PesanController::class, 'bayar'])->name('pesanan.payment');
-// Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');
-
 // route gawe profile user
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\SupermarketController::class, 'index'])->name('supermarket.index');
@@ -90,6 +64,34 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/delete/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/profile/updateAvatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
     Route::delete('/profile/deleteAvatar', [ProfileController::class, 'deleteAvatar'])->name('profile.deleteAvatar');
+
+    
+    Route::resource('/keranjang', KeranjangController::class)->names('supermarket.keranjang');
+    Route::post('/keranjang/tambah', [KeranjangController::class, 'tambahProduk'])->name('keranjang.tambah');
+
+    Route::put('/keranjang/{keranjang}', [KeranjangController::class, 'update'])->name('keranjang.update');
+    Route::delete('/keranjang/{keranjang}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
+    Route::get('/keranjang/{keranjang}/edit', [KeranjangController::class, 'edit'])->name('keranjang.edit');
+
+// gawe pesanan user
+    Route::get('/pesanan', [PesanController::class, 'index'])->name('pesanan.index');
+    Route::get('/pesanan/{id}', [PesanController::class, 'index'])->name('pesanan.show');
+    Route::post('/pesan', [PesanController::class, 'pesan'])->name('pesan');
+    Route::post('/pesanan/tambah', [PesanController::class, 'pesanBayar'])->name('pesanan.tambah');
+    Route::get('/pesanan/{id}/edit', 'PesananController@edit')->name('pesanan.edit');
+    Route::put('/pesanan/{id}', [PesanController::class, 'update'])->name('pesanan.update');
+    Route::delete('/pesanan/{id}', [PesanController::class, 'destroy'])->name('pesanan.destroy');
+    Route::post('/pesanan/payment', [PesanController::class, 'bayar'])->name('pesanan.payment');
+
+// Route::get('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
+// Route::post('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
+
+// Route::match(['get', 'post'], '/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
+    Route::post('/bayar/{id}', [PesanController::class, 'bayar'])->name('bayar');
+
+// Route::get('/pesanan/payment/{id}', [PesanController::class, 'bayar'])->name('pesanan.payment');
+// Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');
+
 });
 
 // Rute untuk mendapatkan data produk dan kategori

@@ -131,7 +131,7 @@
             <div class="container-xl">
                 <ul class="navbar-nav">
                     <li
-                        class="nav-item {{ Route::is('supermarket.index', 'supermarket.keranjang.index', 'supermarket.pesanan.index') ? 'active' : '' }}">
+                        class="nav-item {{ Route::is('index', 'supermarket.index', 'supermarket.keranjang.index', 'supermarket.pesanan.index') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('supermarket.index') }}">
                             <span
                                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->

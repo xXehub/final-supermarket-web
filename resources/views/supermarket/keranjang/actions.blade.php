@@ -4,7 +4,7 @@
         @csrf
         @method('delete')
         <a class="btn btn-outline-primary" onclick="confirmDelete({{ $keranjang->id }})">
-            Hapusss
+            Hapus
         </a>
         <a class="btn btn-primary" href="{{ route('keranjang.edit', ['keranjang' => $keranjang->id]) }}" data-bs-toggle="modal"
             data-bs-target="#modal-editData">
