@@ -9,7 +9,7 @@
                     <div class="row g-2 align-items-center">
                         <div class="col">
                             <h2 class="page-title">
-                                Keranjang Anda
+                                {{ $ingfo_sakkarepmu }}
                             </h2>
                         </div>
                         <!-- Page title actions -->

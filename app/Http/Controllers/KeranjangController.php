@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Keranjang;
-use App\Models\Pemesanan;
 use App\Models\MetodePembayaran;
+use App\Models\Pemesanan;
 use App\Models\Produk;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class KeranjangController extends Controller
@@ -15,6 +15,7 @@ class KeranjangController extends Controller
     // Menampilkan semua entri dalam tabel keranjang
     public function index()
     {
+        $ingfo_sakkarepmu = 'List Produk Keranjang Anda';
         $userId = Auth::id();
         $keranjang = Keranjang::where('user_id', $userId)->get();
         $jumlahProdukKeranjang = $keranjang->count();
@@ -25,7 +26,7 @@ class KeranjangController extends Controller
         $totalBayar = $keranjang->sum(function ($keranjang) {
             return $keranjang->jumlah * $keranjang->produk->harga;
         });
-        return view('supermarket.keranjang.index', compact('keranjang', 'totalBayar', 'jumlahProdukKeranjang', 'jumlahPemesanan', 'metode_pembayaran'));
+        return view('supermarket.keranjang.index', compact('keranjang', 'totalBayar', 'jumlahProdukKeranjang', 'jumlahPemesanan', 'metode_pembayaran', 'ingfo_sakkarepmu'));
     }
 
     public function create()
@@ -61,11 +62,10 @@ class KeranjangController extends Controller
         $request->validate([
             'jumlah' => 'required|integer|min:1',
         ]);
-        
+
         $keranjang = Keranjang::findOrFail($id);
         $keranjang->jumlah = $request->jumlah;
         $keranjang->save();
-
 
         return redirect()->route('supermarket.keranjang.index')->with('success', 'Quantity updated successfully.');
     }
@@ -97,7 +97,7 @@ class KeranjangController extends Controller
 
         // Validasi stok produk
         if ($produk->stock < $request->jumlah) {
-                return redirect()->back()->with('error', 'Stok produk sudah habis.');
+            return redirect()->back()->with('error', 'Stok produk sudah habis.');
         }
 
         // Kurangi stok produk sesuai dengan jumlah yang ditambahkan ke keranjang
@@ -169,6 +169,5 @@ class KeranjangController extends Controller
     {
         return view('pesanan.payment');
     }
-
 
 }

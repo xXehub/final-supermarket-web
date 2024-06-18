@@ -8,7 +8,7 @@
                     <div class="row g-2 align-items-center">
                         <div class="col">
                             <h2 class="page-title">
-                                Pembayaran Test
+                                {{ $ingfo_sakkarepmu }}
                             </h2>
                         </div>
                         <!-- Page title actions -->
@@ -20,7 +20,7 @@
                                     </a>
                                 </span>
                                 <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-                                    data-bs-target="#modal-tambahPesanan">
+                                    data-bs-target="#modal-tambahPembayaran">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -48,12 +48,14 @@
                 </div>
             </div>
             <!-- Page body -->
+            
             <div class="page-body">
                 <div class="container-xl">
                     <div class="card">
                         <div class="card-body">
                             <div id="table-default" class="table-responsive">
                                 <table class="table" id="pembayaranTable">
+                                    <br/>
                                     <thead>
                                         <tr>
                                             <th style="width: 10%;">ID</th>
@@ -76,7 +78,8 @@
 
         </div>
     </div>
-
+    @include('panel.pembayaran.create')
+    {{-- @include('panel.pemesanan.edit') --}}
     <script>
         $(function() {
             $("#pembayaranTable").on("click", ".status-pending", function() {

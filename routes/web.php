@@ -79,15 +79,8 @@ Route::post('/pesanan/payment', [PesanController::class, 'bayar'])->name('pesana
 // Route::match(['get', 'post'], '/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
 Route::post('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('bayar');
 
-
-
-
-
 // Route::get('/pesanan/payment/{id}', [PesanController::class, 'bayar'])->name('pesanan.payment');
-
 // Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');
-
-
 
 // route gawe profile user
 Route::middleware('auth')->group(function () {

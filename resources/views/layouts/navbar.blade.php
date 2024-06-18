@@ -328,7 +328,7 @@
 
                     <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
                         <form action="./" method="get" autocomplete="off" novalidate>
-                            <div class="input-icon">
+                            {{-- <div class="input-icon">
                                 <span class="input-icon-addon">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/search -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -341,7 +341,7 @@
                                 </span>
                                 <input type="text" value="" class="form-control" placeholder="Search…"
                                     aria-label="Search in website">
-                            </div>
+                            </div> --}}
                         </form>
                     </div>
                 </div>

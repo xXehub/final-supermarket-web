@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\metodePembayaran;
 use App\Models\Pembayaran;
+use App\Models\Pemesanan;
+use App\Models\Produk;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
 {
     public function index()
     {
+        $users = User::all();
+
+        $ingfo_sakkarepmu = 'List Transaksi';
+        $pemesanan = Pemesanan::all();
+        $metodePembayaran = MetodePembayaran::all();
         $pembayarans = Pembayaran::all();
-        return view('panel.pembayaran.index', compact('pembayarans'));
+        $produks = Produk::select('id', 'kode_produk', 'nama_produk')->get();
+        return view('panel.pembayaran.index', compact('pembayarans', 'ingfo_sakkarepmu', 'users', 'produks', 'pemesanan', 'metodePembayaran'));
     }
 
     public function create()
@@ -19,16 +29,30 @@ class PembayaranController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {dd($request->all());
+        // Validasi data yang diterima dari request
         $request->validate([
-            'pemesanan_id' => 'required',
-            'total' => 'required',
-            'metode_pembayaran' => 'required',
+            'pemesanan_id' => 'required|exists:pemesanan,id',
+            'metode_pembayaran_id' => 'required|exists:metode_pembayaran,id',
+            'status' => 'required|in:pending,dibatalkan,diproses,dibayar',
         ]);
 
-        Pembayaran::create($request->all());
-        return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil ditambahkan.');
-    }
+        // Ambil pemesanan berdasarkan pemesanan_id yang dipilih
+        $pemesanan = Pemesanan::findOrFail($request->pemesanan_id);
+
+        // Buat instance Pembayaran baru
+        $pembayaran = new Pembayaran();
+        $pembayaran->pemesanan_id = $request->pemesanan_id;
+        // Ambil total dari pemesanan yang dipilih
+        $pembayaran->total = $pemesanan->total;
+        $pembayaran->metode_pembayaran_id = $request->metode_pembayaran_id;
+        $pembayaran->status = $request->status;
+
+        // Simpan data pembayaran ke database
+        $pembayaran->save();
+
+        // Redirect ke halaman tertentu setelah pembayaran berhasil disimpan
+        return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil ditambahkan.');}
 
     public function show($id)
     {

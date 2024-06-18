@@ -218,11 +218,12 @@ class PesanController extends Controller
                 })
 
                 ->addColumn('total_bayar', function ($pemesanan) {
-                    // itungan totalan
-                    $total_bayar = Pembayaran::where('pemesanan_id', $pemesanan->id)->sum('total');
+                    // jupuk total bayar berdasarkan pemesanan_id
+                    $total_bayar = DetailPemesanan::where('pemesanan_id', $pemesanan->id)->sum('subtotal');
+                    
                     return $total_bayar;
                 })
-
+                
                 ->addColumn('status_bayar', function ($pemesanan) {
                     $status_bayar = Pembayaran::where('pemesanan_id', $pemesanan->id)->sum('status');
                     // convert e
