@@ -59,7 +59,7 @@ class PembayaranController extends Controller
     public function show($id)
     {
         $pembayaran = Pembayaran::findOrFail($id);
-        return view('pembayaran.show', compact('pembayaran'));
+        return view('panel.pembayaran.show', compact('pembayaran'));
     }
 
     public function edit($id)
