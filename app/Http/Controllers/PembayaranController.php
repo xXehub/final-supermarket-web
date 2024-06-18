@@ -109,13 +109,27 @@ class PembayaranController extends Controller
         if ($pembayaran) {
             // Update status pembayaran menjadi "dibayar"
             $pembayaran->update([
-                'status' => 'dibayar',
+                'status' => 'diproses',
             ]);
 
-            return redirect()->route('home')->with('success', 'Pembayaran berhasil dilakukan.');
+            return redirect()->route('pesanan.index')->with('success', 'Pembayaran berhasil dilakukan.');
         }
 
         return redirect()->route('home')->with('error', 'Pembayaran tidak dapat diproses.');
     }
+    // public function bayar(Request $request, $id)
+    // {
+    //     // Temukan data pembayaran berdasarkan ID
+    //     $pembayaran = Pembayaran::findOrFail($id);
+
+    //     // Lakukan validasi atau pengecekan lainnya sesuai kebutuhan
+    //     // Misalnya, pastikan pembayaran belum dibayar sebelumnya
+
+    //     // Ubah status pembayaran menjadi "dibayar"
+    //     $pembayaran->update(['status' => 'dibayar']);
+
+    //     // Redirect atau kembalikan respon sesuai kebutuhan
+    //     return redirect()->back()->with('success', 'Pembayaran berhasil dilakukan.');
+    // }
 
 }

@@ -10,17 +10,20 @@
                 Action
             </button>
             <div class="dropdown-menu dropdown-menu-end">
-                <a class="dropdown-item" href="{{ route('pesanan.show', ['id' => $pesanan->id]) }}">
+                <a class="dropdown-item" href="">
                     Detail
                 </a>
-            </form>
-            <a class="dropdown-item" href="{{ route('pesanan.bayar', ['id' => $pesanan->id]) }}">
-                Bayar
-            </a>
-            
-            </div>
-        </div>
-    </div>
+</form>
+<form action="{{ route('bayar', ['id' => $pesanan->id]) }}" method="POST">
+    @csrf
+    <button  class="dropdown-item" type="submit" class="btn btn-primary">Bayar</button>
+</form>
+
+
+
+</div>
+</div>
+</div>
 
 {{-- SweetAlert Library --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -52,7 +52,10 @@ $(function () {
                             statusColor = "bg-red";
                             break;
                         case "dibatalkan":
-                            statusColor = "bg-red";
+                            statusColor = "bg-green";
+                            break;
+                        case "diproses":
+                            statusColor = "bg-blue";
                             break;
                         case "dibayar":
                             statusColor = "bg-green";
@@ -64,7 +67,7 @@ $(function () {
                     var capitalizedStatus = data.charAt(0).toUpperCase() + data.slice(1);
                     var badgeWidth = 100;
                     return '<span class="badge ' + statusColor + '" style="width: ' + badgeWidth + 'px;">' + capitalizedStatus + '</span>';
-                }
+     }
             },
             { data: "actions", name: "actions", orderable: false, searchable: false },
         ],

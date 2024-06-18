@@ -13,7 +13,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pemesanan_id');
             $table->integer('total');
             $table->unsignedBigInteger('metode_pembayaran_id'); // Menggunakan id dari tabel metode_pembayaran
-            $table->enum('status', ['pending', 'dibatalkan', 'dibayar'])->default('pending');
+            $table->enum('status', ['pending', 'dibatalkan', 'diproses', 'dibayar'])->default('pending');
             $table->timestamps();
 
             $table->foreign('pemesanan_id')->references('id')->on('pemesanan')->onDelete('cascade');

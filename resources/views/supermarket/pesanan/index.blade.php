@@ -64,7 +64,7 @@
             </div>
         </div>
         {{-- gawe nyeluk modal create e om :d --}}
-        @include('supermarket.pesanan.payment')
+        {{-- @include('supermarket.pesanan.payment') --}}
         @include('supermarket.keranjang.edit')
         <script>
             jQuery(document).ready(function($) {

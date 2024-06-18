@@ -21,7 +21,7 @@ $(function () {
                     return "Rp " + harga;
                 },
             },
-            { 
+            {
                 data: "metode_pembayaran",
                 name: "metode_pembayaran",
                 render: function (data, type, full, meta) {
@@ -55,6 +55,12 @@ $(function () {
                     switch (data) {
                         case "pending":
                             statusColor = "bg-red";
+                            break;
+                        case "dibatalkan":
+                            statusColor = "bg-green";
+                            break;
+                        case "diproses":
+                            statusColor = "bg-blue";
                             break;
                         case "dibayar":
                             statusColor = "bg-green";

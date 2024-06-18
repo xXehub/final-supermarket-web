@@ -73,14 +73,23 @@ Route::put('/pesanan/{id}', [PesanController::class, 'update'])->name('pesanan.u
 Route::delete('/pesanan/{id}', [PesanController::class, 'destroy'])->name('pesanan.destroy');
 Route::post('/pesanan/payment', [PesanController::class, 'bayar'])->name('pesanan.payment');
 
+// Route::get('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
+// Route::post('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
 
-Route::get('/pesanan/payment/{id}', [PesanController::class, 'bayar'])->name('pesanan.payment');
+// Route::match(['get', 'post'], '/bayar/{id}', [PembayaranController::class, 'bayar'])->name('pesan.bayar');
+Route::post('/bayar/{id}', [PembayaranController::class, 'bayar'])->name('bayar');
+
+
+
+
+
+// Route::get('/pesanan/payment/{id}', [PesanController::class, 'bayar'])->name('pesanan.payment');
 
 // Route::get('/keranjang', [KeranjangController::class, 'index'])->name('supermarket.keranjang.index');
 
 
 
-// Rute untuk profil pengguna
+// route gawe profile user
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\SupermarketController::class, 'index'])->name('supermarket.index');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
