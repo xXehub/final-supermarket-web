@@ -15,11 +15,12 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label class="form-label">Nama pemesanan</label>
-                                <select class="form-select @error('user_id') is-invalid @enderror" name="user_id"
+                                <select id='select-username' class="form-select @error('user_id') is-invalid @enderror" name="user_id"
                                     id="user_id">
                                     <option value="" disabled selected>Pilih User</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}"
+                                            data-custom-properties="<span class='avatar avatar-xs' style='background-image: url({{ $user->gambar_profile ? asset('storage/' . $user->gambar_profile) : '' }})'></span>"
                                             {{ $pemesanan->user_id == $user->id ? 'selected' : '' }}>
                                             {{ $user->name }}
                                         </option>
@@ -110,3 +111,29 @@
         </div>
     </div>
 </form>
+<script>
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function() {
+        var el;
+        window.TomSelect && (new TomSelect(el = document.getElementById('select-username'), {
+            copyClassesToDropdown: false,
+            render: {
+                item: function(data, escape) {
+                    if (data.customProperties) {
+                        return '<div><span class="dropdown-item-indicator">' + data
+                            .customProperties + '</span>' + escape(data.text) + '</div>';
+                    }
+                    return '<div>' + escape(data.text) + '</div>';
+                },
+                option: function(data, escape) {
+                    if (data.customProperties) {
+                        return '<div><span class="dropdown-item-indicator">' + data
+                            .customProperties + '</span>' + escape(data.text) + '</div>';
+                    }
+                    return '<div>' + escape(data.text) + '</div>';
+                },
+            },
+        }));
+    });
+    // @formatter:on
+</script>

@@ -30,7 +30,6 @@ class ProdukController extends Controller
     {
         $ingfo_sakkarepmu = "Data List Produk";
         $kategori = Kategori::all();
-
         $produk = Produk::first();
         $suppliers = Supplier::all();
         $totalProduk = Produk::count();

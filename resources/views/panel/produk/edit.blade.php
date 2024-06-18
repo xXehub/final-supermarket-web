@@ -66,42 +66,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <label class="form-label">Status</label>
-                        <div class="form-selectgroup-boxes row mb-3">
-                            <div class="col-lg-6">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" name="report-type" value="1"
-                                        class="form-selectgroup-input" checked>
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Terverifikasi</span>
-                                            <span class="d-block text-muted">Produk telah diverifikasi oleh
-                                                admin</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" name="report-type" value="0"
-                                        class="form-selectgroup-input">
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Tidak
-                                                Terverifikasi</span>
-                                            <span class="d-block text-muted">Produk belum diverifikasi oleh
-                                                admin</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
                         <div class="col-lg-12">
                             <div>
                                 <label class="form-label">Keterangan</label>
@@ -130,11 +94,7 @@
                     </a>
                     <div class="col-auto ms-auto d-print-none">
                         <div class="btn-list">
-                            <span class="d-none d-sm-inline">
-                                <a class="btn" onclick="resetForm()">
-                                    Reset
-                                </a>
-                            </span>
+
                             <button type="submit" class="btn btn-primary d-none d-sm-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"

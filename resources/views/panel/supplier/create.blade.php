@@ -103,6 +103,7 @@
         </div>
     </div>
 </form>
+
 <script>
     jQuery(document).ready(function($) {
         @if ($errors->any())

@@ -1,5 +1,5 @@
 <div align="center" id="top"> 
-  <img src="https://raw.githubusercontent.com/xXehub/final-system-barang/main/screenshot/dashboard-ui.png" width="900" alt="System Management Barang" />
+  <img src="https://raw.githubusercontent.com/xXehub/final-supermarket-web/main/screenshot/panel_dashboard.png" width="900" alt="System Management Barang" />
 
   <a href="#">Demo</a>
 

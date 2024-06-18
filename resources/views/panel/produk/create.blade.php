@@ -258,7 +258,8 @@
         console.log("Form Reset Successs ");
         document.getElementById("nama_produk").value = '';
         document.getElementById("kategori_id").value = '';
-        document.getElementById("harga").value = '';
+        document.getElementById("harga").value = '';4
+        document.getElementById("stock").value = '';
         document.getElementById("deskripsi").value = '';
 
         // sweet alert notif reset
