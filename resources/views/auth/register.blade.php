@@ -89,9 +89,8 @@
                 </div>
             </form>
             <div class="text-center text-muted mt-3">
-            Already have account? <a href="./sign-in.html" tabindex="-1">Sign in</a>
-        </div>
-
+                Already have an account? <a href="{{ route('login') }}" tabindex="-1">Sign in</a>
+            </div>
 
         </div>
     </div>
