@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
+
 
 class RegisterController extends Controller
 {
@@ -63,14 +65,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        // Buat pengguna baru
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
-        // gawe ngekei role sing lagek register
-        $user->assignRole('user');
+    
+        // Tetapkan peran "user" ke pengguna baru
+        $userRole = Role::where('name', 'user')->first();
+        $user->assignRole($userRole);
+    
         return $user;
     }
+    
 }

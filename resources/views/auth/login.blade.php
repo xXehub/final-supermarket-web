@@ -51,8 +51,9 @@
                                     @enderror
 
                                     <span class="input-group-text">
-                                        <a href="#" class="link-secondary" title="Show password"
-                                            data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                                        <a href="#" class="link-secondary show-password" title="Show password"
+                                            data-bs-toggle="tooltip">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/eye -->
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
                                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -113,15 +114,18 @@
     </div>
     {{-- show password --}}
     <script>
-        document.getElementById('togglePassword').addEventListener('click', function(e) {
-            e.preventDefault();
-            const passwordField = document.getElementById('password');
-            const passwordFieldType = passwordField.getAttribute('type');
-            if (passwordFieldType === 'password') {
-                passwordField.setAttribute('type', 'text');
-            } else {
-                passwordField.setAttribute('type', 'password');
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            const showPasswordButton = document.querySelector('.show-password');
+            const passwordInput = document.querySelector('#password');
+
+            showPasswordButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                } else {
+                    passwordInput.type = 'password';
+                }
+            });
         });
     </script>
 @endsection
